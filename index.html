@@ -1,0 +1,1328 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>SoftCopy סופט קופי</title>
+<meta name="description" content="סופט קופי – סריקת מסמכים והקמת ארכיון דיגיטלי. ספק מורשה של משרד הביטחון.">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap">
+<style>
+/* Layout: sticky white header with logo; full-bleed bands (hero video, prices, clients); content in a 1160px column; hash-routed pages */
+:root{
+  --blue:#26508E; --blue-deep:#16305A; --green:#92AE31; --green-ink:#6B8420;
+  --ink:#111317; --muted:#5B6675; --paper:#F4F7FA; --card:#FFFFFF; --line:#DCE3EB; --band:#E8EFF7;
+  --on-blue:#FFFFFF; --logo-chip:#FFFFFF;
+  --f-display:"Century Gothic","Varela Round","Arial Hebrew",Arial,sans-serif;
+  --f-body:"Varela Round","Century Gothic","Arial Hebrew",Arial,sans-serif;
+  --r:14px;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --blue:#7EA3DD; --blue-deep:#0F2140; --green:#A9C64A; --green-ink:#B5D25A;
+  --ink:#E6EBF1; --muted:#9AA7B6; --paper:#0F151D; --card:#17202B; --line:#2A3644; --band:#141D28;
+  --on-blue:#FFFFFF; --logo-chip:#FFFFFF; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --blue:#7EA3DD; --blue-deep:#0F2140; --green:#A9C64A; --green-ink:#B5D25A;
+  --ink:#E6EBF1; --muted:#9AA7B6; --paper:#0F151D; --card:#17202B; --line:#2A3644; --band:#141D28;
+  --on-blue:#FFFFFF; --logo-chip:#FFFFFF; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:17px;line-height:1.6;direction:rtl}
+h1,h2,h3{font-family:var(--f-display);line-height:1.15;text-wrap:balance;margin:0}
+h1{font-size:clamp(2rem,5vw,3.4rem);font-weight:400;letter-spacing:-.01em}
+h2{font-size:clamp(1.6rem,3.4vw,2.4rem);font-weight:400}
+h3{font-size:1.2rem;font-weight:700}
+p{margin:0}
+a{color:var(--blue)}
+.wrap{max-width:1160px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.band{padding-block:72px}
+.band.alt{background:var(--band)}
+.eyebrow{font-family:var(--f-display);font-weight:700;color:var(--green-ink);font-size:.95rem;letter-spacing:.02em}
+.lead{color:var(--muted);font-size:1.15rem;max-width:62ch}
+.head{display:grid;gap:10px;margin-bottom:36px}
+.btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--f-display);font-weight:700;font-size:1rem;padding:12px 22px;border-radius:999px;border:2px solid transparent;text-decoration:none;cursor:pointer;transition:transform .15s}
+.btn:hover{transform:translateY(-2px)}
+.btn:focus-visible,a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid var(--green);outline-offset:2px}
+.btn-green{background:var(--green);color:#16260A}
+.btn-blue{background:var(--blue);color:var(--on-blue)}
+.btn-ghost{border-color:currentColor;color:var(--blue);background:transparent}
+
+/* header */
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--card)}
+header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:var(--card);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:20px;min-height:72px}
+.logo{display:flex;align-items:center;background:var(--logo-chip);border-radius:10px;padding:4px 8px}
+.logo img{height:48px;width:auto;display:block}
+nav.main{display:flex;gap:4px;flex-wrap:wrap;margin-inline-start:auto}
+nav.main a{font-family:var(--f-display);font-weight:500;text-decoration:none;color:var(--ink);padding:8px 12px;border-radius:8px}
+nav.main a[aria-current="page"]{color:var(--blue);background:var(--band)}
+nav.main a.hot{color:var(--green-ink);font-weight:700}
+.phone{font-family:var(--f-display);font-weight:800;color:var(--blue);direction:ltr;white-space:nowrap;text-decoration:none}
+.menu-btn{display:none;margin-inline-start:auto;background:none;border:1px solid var(--line);border-radius:8px;padding:8px 12px;color:var(--ink);font:inherit;cursor:pointer}
+@media (max-width:980px){
+  .menu-btn{display:block}
+  nav.main{display:none;position:absolute;top:100%;inset-inline:0;background:var(--card);flex-direction:column;padding:8px max(16px,env(safe-area-inset-right,0px)) 16px max(16px,env(safe-area-inset-left,0px));border-bottom:1px solid var(--line)}
+  nav.main.open{display:flex}
+  .top .phone{display:none}
+}
+
+/* hero top */
+.hero-top{background:radial-gradient(120% 90% at 50% 0%,#24508E 0%,#132C50 55%,#0B1A30 100%);color:#fff;padding-block:56px 64px;text-align:center}
+.ht-eyebrow{font-family:var(--f-display);color:var(--green);letter-spacing:.06em;font-size:.95rem}
+.ht-title{font-size:clamp(2.6rem,8vw,5.6rem);line-height:1.02;margin-top:12px;font-weight:400;letter-spacing:-.02em}
+.ht-title span{color:var(--green)}
+.ht-sub{color:#C9D6E6;font-size:clamp(1.05rem,2vw,1.3rem);max-width:56ch;margin:18px auto 0}
+.ht-player{max-width:980px;margin:36px auto 0}
+.rot-band{background:#0B1A30;color:#fff;padding-block:56px}
+.rot-head,.lg-head{display:grid;gap:8px;margin-bottom:26px;text-align:center}
+.rot-head h2,.lg-head h2{color:#fff}
+.rot{display:grid;grid-template-columns:1.25fr 1fr 1fr;gap:12px;height:clamp(240px,34vw,440px)}
+.rot .tile{position:relative;border-radius:16px;overflow:hidden;background:#000;min-width:0}
+.rot .tile img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.06);transition:opacity 1.2s ease,transform 6s ease;pointer-events:none;user-select:none;-webkit-user-drag:none}
+.rot .tile img.on{opacity:1;transform:scale(1)}
+.rot .tile .chip{position:absolute;top:12px;right:12px;background:rgba(0,0,0,.6);color:#fff;font-family:var(--f-display);font-size:.85rem;padding:3px 12px;border-radius:999px;z-index:2}
+@media (max-width:700px){.rot{grid-template-columns:1fr 1fr;height:auto}.rot .tile{aspect-ratio:3/4}.rot .tile:first-child{grid-column:1/-1;aspect-ratio:4/3}}
+.logo-band{background:linear-gradient(180deg,#0B1A30,#132C50);padding-block:56px 64px}
+.lg-stage{position:relative;border-radius:20px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);min-height:clamp(320px,40vw,480px);display:grid;place-items:center;overflow:hidden;padding:14px}
+.lg-one{display:grid;place-items:center;width:min(360px,70%);aspect-ratio:3/2;background:#fff;border-radius:18px;box-shadow:0 30px 60px -20px rgba(0,0,0,.6);padding:24px}
+.lg-one img{max-width:100%;max-height:100%;object-fit:contain}
+.lg-one.pop{animation:lgpop .35s ease}
+@keyframes lgpop{from{transform:scale(.82);opacity:.2}to{transform:scale(1);opacity:1}}
+[hidden]{display:none!important}
+.lg-grid{display:grid;gap:8px;width:100%;max-width:1000px;grid-template-columns:repeat(var(--c,9),minmax(0,1fr));grid-auto-flow:dense}
+.lg-grid .t{min-width:0;background:#fff;border-radius:8px;aspect-ratio:1/1;display:grid;place-items:center;padding:8%;transition:transform .4s cubic-bezier(.2,1.4,.4,1),opacity .4s}
+.lg-grid .t img{width:100%;height:100%;object-fit:contain}
+.lg-grid .t.sc{aspect-ratio:auto}
+.lg-grid.build .t{opacity:0;transform:scale(.3)}
+.lg-grid .t.in{opacity:1;transform:scale(1)}
+.lg-grid .t.sc{border-radius:16px;padding:6%;box-shadow:0 0 0 4px var(--green),0 20px 50px -10px rgba(146,174,49,.6);z-index:2}
+.lg-grid.build .t.sc{transform:scale(.5)}
+.lg-grid .t.sc.in{transform:scale(1)}
+.lg-foot{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:22px}
+.lg-replay{color:#fff}
+.facts-big{display:grid;gap:14px;margin:0;color:var(--muted)}
+.facts-big div{background:rgba(255,255,255,.06);border-radius:14px;padding:14px 18px;color:#C9D6E6}
+@media (prefers-reduced-motion:reduce){.rot .tile img{transition:none}}
+/* ===== v9 components ===== */
+/* page entrance */
+@keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+section[data-page].entered .anim{animation:rise .7s cubic-bezier(.2,.8,.2,1) both;animation-delay:calc(var(--i,0) * 70ms)}
+section[data-page].entered .words span{display:inline-block;animation:rise .8s cubic-bezier(.2,.8,.2,1) both;animation-delay:calc(var(--i,0) * 260ms + 120ms)}
+@media (prefers-reduced-motion:reduce){section[data-page].entered .anim,section[data-page].entered .words span{animation:none}}
+
+/* show stage (home + before/after) */
+.show{position:relative;max-width:1080px;margin:28px auto 0;aspect-ratio:16/9;border-radius:20px;overflow:hidden;background:#07121F;box-shadow:0 40px 80px -30px rgba(0,0,0,.7);text-align:start}
+.sh-layer{position:absolute;inset:0;opacity:0;visibility:hidden;transition:opacity .8s ease,visibility .8s}
+.sh-layer.on{opacity:1;visibility:visible}
+.sh-video video{width:100%;height:100%;object-fit:contain;display:block;background:#000}
+.sh-sound{position:absolute;bottom:16px;left:16px;z-index:6!important;touch-action:manipulation;display:flex;align-items:center;gap:8px;background:rgba(0,0,0,.6);color:#fff;border:1px solid rgba(255,255,255,.3);border-radius:999px;padding:8px 14px;font:inherit;cursor:pointer;z-index:3}
+.sh-narr{position:absolute;bottom:16px;right:16px;z-index:6;touch-action:manipulation;background:var(--green);color:#16260A;border:0;border-radius:999px;padding:9px 16px;font:inherit;font-weight:700;cursor:pointer;z-index:3}
+.sh-narr.on{background:#fff}
+.sh-sub{position:absolute;left:50%;bottom:64px;transform:translateX(-50%);max-width:88%;background:rgba(0,0,0,.72);color:#fff;padding:6px 14px;border-radius:10px;font-size:clamp(.85rem,1.8vw,1.1rem);text-align:center;z-index:3;pointer-events:none}
+.sh-sound .wave{display:none}.sh-sound.unmuted .wave{display:inline}.sh-sound.unmuted .x{display:none}
+.sh-cap{position:absolute;top:0;inset-inline:0;z-index:3;padding:14px 18px 26px;background:linear-gradient(180deg,rgba(7,18,31,.92),rgba(7,18,31,0));display:grid;gap:2px;text-align:center;pointer-events:none}
+.sh-cap small{color:var(--green);font-family:var(--f-display);font-size:.85rem}
+.sh-cap b{color:#fff;font-family:var(--f-display);font-weight:400;font-size:clamp(1.05rem,2.4vw,1.6rem)}
+.sh-rot .rot{position:absolute;inset:0;height:auto;padding:12px;gap:10px;display:grid;grid-template-columns:1.3fr 1fr 1fr}
+.sh-prog{position:absolute;bottom:0;inset-inline:0;height:4px;background:rgba(255,255,255,.12);z-index:4}
+.sh-prog i{display:block;height:100%;width:0;background:var(--green)}
+.sh-tabs{display:flex;justify-content:center;gap:8px;margin-top:14px;flex-wrap:wrap}
+.sh-tabs button{font:inherit;font-family:var(--f-display);background:rgba(255,255,255,.08);color:#C9D6E6;border:1px solid rgba(255,255,255,.18);border-radius:999px;padding:8px 18px;cursor:pointer}
+.sh-tabs button.on{background:var(--green);color:#16260A;border-color:var(--green)}
+.band .sh-tabs button{background:var(--card);color:var(--ink);border-color:var(--line)}
+.band .sh-tabs button.on{background:var(--green);color:#16260A}
+.seq{position:absolute;inset:0;display:grid;place-items:center;padding:clamp(76px,12%,96px) 12px 14px}
+.show-ba .seq{padding-top:14px}
+.seq .one{width:min(46%,420px);aspect-ratio:3/2;background:#fff;border-radius:18px;display:grid;place-items:center;padding:4%;box-shadow:0 30px 60px -20px rgba(0,0,0,.7)}
+.seq .one img{max-width:100%;max-height:100%;object-fit:contain}
+.seq .one.fit-cover{position:absolute;inset:clamp(76px,12%,96px) 12px 14px;width:auto;aspect-ratio:auto;padding:0;overflow:hidden;background:transparent;box-shadow:none;border-radius:12px}
+.show-ba .seq .one.fit-cover{inset:12px}
+.seq .one.fit-cover img{width:100%;height:100%;object-fit:contain;pointer-events:none}
+.seq .one.pop{animation:popS .45s ease}
+@keyframes popS{from{transform:scale(.94)}to{transform:none}}
+.seq .one .cnt{direction:ltr;position:absolute;bottom:8px;left:10px;background:rgba(0,0,0,.6);color:#fff;font-size:.8rem;padding:2px 10px;border-radius:99px;font-variant-numeric:tabular-nums}
+.sq-grid{position:absolute;top:clamp(76px,12%,96px);bottom:14px;left:12px;right:12px;display:grid;gap:clamp(4px,.7vw,8px);grid-template-columns:repeat(var(--c),minmax(0,1fr));grid-template-rows:repeat(var(--r),minmax(0,1fr));grid-auto-flow:dense}
+.sq-grid .t{min-width:0;min-height:0;border-radius:8px;overflow:hidden;display:grid;place-items:center;transition:transform .45s cubic-bezier(.2,1.4,.4,1),opacity .45s}
+.sq-grid.fit-contain .t{background:#fff;padding:10%}
+.sq-grid .t>img{width:100%;height:100%;object-fit:contain;pointer-events:none}
+.sq-grid.fit-cover .t>img{object-fit:cover}
+.show-ba .sq-grid{top:14px}
+.sq-grid.build .t{opacity:0;transform:scale(.3)}
+.sq-grid .t.in{opacity:1;transform:none}
+.sq-grid .t.ctr{background:#fff;padding:0;border-radius:14px;box-shadow:0 0 0 3px var(--green),0 20px 50px -10px rgba(146,174,49,.55);z-index:2}
+.sq-grid .t.ctr{position:relative}
+.ctr-sc{position:absolute;inset:0;display:grid;place-items:center;padding:5%}
+.sq-grid .t.ctr .sys{position:absolute;inset:0;width:auto;height:auto}
+.ctr-sc img{position:absolute;inset:6%;width:88%;height:88%;max-width:none;object-fit:contain;pointer-events:none}
+.sys{width:100%;height:100%;display:grid;grid-template-rows:auto auto 1fr auto;background:#F5F8FC;color:#111317;font-size:clamp(.6rem,1.15vw,.95rem);text-align:right}
+.sys-top{display:flex;align-items:center;justify-content:space-between;gap:8px;background:#26508E;color:#fff;padding:5px 10px}
+.sys-top img{height:clamp(16px,2.6vw,30px);width:auto;background:#fff;border-radius:5px;padding:1px 4px}
+.sys-search{margin:6px 10px;border:2px solid #26508E;border-radius:999px;padding:3px 10px;display:flex;align-items:center;justify-content:space-between;background:#fff}
+.sys-search i{width:.8em;height:.8em;border:2px solid #26508E;border-radius:50%}
+.typing{display:inline-block;overflow:hidden;white-space:nowrap;border-left:2px solid #26508E;animation:type 2.4s steps(16) .6s both,blink 1s step-end infinite}
+@keyframes type{from{max-width:0}to{max-width:12em}}
+@keyframes blink{50%{border-color:transparent}}
+.sys-rows{display:grid;gap:4px;padding:0 10px;align-content:start}
+.sys-rows .r{background:#fff;border:1px solid #DCE3EB;border-radius:6px;padding:3px 8px;display:flex;justify-content:space-between;gap:6px;opacity:0;animation:rise .5s ease both}
+.sys-rows .r:nth-child(1){animation-delay:3.1s}.sys-rows .r:nth-child(2){animation-delay:3.3s}.sys-rows .r:nth-child(3){animation-delay:3.5s}
+.sys-rows .r.on{border-color:#92AE31;background:#EEF7E6}
+.sys-rows small{color:#5B6675;white-space:nowrap}
+.sys-slogan{background:#16305A;color:#fff;text-align:center;padding:6px 8px;font-family:var(--f-display);display:grid}
+.sys-slogan span{color:#92AE31;font-size:1.15em}
+.show-ba{aspect-ratio:16/9}
+
+/* generic page hero */
+.pg-hero{background:radial-gradient(120% 120% at 80% 0%,#24508E 0%,#132C50 55%,#0B1A30 100%);color:#fff;padding-block:56px 60px}
+.pg-hero h1{font-size:clamp(2.1rem,6vw,4rem);font-weight:400;margin-top:10px;line-height:1.08}
+.pg-hero h1 span,.pg-hero h1 .g{color:var(--green)}
+.pg-hero p{color:#C9D6E6;font-size:clamp(1.02rem,2vw,1.2rem);max-width:60ch;margin-top:16px}
+.pg-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:28px;max-width:820px}
+.pg-stats div{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:14px 16px}
+.pg-stats b{display:block;font-family:var(--f-display);font-weight:400;font-size:1.35rem;color:#fff}
+.pg-stats span{color:#C9D6E6;font-size:.92rem}
+
+/* services */
+.svc-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.svc-grid .svc{transition:transform .25s,box-shadow .25s,border-color .25s}
+.svc-grid .svc:hover{transform:translateY(-4px);box-shadow:0 18px 40px -20px rgba(22,48,90,.35);border-color:var(--blue)}
+.svc .ic{transition:background .25s,color .25s}
+.svc:hover .ic{background:var(--blue);color:#fff}
+.fix-band{background:linear-gradient(180deg,#0E2340,#16305A);color:#fff;padding-block:64px}
+.fix-head{text-align:center;display:grid;justify-items:center;gap:10px;margin-bottom:34px}
+.fix-badge{background:var(--green);color:#16260A;font-family:var(--f-display);padding:5px 16px;border-radius:999px;font-size:.95rem}
+.fix-head h2{color:#fff;font-size:clamp(1.8rem,4.6vw,3rem);font-weight:400}
+.fix-word{color:var(--green);display:inline-block;animation:pulse 2.6s ease-in-out infinite}
+@keyframes pulse{50%{transform:scale(1.08)}}
+.fix-head p{color:#C9D6E6;max-width:56ch}
+.fix-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;align-items:stretch;max-width:980px;margin:0 auto}
+.fix-card{background:#fff;color:var(--ink);border-radius:20px;padding:26px 24px;display:grid;grid-template-rows:auto auto auto auto 1fr auto;gap:10px;text-align:center;transition:transform .3s}
+.fix-card:hover{transform:translateY(-6px)}
+.fix-card.feat{box-shadow:0 0 0 3px var(--green),0 30px 60px -25px rgba(146,174,49,.7)}
+.fc-tag{justify-self:center;background:var(--green);color:#16260A;font-family:var(--f-display);font-size:.8rem;padding:2px 12px;border-radius:999px}
+.fc-tag.ghost{background:transparent}
+.fc-name{font-family:var(--f-display);font-size:1.5rem;color:#16305A}
+.fc-pages{color:#5B6675}
+.fc-bar{height:8px;background:#E6ECF3;border-radius:99px;overflow:hidden}
+.fc-bar i{display:block;height:100%;width:var(--w);background:linear-gradient(90deg,#92AE31,#26508E);border-radius:99px}
+section[data-page].entered .fc-bar i{animation:grow 1.2s cubic-bezier(.2,.8,.2,1) .5s both}
+@keyframes grow{from{width:0}}
+.fc-price{display:flex;align-items:baseline;justify-content:center;gap:8px;align-self:end}
+.fc-price b{font-family:var(--f-display);font-weight:400;font-size:3.6rem;line-height:1;color:#26508E;font-variant-numeric:tabular-nums}
+.fc-price span{color:#5B6675}
+.fc-avg{font-size:.92rem;color:#6B8420;background:#F1F6E4;border-radius:99px;padding:4px 10px;justify-self:center}
+.fix-incl{list-style:none;padding:0;margin:30px auto 0;max-width:980px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 24px}
+.fix-incl li{display:flex;gap:10px;align-items:flex-start;color:#E3EBF5}
+.fix-incl li::before{content:"✓";flex:0 0 22px;height:22px;border-radius:50%;background:var(--green);color:#16260A;display:grid;place-items:center;font-size:.8rem;margin-top:2px}
+.fix-foot{max-width:980px;margin:26px auto 0;display:flex;gap:18px;align-items:center;justify-content:space-between;flex-wrap:wrap;border-top:1px solid rgba(255,255,255,.15);padding-top:20px}
+.fix-foot p{color:#9FB2C8;font-size:.92rem;max-width:62ch}
+.sector-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.sector{position:relative;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:24px 22px 22px;display:grid;gap:8px;align-content:start;text-decoration:none;color:var(--ink);overflow:hidden;transition:transform .25s,box-shadow .25s}
+.sector::before{content:"";position:absolute;inset:0 0 auto;height:5px;background:var(--c)}
+.sector:hover{transform:translateY(-5px);box-shadow:0 22px 44px -24px var(--c)}
+.sc-mono{justify-self:start;font-family:var(--f-display);font-size:.85rem;letter-spacing:.08em;color:#fff;background:var(--c);border-radius:10px;padding:6px 10px}
+.sector h3{font-size:1.3rem;font-weight:400}
+.sector p{color:var(--muted)}
+.sector u{color:var(--c);text-decoration:none;font-weight:600;display:block;margin-top:4px}
+
+/* clients */
+.mod{display:grid;grid-template-columns:200px 1fr;gap:28px;align-items:center;background:linear-gradient(135deg,var(--card),var(--band));border:1px solid var(--line);border-radius:20px;padding:26px}
+.mod>*{min-width:0}
+.mod-logo{background:#fff;border-radius:16px;padding:18px;display:grid;place-items:center;box-shadow:0 0 0 3px var(--green)}
+.mod-logo img{width:100%;height:auto}
+.mod h2{margin-top:6px}
+.mod p{color:var(--muted);margin-top:8px;max-width:62ch}
+.logo-wall{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px}
+.lw{background:#fff;border:1px solid var(--line);border-radius:14px;aspect-ratio:4/3;display:grid;place-items:center;padding:14%;transition:transform .25s,box-shadow .25s}
+.lw:hover{transform:translateY(-3px) scale(1.03);box-shadow:0 14px 30px -18px rgba(22,48,90,.5)}
+.lw img{max-width:100%;max-height:100%;object-fit:contain}
+
+/* before/after gallery */
+.ms-b{display:block;padding:0;border:0;background:none;width:100%;cursor:zoom-in;border-radius:12px;overflow:hidden}
+.ms-b img{display:block;width:100%;transition:transform .4s}
+.ms-b:hover img{transform:scale(1.04)}
+.lightbox{position:fixed;inset:0;z-index:50;background:rgba(5,12,22,.94);display:grid;place-items:center;padding:max(16px,env(safe-area-inset-top,0px)) 16px max(16px,env(safe-area-inset-bottom,0px))}
+.lightbox img{max-width:100%;max-height:100%;object-fit:contain;border-radius:8px;user-select:none;-webkit-user-drag:none;-webkit-touch-callout:none}
+.lb-x,.lb-n{position:absolute;background:rgba(255,255,255,.12);color:#fff;border:0;border-radius:50%;width:46px;height:46px;font-size:1.4rem;cursor:pointer}
+.lb-x{top:max(14px,env(safe-area-inset-top,0px));left:14px}
+.lb-prev{right:14px;top:50%}.lb-next{left:14px;top:50%}
+
+/* work */
+.work-hero h1{font-size:clamp(2.2rem,6.5vw,4.4rem)}
+.process{display:grid;grid-template-columns:1fr 1.6fr 1fr;gap:20px;align-items:start}
+.ph{background:var(--card);border:1px solid var(--line);border-radius:18px;overflow:hidden;min-width:0}
+.ph-h{display:flex;align-items:center;gap:10px;background:var(--blue-deep);color:#fff;font-family:var(--f-display);padding:12px 16px;font-size:1.1rem}
+.ph-h span{width:28px;height:28px;border-radius:50%;background:var(--green);color:#16260A;display:grid;place-items:center;font-size:.9rem}
+.steps{list-style:none;margin:0;padding:14px 16px 16px;display:grid;gap:12px;position:relative}
+.steps li{display:grid;grid-template-columns:38px 1fr;gap:12px;align-items:start;position:relative}
+.steps li:not(:last-child)::after{content:"";position:absolute;right:18px;top:40px;bottom:-12px;width:2px;background:var(--line)}
+.sn{width:38px;height:38px;border-radius:12px;background:var(--band);color:var(--blue);display:grid;place-items:center;font-family:var(--f-display);font-weight:400;font-size:1.05rem;z-index:1}
+.steps h3{font-size:1.05rem;font-weight:400;font-family:var(--f-display)}
+.steps p{color:var(--muted);font-size:.95rem}
+.chain{max-width:980px;margin:0 auto}
+.chain-main{background:#000;border-radius:18px 18px 0 0;overflow:hidden;aspect-ratio:16/9;max-width:100%;display:grid}
+.chain-main video,.chain-main img{width:100%;height:100%;object-fit:contain;display:block;background:#000}
+.chain-main img.fade{animation:gfade .6s ease}
+.chain-cap{display:flex;justify-content:space-between;gap:12px;align-items:center;background:var(--card);border:1px solid var(--line);border-top:3px solid var(--green);border-radius:0 0 18px 18px;padding:10px 16px}
+.chain-cap b{font-family:var(--f-display);font-weight:400;font-size:1.1rem}
+.chain-cap span{color:var(--muted);font-variant-numeric:tabular-nums}
+.chain-thumbs{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:8px;margin-top:12px}
+.chain-thumbs .g-th{position:relative}
+.chain-thumbs .g-th.on{box-shadow:0 0 0 3px var(--green)}
+.chain-thumbs em{position:absolute;inset:auto auto 6px 6px;background:rgba(0,0,0,.6);color:#fff;font-style:normal;font-size:.7rem;border-radius:50%;width:22px;height:22px;display:grid;place-items:center}
+
+/* contact */
+.alb-go{display:grid;grid-template-columns:90px 1fr;gap:14px;align-items:center;background:#FFF5E6;border:2px solid #F39200;border-radius:14px;padding:14px;color:#3A2600}
+.alb-go img{width:100%;height:auto}
+.alb-go p{margin:4px 0 10px;font-size:.95rem}
+
+/* ===== mobile ===== */
+@media (max-width:860px){
+ .svc-grid,.sector-grid{grid-template-columns:1fr 1fr}
+ .fix-cards{grid-template-columns:1fr;max-width:420px}
+ .fix-card{grid-template-rows:none}
+ .fix-incl{grid-template-columns:1fr}
+ .process{grid-template-columns:1fr}
+ .chain-thumbs{grid-template-columns:repeat(4,minmax(0,1fr))}
+ .mod{grid-template-columns:1fr;text-align:center;justify-items:center}
+ .mod-logo{width:160px}
+}
+@media (max-width:600px){
+ .seq .one.fit-cover{inset:clamp(70px,14%,90px) 8px 10px}
+ .show{aspect-ratio:1/1;border-radius:16px;margin-top:20px}
+ .show-ba{aspect-ratio:1/1}
+ .sh-rot .rot{grid-template-columns:1fr 1fr;grid-template-rows:1.2fr 1fr}
+ .sh-rot .rot .tile:first-child{grid-column:1/-1}
+ .seq .one{width:72%}
+ .seq .one.fit-cover{width:92%;aspect-ratio:4/5}
+ .svc-grid,.sector-grid{grid-template-columns:1fr}
+ .pg-hero{padding-block:40px 44px}
+ .pg-stats{grid-template-columns:1fr;gap:8px}
+ .pg-stats div{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+ .logo-wall{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+ .lw{border-radius:10px;padding:12%}
+ .fix-band{padding-block:48px}
+ .fc-price b{font-size:3rem}
+ .alb-go{grid-template-columns:1fr}
+ .alb-go img{width:120px}
+ .sh-tabs button{padding:7px 14px;font-size:.92rem}
+ .ht-title{font-size:clamp(2.4rem,11vw,3.2rem)}
+ .lb-n{top:auto;bottom:max(18px,env(safe-area-inset-bottom,0px))}
+ .masonry{columns:2;column-gap:8px}
+ .masonry figure{margin-bottom:8px}
+}
+
+/* work tour */
+.tour{display:grid;grid-template-columns:1.1fr 1fr;gap:0;background:var(--card);border:1px solid var(--line);border-radius:22px;overflow:hidden;box-shadow:0 30px 60px -40px rgba(22,48,90,.5)}
+.tour>*{min-width:0}
+.tour-art{background:linear-gradient(160deg,#EAF1F9,#D5E3F2);aspect-ratio:400/280;position:relative}
+.tour-art svg{position:absolute;inset:0;width:100%;height:100%}
+.tour-txt{padding:28px 28px 22px;display:grid;gap:10px;align-content:center}
+.tour-ph{color:var(--green-ink);font-family:var(--f-display);font-size:.95rem}
+.tour-n{font-family:var(--f-display);font-size:3.4rem;line-height:1;color:var(--blue);opacity:.18}
+.tour-txt h3{font-size:1.7rem;font-weight:400;font-family:var(--f-display);animation:rise .5s both}
+.tour-txt p{color:var(--muted);font-size:1.08rem;animation:rise .5s .08s both}
+.tour-ctl{display:flex;gap:10px;align-items:center;margin-top:8px;flex-wrap:wrap}
+.tbtn{width:46px;height:46px;border-radius:50%;border:1px solid var(--line);background:var(--paper);color:var(--ink);font-size:1.4rem;cursor:pointer}
+.tour-note{font-size:.88rem!important;color:var(--muted)}
+.tour-dots{grid-column:1/-1;display:flex;gap:6px;justify-content:center;padding:14px;border-top:1px solid var(--line);flex-wrap:wrap}
+.tour-dots button{width:30px;height:30px;border-radius:50%;border:0;background:var(--band);color:var(--blue);font:inherit;font-size:.82rem;cursor:pointer;font-variant-numeric:tabular-nums}
+.tour-dots button.on{background:var(--green);color:#16260A}
+.tour-dots button.done{background:var(--blue);color:#fff}
+@media (max-width:860px){.tour{grid-template-columns:1fr}.tour-txt{padding:20px}.tour-n{font-size:2.6rem}}
+/* scene animations */
+.a-drive{animation:drive 3s ease-in-out infinite}
+@keyframes drive{0%{transform:translateX(-160px)}45%,70%{transform:none}100%{transform:translateX(220px)}}
+.a-spin{transform-box:fill-box;transform-origin:center;animation:spin .6s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.a-drop{animation:drop 2.4s ease-in infinite}
+.a-drop.d2{animation-delay:.8s}.a-drop.d3{animation-delay:1.6s}
+@keyframes drop{0%{transform:translateY(-120px);opacity:0}15%{opacity:1}55%,100%{transform:none;opacity:1}}
+.a-tick{stroke-dasharray:30;stroke-dashoffset:30;animation:tick 3s ease infinite}
+.a-tick.d2{animation-delay:.6s}.a-tick.d3{animation-delay:1.2s}.a-tick.d4{animation-delay:1.8s}
+@keyframes tick{30%,100%{stroke-dashoffset:0}}
+.a-beam{animation:beam 1.8s ease-in-out infinite alternate}
+@keyframes beam{from{transform:translateY(0)}to{transform:translateY(110px)}}
+.a-pop{transform-box:fill-box;transform-origin:center;animation:popout 2.4s ease infinite}
+@keyframes popout{0%,30%{transform:none;opacity:1}60%{transform:translate(40px,-60px) rotate(60deg);opacity:1}80%,100%{transform:translate(60px,-90px) rotate(90deg);opacity:0}}
+.a-flat{transform-box:fill-box;transform-origin:center;animation:flat 2.4s ease infinite}
+@keyframes flat{0%,20%{transform:skewY(-6deg) scaleY(.92)}60%,100%{transform:none}}
+.a-feed{animation:feed 2.6s ease-in-out infinite}
+@keyframes feed{0%{transform:translateY(-40px);opacity:0}20%{opacity:1}70%{transform:translateY(60px);opacity:1}100%{transform:translateY(80px);opacity:0}}
+.a-light{animation:light 1.3s ease-in-out infinite alternate}
+@keyframes light{from{transform:translateX(0)}to{transform:translateX(150px)}}
+.a-in{opacity:0;animation:fadein .5s ease forwards}
+.a-in.d1{animation-delay:.3s}.a-in.d2{animation-delay:.8s}.a-in.d3{animation-delay:1.3s}.a-in.d4{animation-delay:1.8s}
+@keyframes fadein{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.a-mag{animation:mag 3s ease-in-out infinite}
+@keyframes mag{0%,100%{transform:translate(0,0)}50%{transform:translate(110px,50px)}}
+.a-type{stroke-dasharray:160;stroke-dashoffset:160;animation:typeL 2.5s steps(12) infinite}
+@keyframes typeL{60%,100%{stroke-dashoffset:0}}
+.a-float{animation:fl 2.4s ease-in-out infinite}
+@keyframes fl{0%{transform:translate(0,0);opacity:1}80%{transform:translate(120px,-70px);opacity:0}100%{opacity:0}}
+.a-pulse{transform-box:fill-box;transform-origin:center;animation:pl 1.4s ease-in-out infinite}
+@keyframes pl{50%{transform:scale(1.12)}}
+.a-back{animation:back 3s ease-in-out infinite}
+@keyframes back{0%{transform:translateX(220px)}45%,70%{transform:none}100%{transform:translateX(-200px)}}
+@media (prefers-reduced-motion:reduce){.tour-art *{animation:none!important;opacity:1!important}}
+.slides{position:absolute;inset:0;overflow:hidden;background:#000}
+.slides .sl{position:absolute;inset:0;opacity:0;transition:opacity .45s ease;pointer-events:none;user-select:none}
+.slides .sl.on{opacity:1}
+.slides .sl i{display:none}
+.slides .sl.fill img{object-fit:cover}
+.slides .sl img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
+@keyframes panY{from{object-position:50% 0%}to{object-position:50% 100%}}
+@keyframes panX{from{object-position:0% 50%}to{object-position:100% 50%}}
+.slides .cnt{position:absolute;bottom:12px;left:12px;z-index:2;direction:ltr;background:rgba(0,0,0,.6);color:#fff;font-size:.8rem;padding:2px 10px;border-radius:99px;font-variant-numeric:tabular-nums}
+@media (prefers-reduced-motion:reduce){.slides .sl.on{animation:none}}
+/* hero */
+.hero{background:linear-gradient(180deg,var(--blue-deep),#0B1E36);color:#fff;padding-block:48px 64px}
+.hero-grid{display:grid;grid-template-columns:1fr 1.35fr;gap:40px;align-items:center}
+.hero-grid>*{min-width:0}
+.hero h1 .q{color:var(--green)}
+.hero p{color:#C9D6E6;font-size:1.15rem;margin-top:16px}
+.hero .ctas{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px}
+.hero .btn-ghost{color:#fff}
+.player{position:relative;border-radius:18px;overflow:hidden;box-shadow:0 30px 60px -20px rgba(0,0,0,.6);aspect-ratio:16/9;max-width:100%;background:#000}
+.player video{width:100%;height:100%;display:block;object-fit:cover}
+.play{position:absolute;inset:0;display:grid;place-items:end center;padding-bottom:7%;background:rgba(10,25,45,.35);border:0;cursor:pointer;color:#fff}
+.play span{display:flex;align-items:center;gap:12px;background:var(--green);color:#16260A;font-family:var(--f-display);font-weight:800;font-size:1.15rem;padding:14px 26px;border-radius:999px}
+.play svg{width:26px;height:26px}
+.facts{display:flex;gap:28px;flex-wrap:wrap;margin-top:30px;color:#C9D6E6;font-size:.95rem}
+.facts b{display:block;font-family:var(--f-display);font-size:1.6rem;color:#fff}
+@media (max-width:900px){.hero-grid{grid-template-columns:1fr}}
+
+/* services */
+.grid{display:grid;gap:20px}
+.g3{grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+.svc{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:24px;display:grid;gap:10px;align-content:start}
+.svc .ic{width:48px;height:48px;border-radius:12px;background:var(--band);display:grid;place-items:center;color:var(--blue)}
+.svc .ic svg{width:28px;height:28px}
+.svc p{color:var(--muted)}
+.why{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:28px}
+.why div{border-top:4px solid var(--green);padding-top:14px}
+.why p{color:var(--muted);margin-top:6px}
+
+/* prices */
+.price-wrap{display:grid;grid-template-columns:1.2fr 1fr;gap:36px;align-items:start}
+.price-wrap>*{min-width:0}
+.tbl{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-variant-numeric:tabular-nums;background:var(--card);border-radius:var(--r);overflow:hidden}
+th,td{padding:14px 16px;text-align:right;border-bottom:1px solid var(--line)}
+th{background:var(--blue);color:var(--on-blue);font-family:var(--f-display);font-weight:700}
+td.num{font-family:var(--f-display);font-weight:700;color:var(--blue)}
+.fine{font-size:.9rem;color:var(--muted);margin-top:12px}
+.extra{display:grid;gap:12px}
+.extra div{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:16px 18px;display:flex;justify-content:space-between;gap:12px;align-items:center}
+.extra b{font-family:var(--f-display);color:var(--green-ink);white-space:nowrap}
+@media (max-width:860px){.price-wrap{grid-template-columns:1fr}}
+
+/* clients */
+.logos{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px}
+.logos div{background:#fff;border:1px solid var(--line);border-radius:12px;aspect-ratio:3/2;display:grid;place-items:center;padding:14px;max-width:100%}
+.logos img{max-height:100%;max-width:100%;object-fit:contain}
+.strip{display:flex;gap:14px;overflow:hidden;mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.strip .track{display:flex;gap:14px;animation:slide 40s linear infinite}
+.strip .track div{flex:0 0 150px;background:#fff;border-radius:12px;height:96px;display:grid;place-items:center;padding:12px;border:1px solid var(--line)}
+.strip img{max-height:100%;max-width:100%}
+@keyframes slide{to{transform:translateX(50%)}}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips span{background:var(--card);border:1px solid var(--line);border-radius:999px;padding:6px 14px;font-weight:600}
+.big-photo{border-radius:var(--r);overflow:hidden;margin-top:28px}
+.big-photo img{display:block;width:100%}
+.cap{font-size:.92rem;color:var(--muted);margin-top:8px}
+
+/* before/after */
+.ba-list{display:grid;gap:36px}
+.ba{display:grid;grid-template-columns:1.6fr 1fr;gap:28px;align-items:center}
+.ba>*{min-width:0}
+.cmp{position:relative;aspect-ratio:4/3;border-radius:var(--r);overflow:hidden;max-width:100%;background:#000;user-select:none}
+.cmp img,.cmp .after{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.cmp .after{clip-path:inset(0 0 0 var(--pos,50%))}
+.cmp .handle{position:absolute;top:0;bottom:0;left:var(--pos,50%);width:4px;background:#fff;transform:translateX(-2px);pointer-events:none}
+.cmp .handle::after{content:"⇆";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:44px;height:44px;border-radius:50%;background:#fff;color:#16305A;display:grid;place-items:center;font-size:22px;font-weight:700;box-shadow:0 4px 14px rgba(0,0,0,.3)}
+.cmp input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:ew-resize;margin:0}
+.tag{position:absolute;top:12px;font-family:var(--f-display);font-weight:800;font-size:.9rem;padding:4px 12px;border-radius:999px;pointer-events:none}
+.tag.b{left:12px;background:rgba(0,0,0,.6);color:#fff}
+.tag.a{right:12px;background:var(--green);color:#16260A}
+.ba h3{font-size:1.4rem}
+.ba .stat{font-family:var(--f-display);font-weight:800;font-size:2.2rem;color:var(--blue);margin-top:10px}
+.ba p{color:var(--muted)}
+@media (max-width:860px){.ba{grid-template-columns:1fr}}
+.masonry{columns:4 220px;column-gap:14px}
+.masonry figure{margin:0 0 14px;break-inside:avoid;position:relative;border-radius:12px;overflow:hidden}
+.masonry img{display:block;width:100%}
+[data-page="archive"] img{-webkit-user-drag:none;-webkit-touch-callout:none;user-select:none;pointer-events:none}
+.masonry figcaption{position:absolute;top:10px;right:10px;background:rgba(0,0,0,.6);color:#fff;font-family:var(--f-display);font-weight:700;font-size:.8rem;padding:2px 10px;border-radius:999px}
+.privacy{display:flex;gap:10px;align-items:center;background:var(--card);border:1px dashed var(--line);border-radius:12px;padding:12px 16px;color:var(--muted);margin-bottom:22px}
+
+/* work videos */
+.vids{display:grid;grid-template-columns:1.8fr 1fr 1fr;gap:16px;align-items:start}
+.vids>*{min-width:0}
+.vids figure{margin:0}
+.vids video{width:100%;border-radius:var(--r);display:block;background:#000;max-width:100%}
+.vids figcaption{color:var(--muted);font-size:.95rem;margin-top:8px}
+@media (max-width:860px){.vids{grid-template-columns:1fr 1fr}.vids figure:first-child{grid-column:1/-1}}
+.photos{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-top:20px}
+.photos img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:12px;display:block}
+
+/* jobs */
+.job{display:grid;grid-template-columns:1.3fr 1fr;gap:36px;align-items:start}
+.job>*{min-width:0}
+.badge-idf{display:flex;gap:16px;align-items:center;background:var(--green);color:#16260A;border-radius:var(--r);padding:20px 22px;margin-block:22px}
+.badge-idf svg{flex:0 0 52px;height:52px}
+.badge-idf b{font-family:var(--f-display);font-size:1.3rem;display:block}
+.req{display:grid;gap:10px;padding:0;margin:16px 0 0;list-style:none}
+.req li{display:flex;gap:10px;align-items:flex-start}
+.req li::before{content:"";flex:0 0 10px;height:10px;margin-top:9px;border-radius:2px;background:var(--blue)}
+form.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:24px;display:grid;gap:14px}
+label{display:grid;gap:6px;font-weight:600}
+input,select,textarea{font:inherit;padding:11px 12px;border:1px solid var(--line);border-radius:10px;background:var(--paper);color:var(--ink);width:100%}
+.check{display:flex;gap:10px;align-items:center;font-weight:600}
+.check input{width:auto}
+.ok{background:var(--band);border-radius:10px;padding:14px;color:var(--ink)}
+@media (max-width:860px){.job{grid-template-columns:1fr}}
+
+/* album */
+:root{--alb-navy:#2B5277;--alb-orange:#F39200}
+.alb-hero{display:grid;grid-template-columns:1fr 1fr;gap:36px;align-items:center}
+.alb-hero>*{min-width:0}
+.alb-hero img.flyer{width:100%;border-radius:var(--r);display:block}
+.alb-logo{background:#fff;border-radius:16px;padding:14px 18px;display:inline-block}
+.alb-logo img{height:84px;width:auto;display:block}
+.btn-alb{background:var(--alb-orange);color:#1E1200}
+.alb-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:16px}
+.alb-grid figure{margin:0;background:var(--card);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.alb-grid video{width:100%;aspect-ratio:1/1;object-fit:contain;background:#000;display:block;max-width:100%}
+.alb-grid figcaption{padding:10px 14px;font-weight:600}
+.alb-photos{display:grid;grid-template-columns:1fr 1.5fr 1fr;gap:14px;align-items:stretch}
+.alb-photos img{width:100%;height:100%;max-height:420px;object-fit:cover;border-radius:var(--r);display:block}
+.alb-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.alb-steps div{border-top:4px solid var(--alb-orange);padding-top:10px;display:grid;gap:2px}
+.alb-steps b{font-family:var(--f-display);font-size:1.15rem;color:var(--ink);font-weight:400}
+.alb-steps span{color:var(--muted)}
+@media (max-width:700px){.alb-photos{grid-template-columns:1fr 1fr}.alb-photos img:nth-child(2){grid-column:1/-1;order:-1}.alb-steps{grid-template-columns:1fr}}
+.alb-what{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+.alb-what figure{margin:0;background:var(--card);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.alb-what img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;max-width:100%}
+.alb-what figcaption{padding:12px 14px;color:var(--muted);display:grid;gap:2px}
+.alb-what b{font-family:var(--f-display);color:var(--ink);font-weight:400;font-size:1.1rem}
+.alb-usb{display:grid;grid-template-columns:220px 1fr;gap:24px;align-items:center;margin-top:28px;background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:20px}
+.alb-usb>*{min-width:0}
+.alb-usb img{width:100%;border-radius:10px;background:#fff;display:block}
+.alb-posters{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;align-items:start}
+.alb-posters img{background:#fff}
+.alb-posters img{width:100%;border-radius:var(--r);display:block}
+@media (max-width:900px){.alb-posters{grid-template-columns:1fr 1fr}}
+@media (max-width:700px){.alb-usb{grid-template-columns:1fr}.alb-usb img{max-width:240px}}
+.alb-lab{columns:4 200px;column-gap:12px}
+.alb-lab img{width:100%;display:block;margin-bottom:12px;border-radius:12px;break-inside:avoid;user-select:none;-webkit-user-drag:none;-webkit-touch-callout:none;pointer-events:none}
+.alb-feat{display:grid;grid-template-columns:minmax(0,300px) 1fr;gap:28px;align-items:center;margin-bottom:28px}
+.alb-feat>*{min-width:0}
+.alb-feat video{width:100%;aspect-ratio:9/16;background:#000;border-radius:var(--r);display:block;max-width:100%}
+@media (max-width:700px){.alb-feat{grid-template-columns:1fr}.alb-feat video{max-width:300px}}
+.g-wrap{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:18px;align-items:start}
+.g-main{position:relative;background:#000;border-radius:var(--r);overflow:hidden;display:grid}
+.g-main video,.g-main img{width:100%;height:clamp(300px,46vw,560px);object-fit:contain;display:block;background:#000;max-width:100%}
+.g-photo img{user-select:none;-webkit-user-drag:none;-webkit-touch-callout:none;pointer-events:none}
+.g-photo img.fade{animation:gfade .6s ease}
+@keyframes gfade{from{opacity:.15}to{opacity:1}}
+.g-cap{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:10px 14px;background:var(--card);color:var(--ink);border-top:3px solid var(--alb-orange)}
+.g-cap b{font-family:var(--f-display);font-weight:400;font-size:1.1rem}
+.g-cap span{color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+.g-thumbs{display:grid;grid-template-columns:repeat(auto-fill,minmax(70px,1fr));gap:8px;align-content:start;max-height:calc(clamp(300px,46vw,560px) + 48px);overflow-y:auto;padding:2px}
+.g-th{padding:0;border:0;background:#000;border-radius:10px;overflow:hidden;aspect-ratio:1/1;cursor:pointer;outline-offset:2px;opacity:.7;transition:opacity .2s,transform .2s}
+.g-th img{width:100%;height:100%;object-fit:cover;display:block;pointer-events:none}
+.g-th:hover{opacity:1}
+.g-th.on{opacity:1;box-shadow:0 0 0 3px var(--alb-orange);transform:scale(.94)}
+@media (max-width:760px){.g-wrap{grid-template-columns:1fr}.g-thumbs{max-height:none;grid-template-columns:repeat(auto-fill,minmax(60px,1fr))}}
+.alb-teaser{display:grid;grid-template-columns:auto 1fr auto;gap:28px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:24px}
+.alb-teaser>*{min-width:0}
+@media (max-width:860px){.alb-hero,.alb-teaser{grid-template-columns:1fr}}
+/* contact & footer */
+.contact{display:grid;grid-template-columns:1fr 1fr;gap:36px}
+.contact>*{min-width:0}
+.cinfo{display:grid;gap:16px}
+.cinfo div{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:16px 18px}
+.cinfo small{color:var(--muted);display:block}
+.cinfo b{font-family:var(--f-display);font-size:1.15rem;user-select:all}
+.ltr{direction:ltr;unicode-bidi:isolate}
+@media (max-width:860px){.contact{grid-template-columns:1fr}}
+.cta-band{background:var(--blue);color:var(--on-blue)}
+.cta-band .wrap{display:flex;flex-wrap:wrap;gap:20px;align-items:center;justify-content:space-between;padding-block:40px}
+.cta-band h2{color:#fff}
+footer{background:var(--blue-deep);color:#C9D6E6;padding-block:40px;font-size:.95rem}
+footer .wrap{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:24px}
+footer b{color:#fff;font-family:var(--f-display)}
+footer a{color:#C9D6E6}
+.mod{display:flex;align-items:center;gap:12px}
+.group{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+.group div{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px}
+.group b{font-family:var(--f-display);color:var(--blue)}
+.group p{color:var(--muted);font-size:.95rem}
+@media (prefers-reduced-motion:reduce){.strip .track{animation:none}.btn{transition:none}}
+</style>
+</head>
+<body>
+
+
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="#home" aria-label="סופט קופי — דף הבית"><img src="img/logo.png" alt="SoftCopy פתרונות סריקה מתקדמים"></a>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="mainNav">תפריט</button>
+    <nav class="main" id="mainNav">
+      <a href="#home">דף הבית</a>
+      <a href="#services">שירותים ומחירים</a>
+      <a href="#clients">הלקוחות שלנו</a>
+      <a href="#archive">לפני ואחרי</a>
+      <a href="#work">העבודה שלנו</a>
+      <a href="#album">אלבום בקליק</a>
+      <a href="#jobs" class="hot">דרושים</a>
+      <a href="#contact">צור קשר</a>
+    </nav>
+    <a class="phone" href="tel:039231111">03-9231111</a>
+  </div>
+</header>
+
+<main>
+<!-- ================= HOME ================= -->
+<section data-page="home">
+  <div class="hero-top">
+    <div class="wrap">
+      <div class="ht-eyebrow">SoftCopy · פתרונות סריקה מתקדמים</div>
+      <h1 class="ht-title">כל הארכיון שלכם.<br><span>בקליק אחד.</span></h1>
+      <p class="ht-sub">מחדר מלא קלסרים לקובץ שנמצא בשנייה: סריקה, ארכוב וחיפוש חכם, במחשב ובדיסק און קי ממותג.</p>
+      <div class="show" id="show" aria-label="הסרטון, הארכיונים והלקוחות שלנו">
+        <div class="sh-layer sh-video on" data-ph="0">
+          <div class="sh-sub" id="shSub" hidden></div>
+          <video id="heroVid" src="vid/hero.mp4" poster="vid/hero_poster.jpg" muted playsinline preload="auto"></video>
+          <button class="sh-narr" id="shNarr" type="button">🎙️ עם קריינות</button>
+          <button class="sh-sound" id="shSound" type="button" aria-label="הפעלת קול"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9z"/><path class="wave" d="M16 9a4 4 0 010 6M18.5 6.5a8 8 0 010 11"/><path class="x" d="M17 10l4 4M21 10l-4 4"/></svg><span>הפעלת קול</span></button>
+        </div>
+        <div class="sh-layer sh-arch" data-ph="1">
+          <div class="sh-cap"><small>לפני ואחרי</small><b>ככה הארכיונים מגיעים אלינו</b></div>
+          <div class="seq" id="archSeq"></div>
+        </div>
+        <div class="sh-layer sh-logos" data-ph="2">
+          <div class="sh-cap"><small>סומכים עלינו</small><b>ארגונים שהארכיון שלהם כבר בקליק</b></div>
+          <div class="seq" id="lgSeq"></div>
+        </div>
+        <div class="sh-prog" aria-hidden="true"><i id="shBar"></i></div>
+      </div>
+      <div class="sh-tabs" role="tablist" aria-label="חלקי המצגת">
+        <button type="button" role="tab" data-go="0" class="on">הסרטון</button>
+        <button type="button" role="tab" data-go="1">הארכיונים</button>
+        <button type="button" role="tab" data-go="2">הלקוחות</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <div class="eyebrow" style="color:var(--green)">למה לסרוק?</div>
+        <h2 style="font-size:clamp(1.8rem,4vw,2.8rem)">לא חבל על שטח הנדל״ן <span class="q">במשרד?</span></h2>
+        <p>סורקים את כל ארכיון המסמכים שלכם לארכיון דיגיטלי עם חיפוש חכם. הקלסרים מפנים מקום, וכל מסמך נמצא בשנייה, במחשב ובדיסק און קי ממותג.</p>
+        <div class="ctas">
+          <a class="btn btn-green" href="#contact">לקבלת הצעת מחיר</a>
+          <a class="btn btn-ghost" href="#archive">לפני ואחרי</a>
+        </div>
+      </div>
+      <div class="facts facts-big">
+        <div><b>99 ₪</b>לקלסר גדול, מחיר קבוע</div>
+        <div><b>A0–A4</b>מכל גודל, כולל שרטוטים</div>
+        <div><b>במשרדכם</b>בלי להוציא חומר החוצה</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="band">
+    <div class="wrap">
+      <div class="head"><div class="eyebrow">השירותים שלנו</div><h2>מהקלסר על המדף — לקובץ שנמצא בחיפוש</h2></div>
+      <div class="grid g3" id="svcHome"></div>
+      <p style="margin-top:24px"><a class="btn btn-blue" href="#services">כל השירותים והמחירים</a></p>
+    </div>
+  </div>
+
+  <div class="band alt">
+    <div class="wrap">
+      <div class="head"><div class="eyebrow">סריקה בבית הלקוח</div><h2>סורקים שלנו, מחשבים שלנו, אנשים שלנו. רק הקלסרים שלכם.</h2>
+        <p class="lead">סופט קופי הוקמה סביב הקונספט של סריקה באתר הלקוח. החומר לא יוצא מהארגון, ושירות זה אינו מייקר את עלות הסריקה.</p></div>
+      <div class="why">
+        <div><h3>נגישות</h3><p>בזמן העבודה אפשר לשלוף כל מסמך שצריך, בלי לעצור את השגרה.</p></div>
+        <div><h3>ביטוחיות</h3><p>הוצאת מסמכים מהמשרד מסכנת אותם. כשהסריקה אצלכם, אין סיכון של אובדן בדרך.</p></div>
+        <div><h3>בטחון שדה</h3><p>החומר לא יוצא ממשרדי החברה הנסרקת. מתאים לחומר רגיש: משפטי, רפואי ופיננסי.</p></div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="band" style="padding-top:0">
+    <div class="wrap">
+      <div class="alb-teaser">
+        <div class="alb-logo"><img src="alb/logo.png" alt="אלבום בקליק"></div>
+        <div><div class="eyebrow">גם לחומר האישי</div><h3 style="font-size:1.5rem;font-weight:400">אלבומים, תמונות ושקופיות מהבית? יש לנו חברת בת בשבילם.</h3>
+          <p style="color:var(--muted);margin-top:6px">אלבום בקליק, מבית סופט קופי, סורקת אלבומים ותמונות משפחתיות והופכת אותם לנכסים דיגיטליים.</p></div>
+        <a class="btn btn-alb" href="#album">לסרטונים של אלבום בקליק</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="band alt">
+    <div class="wrap">
+      <div class="head"><div class="eyebrow">ספק מורשה של משרד הביטחון</div><h2>ככה זה נראה אצלנו</h2>
+        <p class="lead">צוות מיומן, סורקים מקצועיים ותהליך מסודר: פירוק, סריקה, בקרה והחזרה לקלסר.</p></div>
+      <div class="vids" id="vidsHome"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SERVICES ================= -->
+<section data-page="services" hidden>
+  <div class="pg-hero">
+    <div class="wrap">
+      <div class="eyebrow anim" style="--i:0">שירותים ומחירים</div>
+      <h1 class="anim" style="--i:1">כל מה שצריך כדי לעבור <span>לארכיון דיגיטלי</span></h1>
+      <p class="anim" style="--i:2">ייעוץ, תכנון והקמה בפועל. אנחנו סורקים מסמכים לארגונים ולחברות, ממירים אותם לקבצים ומשלבים אותם בתוכנת ניהול מסמכים עם חיפוש חכם.</p>
+      <div class="pg-stats anim" style="--i:3">
+        <div><b>A0–A4</b><span>כל גודל, כולל שרטוטים ומפות</span></div>
+        <div><b>PDF + OCR</b><span>קבצים שאפשר לחפש בהם</span></div>
+        <div><b>אצלכם או אצלנו</b><span>סריקה בבית הלקוח או בלשכה</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="band">
+    <div class="wrap">
+      <div class="head"><div class="eyebrow">מה אנחנו עושים</div><h2>תשעה שירותים, ארכיון אחד מסודר</h2></div>
+      <div class="svc-grid" id="svcAll"></div>
+    </div>
+  </div>
+
+  <div class="fix-band">
+    <div class="wrap">
+      <div class="fix-head">
+        <span class="fix-badge anim" style="--i:0">לראשונה בישראל</span>
+        <h2 class="anim" style="--i:1">סריקת ארכיון במחיר <span class="fix-word">FIX</span></h2>
+        <p class="anim" style="--i:2">סורקים את כל ארכיון המסמכים בעלות קבועה וידועה מראש. משלמים לפי קלסר, לא לפי עמוד.</p>
+      </div>
+      <div class="fix-cards">
+        <div class="fix-card feat anim" style="--i:3">
+          <div class="fc-tag">הכי משתלם</div>
+          <div class="fc-name">קלסר גדול</div>
+          <div class="fc-pages">עד 450 עמודים</div>
+          <div class="fc-bar"><i style="--w:100%"></i></div>
+          <div class="fc-price"><b data-count="99">99</b><span>₪ לקלסר</span></div>
+          <div class="fc-avg">כ־0.22 ₪ לעמוד</div>
+        </div>
+        <div class="fix-card anim" style="--i:4">
+          <div class="fc-tag ghost">&nbsp;</div>
+          <div class="fc-name">קלסר בינוני</div>
+          <div class="fc-pages">עד 250 עמודים</div>
+          <div class="fc-bar"><i style="--w:56%"></i></div>
+          <div class="fc-price"><b data-count="69">69</b><span>₪ לקלסר</span></div>
+          <div class="fc-avg">כ־0.27 ₪ לעמוד</div>
+        </div>
+        <div class="fix-card anim" style="--i:5">
+          <div class="fc-tag ghost">&nbsp;</div>
+          <div class="fc-name">קלסר קטן</div>
+          <div class="fc-pages">עד 150 עמודים</div>
+          <div class="fc-bar"><i style="--w:33%"></i></div>
+          <div class="fc-price"><b data-count="49">49</b><span>₪ לקלסר</span></div>
+          <div class="fc-avg">כ־0.32 ₪ לעמוד</div>
+        </div>
+      </div>
+      <ul class="fix-incl anim" style="--i:6">
+        <li>פירוק הקלסר, סריקה עד A4 והחזרה לקלסר</li>
+        <li>קובץ PDF אחד, או עד 5 חוצצים בתיקייה אחת</li>
+        <li>סריקה בבית הלקוח: תוספת 19 ₪ לתיק</li>
+        <li>תוכנת ניהול מסמכים, כולל אפיון, התקנה והדרכה: 9,900 ₪</li>
+      </ul>
+      <div class="fix-foot anim" style="--i:7">
+        <p>המחירים אינם כוללים מע״מ, אינם כוללים קטלוג ומותנים בכמות מינימום. שרטוטים ומפות A3–A0 לפי הצעת מחיר.</p>
+        <a class="btn btn-green" href="#contact">להזמנת סריקה</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="band">
+    <div class="wrap">
+      <div class="head"><div class="eyebrow">במסגרת פעילות הקבוצה</div><h2>פתרונות לכל מגזר</h2><p class="lead">לכל סוג ארגון יש מסמכים, רגולציה וקצב עבודה משלו. בנינו לכל אחד מהם פתרון ייעודי.</p></div>
+      <div class="sector-grid">
+        <div class="sector anim" style="--i:0;--c:#26508E"><span class="sc-mono">GOV</span><h3>Soft Gov</h3><p>ארכיונים דיגיטליים לעיריות, למשרדי ממשלה ולגופים ציבוריים.</p></div>
+        <div class="sector anim" style="--i:1;--c:#2A8C7E"><span class="sc-mono">MED</span><h3>MediCopy</h3><p>מעבר לארכיב דיגיטלי בבתי חולים, מרפאות, חברות תרופות ורופאים פרטיים.</p></div>
+        <div class="sector anim" style="--i:2;--c:#5B4B9A"><span class="sc-mono">LAW</span><h3>Soft LAW</h3><p>סריקה וארכוב לתיקי משרדי עורכי דין, עם שמירה קפדנית על חיסיון.</p></div>
+        <div class="sector anim" style="--i:3;--c:#92AE31"><span class="sc-mono">DOC</span><h3>Soft Doc</h3><p>סריקה ואחסון דיגיטלי למסמכי השגרה: קבלות, תעודות אחריות ומסמכים אישיים.</p></div>
+        <a class="sector anim" href="#album" style="--i:4;--c:#F39200"><span class="sc-mono">ALB</span><h3>אלבום בקליק</h3><p>סריקת אלבומים, תמונות, שקופיות וקלטות וידאו מהבית. <u>לעמוד אלבום בקליק</u></p></a>
+        <div class="sector anim" style="--i:5;--c:#C2477A"><span class="sc-mono">KID</span><h3>אלבומי</h3><p>תיעוד אלבום הציורים האישי של ילדים צעירים, לשמירה לשנים.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CLIENTS ================= -->
+<section data-page="clients" hidden>
+  <div class="pg-hero">
+    <div class="wrap">
+      <div class="eyebrow anim" style="--i:0">הלקוחות שלנו</div>
+      <h1 class="anim" style="--i:1">ממשרדי ממשלה <span>ועד חברות הייטק</span></h1>
+      <p class="anim" style="--i:2">סופט קופי סורקת חומרים רגישים ומסווגים בתחום העסקי, הרפואי, המשפטי והפיננסי, וזוכה להערכה על הקפדה על חיסיון ושמירת סודיות.</p>
+    </div>
+  </div>
+  <div class="band">
+    <div class="wrap">
+      <div class="mod anim" style="--i:0">
+        <div class="mod-logo"><img src="img/logos/m85.png" alt="משרד הביטחון"></div>
+        <div><div class="eyebrow">אישור רשמי</div><h2>ספק מורשה של משרד הביטחון</h2>
+          <p>סופט קופי מורשית לסרוק חומר עבור משרד הביטחון ומערכת הביטחון. עבודה על חומר רגיש מתבצעת בידי צוותים מאושרים, לפי נהלי אבטחת מידע.</p></div>
+      </div>
+      <div class="head" style="margin-top:48px"><h2>חלק מהארגונים שעובדים איתנו</h2></div>
+      <div class="logo-wall" id="logos"></div>
+      <figure class="big-photo"><img src="img/o4.jpg" alt="קיר לוגואים של לקוחות סופט קופי בעמדת סריקה" loading="lazy"></figure>
+      <p class="cap">עמדת סריקה של סופט קופי, עם קיר הלקוחות שלנו.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= BEFORE / AFTER ================= -->
+<section data-page="archive" hidden>
+  <div class="pg-hero">
+    <div class="wrap">
+      <div class="eyebrow anim" style="--i:0">לפני ואחרי</div>
+      <h1 class="anim" style="--i:1">מחדר מלא קלסרים <span>למחשב אחד</span></h1>
+      <p class="anim" style="--i:2">ארכיונים שקיבלנו, כמו שהם. אחרי הסריקה כל אחד מהם זמין בכל מחשב, עם חיפוש חכם.</p>
+    </div>
+  </div>
+  <div class="band" style="padding-top:36px">
+    <div class="wrap">
+      <div class="show show-ba" id="baShow">
+        <div class="seq" id="baSeq"></div>
+        <div class="sh-prog" aria-hidden="true"><i id="baBar"></i></div>
+      </div>
+      <div class="sh-tabs"><button type="button" id="baReplay" class="on">צפו שוב</button></div>
+    </div>
+  </div>
+  <div class="band alt">
+    <div class="wrap">
+      <div class="head"><h2>הארכיונים, בתמונות</h2><p class="lead">לחצו על תמונה כדי לראות אותה בגדול.</p></div>
+      <div class="privacy"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/></svg>כיתובים על קלסרים וארגזים טושטשו לשמירת פרטיות הלקוחות.</div>
+      <div class="masonry" id="masonry"></div>
+    </div>
+  </div>
+  <div class="band">
+    <div class="wrap">
+      <div class="head"><h2>גררו וראו את ההבדל</h2></div>
+      <div class="ba-list" id="baList"></div>
+    </div>
+  </div>
+  <div class="lightbox" id="lb" hidden><button type="button" class="lb-x" id="lbX" aria-label="סגירה">✕</button><button type="button" class="lb-n lb-prev" id="lbPrev" aria-label="הקודמת">›</button><img id="lbImg" alt="" draggable="false"><button type="button" class="lb-n lb-next" id="lbNext" aria-label="הבאה">‹</button></div>
+</section>
+
+<!-- ================= WORK ================= -->
+<section data-page="work" hidden>
+  <div class="pg-hero work-hero">
+    <div class="wrap">
+      <div class="eyebrow anim" style="--i:0">העבודה שלנו</div>
+      <h1 class="words"><span style="--i:0">מקצועיות.</span> <span style="--i:1">דיוק.</span> <span style="--i:2" class="g">איכות בלתי מתפשרת.</span></h1>
+      <p class="anim" style="--i:4">כל תיק נרשם, כל עמוד נבדק, וכל פרויקט מקבל צוות קבוע שמכיר אותו מההתחלה ועד הסוף. כך הארכיון שלכם חוזר אליכם שלם, מסודר ומוכן לחיפוש.</p>
+      <div class="pg-stats anim" style="--i:5">
+        <div><b>100%</b><span>בקרת איכות וכמות</span></div>
+        <div><b>צוות קבוע</b><span>לכל פרויקט</span></div>
+        <div><b>רישום מלא</b><span>של כל תיק וקלסר</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="band">
+    <div class="wrap">
+      <div class="head"><div class="eyebrow">תהליך העבודה</div><h2>מהמדף שלכם ועד החיפוש במחשב</h2><p class="lead">סיור מודרך ב־12 שלבים. לחצו על ״הפעלה עם קריינות״ כדי לשמוע את ההסבר, או עברו בין השלבים בעצמכם.</p></div>
+      <div class="tour" id="tour">
+        <div class="tour-art" id="tourArt" aria-hidden="true"></div>
+        <div class="tour-txt">
+          <div class="tour-ph" id="tourPh"></div>
+          <div class="tour-n" id="tourN"></div>
+          <h3 id="tourH"></h3>
+          <p id="tourP"></p>
+          <div class="tour-ctl">
+            <button type="button" class="btn btn-green" id="tourPlay">▶ הפעלה עם קריינות</button>
+            <button type="button" class="tbtn" id="tourPrev" aria-label="השלב הקודם">›</button>
+            <button type="button" class="tbtn" id="tourNext" aria-label="השלב הבא">‹</button>
+          </div>
+          <p class="tour-note" id="tourNote" hidden></p>
+        </div>
+        <div class="tour-dots" id="tourDots"></div>
+      </div>
+      <h3 style="margin:44px 0 16px;font-size:1.4rem;font-weight:400">כל השלבים במבט אחד</h3>
+      <div class="process" id="process"></div>
+    </div>
+  </div>
+
+  <div class="band alt">
+    <div class="wrap">
+      <div class="head"><div class="eyebrow">מאחורי הקלעים</div><h2>הצוות של סופט קופי בעבודה</h2></div>
+      <div class="chain">
+        <div class="chain-main" id="chMain"></div>
+        <div class="chain-cap"><b id="chTitle"></b><span id="chNum"></span></div>
+        <div class="chain-thumbs" id="chThumbs"></div>
+      </div>
+      <p class="fine" style="text-align:center">הסרטונים והתמונות מוצגים ברצף. לחצו על ריבוע כדי לעבור אליו.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ALBUM ================= -->
+<section data-page="album" hidden>
+  <div class="band">
+    <div class="wrap alb-hero">
+      <div style="display:grid;gap:16px;justify-items:start">
+        <div class="alb-logo"><img src="alb/logo.png" alt="אלבום בקליק מבית סופט קופי"></div>
+        <div class="eyebrow">סריקת חומר אישי · חברת הבת של סופט קופי</div>
+        <h1>האלבומים בארון הפכו לנושא כבד?</h1>
+        <p class="lead">שלחו לנו את אלבומי התמונות הישנים ואנחנו נעזור לכם לפנות מקום יקר בבית, בלי להיפרד מהזיכרונות. אלבום בקליק סורקת תמונות, אלבומים, שקופיות וסרטים ישנים, ומחזירה לכם אותם בדיגיטל: לצפייה בטלוויזיה, לשיתוף עם המשפחה ולשמירה לדורות.</p>
+        <div style="display:flex;gap:12px;flex-wrap:wrap">
+          <a class="btn btn-alb" href="/album/" target="_blank" rel="noopener">לאתר אלבום בקליק</a>
+          <span class="btn btn-ghost" style="cursor:default">טלפון: <span class="ltr" style="user-select:all">03-9369999</span></span>
+        </div>
+      </div>
+      <img class="flyer" src="alb/flyer.jpg" alt="ארון ספרים מלא אלבומי תמונות ישנים" loading="lazy">
+    </div>
+  </div>
+  <div class="band alt" style="padding-top:36px">
+    <div class="wrap">
+      <div class="head"><h2>ככה זה נראה אצל אלבום בקליק</h2><p class="lead">סרטונים קצרים מהקמפיינים שלנו, לכל חג ועונה. אהבתם? כל הפרטים באתר.</p></div>
+      <div class="alb-feat"><video src="alb/feat.mp4" poster="alb/feat.jpg" controls playsinline preload="none"></video>
+        <div><div class="eyebrow">צפו קודם בזה</div><h3 style="font-size:1.5rem;font-weight:400">איך זה עובד באלבום בקליק</h3><p style="color:var(--muted);margin-top:6px">דקה על התהליך: מאספים את האלבומים, סורקים בסורק עילי בלי לפרק את האלבום, ומחזירים לכם הכל בדיגיטל.</p>
+        <p style="margin-top:14px"><a class="btn btn-alb" href="/album/" target="_blank" rel="noopener">לאתר אלבום בקליק</a></p></div></div>
+      <div class="g-wrap">
+        <div class="g-main"><video id="plVid" muted playsinline controls preload="metadata"></video>
+          <div class="g-cap"><b id="plTitle"></b><span id="plNum"></span></div></div>
+        <div class="g-thumbs" id="plThumbs" aria-label="בחירת סרטון"></div>
+      </div>
+      <p class="fine" style="text-align:center">הסרטונים מתנגנים ברצף, אחד אחרי השני. לחצו על ריבוע כדי לעבור לסרטון מסוים. להפעלת הקול לחצו על הרמקול בנגן.</p>
+      <p style="margin-top:28px;text-align:center"><a class="btn btn-alb" href="/album/" target="_blank" rel="noopener">כניסה לאתר אלבום בקליק</a></p>
+    </div>
+  </div>
+  <div class="band" style="padding-top:0">
+    <div class="wrap alb-photos">
+      <img src="alb/ph2.jpg" alt="מעיינת באלבום תמונות ישן ושקופיות" loading="lazy">
+      <img src="alb/ph1.jpg" alt="סבתא ונכדים צופים בתמונות המשפחה במחשב" loading="lazy">
+      <img src="alb/ph3.jpg" alt="אלבום ותמונות שחור לבן על השולחן" loading="lazy">
+    </div>
+    <div class="wrap" style="margin-top:14px"><div class="alb-steps">
+      <div><b>שולחים אלינו</b><span>אלבומים, תמונות, שקופיות וסרטים ישנים</span></div>
+      <div><b>אנחנו סורקים</b><span>בזהירות, תמונה אחר תמונה</span></div>
+      <div><b>מקבלים בדיגיטל</b><span>לצפייה בטלוויזיה ולשיתוף עם המשפחה</span></div>
+    </div></div>
+  </div>
+  <div class="band alt">
+    <div class="wrap">
+      <div class="head"><div class="eyebrow">מה סורקים?</div><h2>כל מה שמחכה בארון</h2></div>
+      <div class="alb-what">
+        <figure><img src="alb/shelf.jpg" alt="מדף אלבומי תמונות ישנים" loading="lazy"><figcaption><b>אלבומי תמונות</b>כל סוגי האלבומים, גם הדביקים והישנים</figcaption></figure>
+        <figure><img src="alb/old1.jpg" alt="תמונות ישנות בשחור לבן" loading="lazy"><figcaption><b>תמונות בודדות</b>שחור לבן, צבע, פולארויד ומסמכים משפחתיים</figcaption></figure>
+        <figure><img src="alb/stack.jpg" alt="ערימת אלבומי תמונות" loading="lazy"><figcaption><b>אלבומים עבים וקלסרים</b>גם קלסרי תמונות כבדים, שקופיות ונגטיבים</figcaption></figure>
+        <figure><img src="alb/pvhs2.jpg" alt="המרת קלטות וידאו לקבצי מחשב" loading="lazy"><figcaption><b>קלטות וידאו</b>המרת קלטות VHS לקבצי מחשב, כדי שגם הנכדים יצפו בסרט מהחתונה</figcaption></figure>
+      </div>
+      <div class="alb-usb">
+        <img src="alb/usb.jpg" alt="דיסק און קי ממותג של אלבום בקליק" loading="lazy">
+        <div><h3 style="font-size:1.5rem;font-weight:400">הכל חוזר אליכם בדיסק און קי ממותג</h3>
+          <p style="color:var(--muted);margin-top:6px">התמונות והסרטים הסרוקים מסודרים בתיקיות ומגיעים בדיסק און קי של אלבום בקליק, מוכנים לצפייה במחשב ובטלוויזיה ולהעתקה לכל בני המשפחה.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="band">
+    <div class="wrap">
+      <div class="head"><div class="eyebrow">מתנה משמעותית</div><h2>חוגגים להורים יום הולדת?</h2><p class="lead">יש להם הכל, אבל רוצים להעניק מתנה מרגשת? הופכים את התמונות והזכרונות שלהם מהיסטוריה להווה ועתיד.</p></div>
+      <div class="alb-posters">
+        <img src="alb/p80.jpg" alt="חוגגים לסבתא 80? הופכים את התמונות לזכרונות דיגיטליים" loading="lazy">
+        <img src="alb/pbday.jpg" alt="חוגגים להורים יום הולדת ומחפשים מתנה משמעותית ונוסטלגית?" loading="lazy">
+        <img src="alb/mascot.jpg" alt="אלבום בקליק, מקבוצת סופט קופי: המרת תמונות לקבצי מחשב, 03-9369999" loading="lazy">
+        <img src="alb/pvhs1.jpg" alt="הילדים לא יודעים מה זה? המרת קלטות וידאו לקבצי מחשב" loading="lazy">
+      </div>
+    </div>
+  </div>
+
+  <div class="band">
+    <div class="wrap">
+      <div class="head"><div class="eyebrow">מהמעבדה שלנו</div><h2>ככה מגיעים אלינו הזכרונות</h2>
+        <p class="lead">ארגזים, קופסאות שקופיות של קודאק, קלטות וידאו ומעטפות תמונות מהמעבדה. כל ארגז מקבל מדבקה ומספר, נסרק ומוחזר ללקוח.</p></div>
+      <div class="privacy"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/></svg>התמונות מוצגות ברזולוציה מוגבלת כדי ששמות הלקוחות על הארגזים לא יהיו קריאים.</div>
+      <div class="g-wrap" id="labGal">
+        <div class="g-main g-photo"><img id="labBig" src="alb/lab/l01.jpg" alt="ארגזי אלבומים, שקופיות וקלטות שהגיעו לסריקה" draggable="false">
+          <div class="g-cap"><b>מהמעבדה של אלבום בקליק</b><span id="labCap"></span></div></div>
+        <div class="g-thumbs" id="labThumbs" aria-label="בחירת תמונה"></div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ================= JOBS ================= -->
+<section data-page="jobs" hidden>
+  <div class="band">
+    <div class="wrap job">
+      <div>
+        <div class="eyebrow">דרושים</div>
+        <h1>מפעיל/ת סורקים</h1>
+        <p class="lead" style="margin-top:12px">לחברת סופט קופי, המתמחה בסריקת מסמכים ותמונות ובהקמת ארכיב דיגיטלי, דרושים מפעילים ומפעילות סורקים עם אופציה לקידום.</p>
+        <div class="badge-idf">
+          <svg viewBox="0 0 52 52" fill="none" aria-hidden="true"><circle cx="26" cy="26" r="24" fill="#fff" opacity=".9"/><path d="M15 27l7 7 15-16" stroke="#3B6E1C" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <div><b>מאושרת כעבודה מועדפת</b>המשרה מוכרת כעבודה מועדפת לחיילים ולחיילות משוחררים. זכאים יכולים לצבור את מענק העבודה המועדפת תוך כדי עבודה.</div>
+        </div>
+        <h3>פרטי המשרה</h3>
+        <ul class="req">
+          <li>העבודה במשרדי החברה בצומת שילת</li>
+          <li>משרה מלאה או חלקית</li>
+          <li>אופציה לקידום בתוך החברה</li>
+        </ul>
+        <h3 style="margin-top:22px">מה אנחנו מחפשים</h3>
+        <ul class="req">
+          <li>אחריות אישית ורצינות</li>
+          <li>סדר וניקיון</li>
+          <li>כישורי מחשב בסיסיים</li>
+        </ul>
+        <p style="margin-top:24px">רוצים לשמוע עוד? דברו איתנו בוואטסאפ: <b class="ltr" style="user-select:all">058-4858600</b></p>
+        <p style="margin-top:12px"><a class="btn btn-green" href="https://wa.me/972584858600" target="_blank" rel="noopener">שליחת הודעה בוואטסאפ</a></p>
+      </div>
+      <form class="card" id="jobForm" novalidate>
+        <h3>הגשת מועמדות</h3>
+        <label for="jName">שם מלא<input id="jName" name="name" required autocomplete="name"></label>
+        <label for="jPhone">טלפון<input id="jPhone" name="phone" required inputmode="tel" autocomplete="tel" class="ltr" style="text-align:right"></label>
+        <label for="jScope">היקף משרה<select id="jScope" name="scope"><option>משרה מלאה</option><option>משרה חלקית</option></select></label>
+        <label class="check" for="jVet"><input type="checkbox" id="jVet" name="vet"> אני חייל/ת משוחרר/ת</label>
+        <label for="jNote">כמה מילים עליך<textarea id="jNote" name="note" rows="3"></textarea></label>
+        <button class="btn btn-blue" type="submit">שליחה</button>
+        <div class="ok" id="jobOk" hidden></div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CONTACT ================= -->
+<section data-page="contact" hidden>
+  <div class="band">
+    <div class="wrap contact">
+      <div>
+        <div class="eyebrow">צור קשר</div>
+        <h1>נשמח להיפגש ולשוחח על הארכיון שלכם</h1>
+        <p class="lead" style="margin-top:12px">לפרטים נוספים ולקבלת הצעת מחיר מתאימה, השאירו פרטים או התקשרו.</p>
+        <div class="cinfo" style="margin-top:24px">
+          <div><small>טלפון</small><b class="ltr">03-9231111</b></div>
+          <div><small>וואטסאפ</small><b class="ltr">055-3076305</b></div>
+          <div><small>דוא״ל</small><b class="ltr">Info@SoftCopy.co.il</b></div>
+          <div><small>כתובת</small><b>בית לוטם, שילת</b></div>
+        </div>
+      </div>
+      <form class="card" id="cForm" novalidate>
+        <h3>השארת פרטים</h3>
+        <label for="cName">שם<input id="cName" required autocomplete="name"></label>
+        <label for="cOrg">ארגון / משרד<input id="cOrg" autocomplete="organization"></label>
+        <label for="cPhone">טלפון<input id="cPhone" required inputmode="tel" class="ltr" style="text-align:right"></label>
+        <label for="cSize">היקף הארכיון<select id="cSize"><option>עד 100 קלסרים</option><option>100–500 קלסרים</option><option>500–2,000 קלסרים</option><option>מעל 2,000 קלסרים</option><option value="album">תמונות ומסמכים אישיים</option></select></label>
+        <div class="alb-go" id="albGo" hidden><img src="alb/logo.png" alt="אלבום בקליק"><div><b>לחומר אישי יש לנו חברת בת</b><p>תמונות, אלבומים, שקופיות, קלטות ומסמכים אישיים נסרקים באלבום בקליק, מבית סופט קופי. טלפון: <span class="ltr" style="user-select:all">03-9369999</span></p><a class="btn btn-alb" href="/album/" target="_blank" rel="noopener">מעבר לאתר אלבום בקליק</a></div></div>
+        <label for="cMsg">הודעה<textarea id="cMsg" rows="3"></textarea></label>
+        <button class="btn btn-green" type="submit">לקבלת הצעת מחיר</button>
+        <div class="ok" id="cOk" hidden></div>
+      </form>
+    </div>
+  </div>
+</section>
+</main>
+
+<div class="cta-band"><div class="wrap"><h2>עדיין מחפשים מסמכים בארכיון?</h2><a class="btn btn-green" href="#contact">דברו איתנו: 03-9231111</a></div></div>
+<footer>
+  <div class="wrap">
+    <div><b>סופט קופי בע״מ</b><p>פתרונות סריקה מתקדמים. ספק מורשה של משרד הביטחון. מחזיקה בתו התקן החברתי ובתו אמון הציבור, ומשתייכת לארגונים הירוקים.</p></div>
+    <div><b>יצירת קשר</b><p>טל׳ <span class="ltr">03-9231111</span> · פקס <span class="ltr">03-9236688</span><br><span class="ltr">Info@SoftCopy.co.il</span><br>בית לוטם, שילת</p></div>
+    <div><b>ניווט</b><p><a href="#services">שירותים ומחירים</a> · <a href="#clients">לקוחות</a> · <a href="#archive">לפני ואחרי</a> · <a href="#jobs">דרושים</a></p><p style="margin-top:8px">סריקת חומר אישי: <a href="/album/" target="_blank" rel="noopener">אלבום בקליק</a></p></div>
+  </div>
+</footer>
+
+<script>
+const ICONS={
+ scan:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="10" width="18" height="8" rx="2"/><path d="M6 10V5h12v5M7 14h6"/></svg>',
+ home:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 11l9-7 9 7v9H3z"/><path d="M9 20v-6h6v6"/></svg>',
+ soft:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="6"/><path d="M20 20l-4.5-4.5"/></svg>',
+ plan:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 5l6-2 6 2 6-2v16l-6 2-6-2-6 2z"/><path d="M9 3v16M15 5v16"/></svg>',
+ key:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="10" rx="2"/><path d="M6 11h1M10 11h1M14 11h1M18 11h0M7 14h10"/></svg>',
+ ocr:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7V4h3M17 4h3v3M20 17v3h-3M7 20H4v-3"/><path d="M8 9h8M8 12h8M8 15h5"/></svg>'};
+const SVC=[
+ ['scan','לשכת סריקה','סריקה בלשכת הסריקה שלנו, כולל איסוף הארגזים ממשרדכם והחזרתם בתום העבודה.'],
+ ['home','סריקה בבית הלקוח','הצוות, הסורקים והמחשבים מגיעים אליכם. החומר לא יוצא מהארגון.'],
+ ['soft','תוכנה לניהול מסמכים','ארכיון ממוחשב עם מפתחות חיפוש והיררכיה של ספריות, קבצים ומסמכים.'],
+ ['plan','סריקת שרטוטים','סריקת שרטוטים, מפות ותוכניות הנדסיות בגדלים A3 עד A0 עבור קבלנים ומהנדסים.'],
+ ['key','מפתוח וקלדנות','הקלדת נתונים ובניית מפתחות חיפוש, כך שכל תיק נמצא לפי שם, מספר או תאריך.'],
+ ['ocr','OCR ועיבוד טפסים','זיהוי טקסט (OCR), עיבוד שאלונים וטפסים (OMR) וקריאת ברקודים.']];
+const card=(s,i)=>`<div class="svc anim" style="--i:${i||0}"><div class="ic">${ICONS[s[0]]}</div><h3>${s[1]}</h3><p>${s[2]}</p></div>`;
+document.getElementById('svcHome').innerHTML=SVC.slice(0,3).map(card).join('');
+document.getElementById('svcAll').innerHTML=SVC.map(card).join('')+
+ `<div class="svc anim" style="--i:6"><div class="ic">${ICONS.scan}</div><h3>סריקות דחופות</h3><p>עשרות אלפי מסמכים בתוך ימים, לבדיקות נאותות, מיזוגים ורכישות.</p></div>
+  <div class="svc anim" style="--i:7"><div class="ic">${ICONS.home}</div><h3>סריקה בחו״ל</h3><p>מפעילי סורקים בעלי סיווג ביטחוני, בנציגויות ובבית הלקוח בארה״ב ובאירופה.</p></div>
+  <div class="svc anim" style="--i:8"><div class="ic">${ICONS.soft}</div><h3>גיבוי מרחוק</h3><p>החומר הסרוק זמין לאנשי עסקים בכל מקום, בלי תלות במיקום.</p></div>`;
+
+const LG=[["m00", "יידישפיל"], ["m01", "קבוצת עבודה עברית"], ["m02", "קבוצת עזריאלי"], ["m03", "דלק"], ["m04", "צה״ל"], ["m05", "חיל הים"], ["m06", "י.ח. דמרי"], ["m07", "פרוטליקס"], ["m08", "NMC יונייטד"], ["m09", "רוזטה גרין"], ["m10", "ספקטרוניקס"], ["m11", "טבע"], ["m12", "Waze"], ["m13", "אינוקום"], ["m14", "אש התורה"], ["m15", "אלפגה"], ["m16", "סימנס"], ["m17", "מניב ראשון"], ["m18", "משרד הפנים"], ["m19", "קבוצת האחים עופר"], ["m20", "טארו"], ["m21", "עיריית תל אביב יפו"], ["m22", "משרד עורכי דין"], ["m23", "כאן"], ["m24", "כפות תמר"], ["m25", "בנק הפועלים"], ["m26", "ישיבת נר תמיד"], ["m27", "קונסטה"], ["m28", "צוות"], ["m29", "תל אביב תיירות"], ["m30", "תרבות הדיור"], ["m31", "תן ביס"], ["m32", "קרייטר"], ["m33", "קרן גרינספון"], ["m34", "קשת"], ["m35", "רכבת ישראל"], ["m36", "רם אפרתי"], ["m37", "רותם אמפרט"], ["m38", "גב ים"], ["m39", "איגוד ערים לאיכות הסביבה יהודה"], ["m40", "איזימץ"], ["m41", "אוניברסיטת תל אביב"], ["m42", "אוניברסיטת בר אילן"], ["m43", "אוניברסיטת בן גוריון"], ["m44", "אונו"], ["m45", "אוסם"], ["m46", "אמריקן לייזר"], ["m47", "אמן מחשבים"], ["m48", "י שרמן זיווד אלקטרוני בע מ"], ["m49", "ינשוף אווה ואניטה"], ["m50", "נמדע בעמ"], ["m51", "בת שבע"], ["m52", "ביח רמבם"], ["m53", "Bits of Gold"], ["m54", "בנק מזרחי"], ["m55", "סקרינז"], ["m56", "סרטי שפירא"], ["m57", "ספריית בית אריאלה"], ["m58", "סוכנויות פלתורס ביטוח בעמ"], ["m59", "סטודיו סי"], ["m60", "פפירוס"], ["m61", "פורט הנדסה"], ["m62", "פונטיס"], ["m63", "פז"], ["m64", "עטרת ישראל"], ["m65", "האוניברסיטה הפתוחה"], ["m66", "היפרמדייה מערכות"], ["m67", "העברית"], ["m68", "ההתאחדות הישראלית לצלילה"], ["m69", "המכללה למינהל"], ["m70", "חיל אויר"], ["m71", "חוצה ישראל"], ["m72", "זלמן זכריה"], ["m73", "זהר קליר עוד"], ["m74", "מכון ויצמן למדע"], ["m75", "מליסרון"], ["m76", "מרכז מורשת יהודי לוב"], ["m77", "מגער"], ["m78", "מיקרוסופט"], ["m79", "מבני תעשיה בעמ"], ["m80", "מועצה אזורית מטה בנימין"], ["m81", "מושב גבעת חן"], ["m82", "מעיינות"], ["m83", "משרד התיירות"], ["m84", "משרד התחבורה"], ["m85", "משרד הבטחון"],["m86","אל על"],["m87","ידיעות אחרונות"],["m88","אסותא"],["m89","שיכון ובינוי"],["m90","אזורים"],["m91","איגודן"]];
+document.getElementById('logos').innerHTML=LG.map((c,i)=>`<div class="lw anim" style="--i:${Math.min(i,24)}"><img src="img/logos/${c[0]}.png" alt="${c[1]}" loading="lazy"></div>`).join('');
+
+// after illustration: laptop with SoftCopy archive + branded USB
+function afterSVG(folders,files){
+ const rows=folders.map((f,i)=>`<g transform="translate(0 ${i*38})"><rect x="210" y="128" width="420" height="30" rx="6" fill="${i===1?'#EEF7E6':'#fff'}" stroke="${i===1?'#92AE31':'#DCE3EB'}"/><path d="M600 136h10l4 4h10v12h-24z" fill="#F2C14E"/><text x="586" y="148" font-size="14" font-weight="700" fill="#24292F" text-anchor="end" font-family="Varela Round,Arial">${f}</text><text x="226" y="148" font-size="12" fill="#5B6675" font-family="Varela Round,Arial">${(files[i]).toLocaleString('he-IL')} מסמכים</text></g>`).join('');
+ return `<svg class="after" direction="ltr" viewBox="0 0 800 600" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="אחרי: ארכיון דיגיטלי במחשב ובדיסק און קי">
+ <defs><linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#EAF2FB"/><stop offset="1" stop-color="#D3E2F3"/></linearGradient></defs>
+ <rect width="800" height="600" fill="url(#bg)"/>
+ <rect y="470" width="800" height="130" fill="#C9B79C"/><rect y="470" width="800" height="10" fill="#B8A487"/>
+ <rect x="170" y="40" width="500" height="320" rx="16" fill="#36383C"/><rect x="184" y="54" width="472" height="292" rx="6" fill="#F5F8FC"/>
+ <rect x="184" y="54" width="472" height="40" rx="6" fill="#26508E"/><text x="420" y="81" font-size="18" font-weight="800" fill="#fff" text-anchor="middle" font-family="Varela Round,Arial">SoftCopy · ארכיון דיגיטלי</text>
+ <rect x="210" y="102" width="420" height="20" rx="10" fill="#fff" stroke="#26508E"/><circle cx="224" cy="112" r="5" fill="none" stroke="#26508E" stroke-width="2"/><text x="616" y="117" font-size="12" fill="#5B6675" text-anchor="end" font-family="Varela Round,Arial">חיפוש חכם במסמכים…</text>
+ ${rows}
+ <path d="M120 360h600l-36 40H156z" fill="#C2C9D3"/><rect x="370" y="362" width="100" height="8" rx="4" fill="#9AA3AF"/>
+ <g transform="translate(640 455) rotate(-14)"><rect x="-22" y="-150" width="44" height="34" rx="3" fill="#CFD6DF" stroke="#9AA3AF" stroke-width="2"/><rect x="-36" y="-118" width="72" height="140" rx="18" fill="#26508E"/><rect x="-36" y="-8" width="72" height="30" rx="14" fill="#16305A"/><text x="0" y="-62" font-size="20" font-weight="800" fill="#fff" text-anchor="middle" font-family="Varela Round,Arial">Soft</text><text x="0" y="-38" font-size="20" font-weight="800" fill="#fff" text-anchor="middle" font-family="Varela Round,Arial">Copy</text><path d="M0 -106v14m-6-6 6 7 6-7" stroke="#92AE31" stroke-width="4" fill="none" stroke-linecap="round"/><circle cx="0" cy="8" r="6" fill="#92AE31"/></g>
+ <g transform="translate(150 430)"><rect x="-40" y="0" width="80" height="40" rx="6" fill="#fff" opacity=".9"/><text x="0" y="26" font-size="16" font-weight="800" fill="#6B8420" text-anchor="middle" font-family="Varela Round,Arial">0 קלסרים</text></g>
+ </svg>`}
+const BA=[
+ {b:'b17',h:'חדר ארכיון צבעוני, מדף מעל מדף',stat:'1 דיסק און קי',p:'מאות קלסרים עברו סריקה למבנה תיקיות לפי שנה ונושא.',f:['מסמכי 2008','חוזים','חשבוניות','התכתבויות','דוחות'],n:[2140,860,5320,1190,740]},
+ {b:'b14',h:'ערימות תיקים קשורים בחוט',stat:'חיפוש בשנייה',p:'אלפי תיקים שנערמו לאורך שנים הפכו לארכיון שאפשר לחפש בו לפי שם או מספר תיק.',f:['תיקי לקוחות','תיקים 1990–1999','תיקים 2000–2009','נספחים','שרטוטים'],n:[18400,9200,11700,3300,410]},
+ {b:'b19',h:'מחסן עמוס ארגזים וקלסרים',stat:'חדר שלם התפנה',p:'החומר נסרק, הוחזר לקלסר והמקום חזר לשימוש המשרד.',f:['הנהלת חשבונות','משאבי אנוש','רכש','איכות','הנדסה'],n:[6200,1450,2900,880,1320]}];
+document.getElementById('baList').innerHTML=BA.map((x,i)=>`<div class="ba">
+ <div class="cmp" style="--pos:50%"><img src="img/${x.b}.jpg" alt="לפני: ${x.h}" loading="lazy" draggable="false">${afterSVG(x.f,x.n)}<div class="handle"></div>
+ <span class="tag b">לפני</span><span class="tag a">אחרי</span>
+ <input type="range" id="ba${i}" min="0" max="100" value="50" aria-label="השוואת לפני ואחרי"></div>
+ <div><h3>${x.h}</h3><div class="stat">${x.stat}</div><p>${x.p}</p></div></div>`).join('');
+document.querySelectorAll('.cmp input').forEach(r=>r.addEventListener('input',e=>e.target.parentElement.style.setProperty('--pos',(100-e.target.value)+'%')));
+const MS=['b17','b13','b01','b05','b02','b07','b15','b10','b18','b16','b03','b20','b09','b21','b06','b22','b04','b12','b08','b11','b23','b14','b19'];
+document.querySelector('[data-page="archive"]').addEventListener('contextmenu',e=>e.preventDefault());
+document.getElementById('masonry').innerHTML=MS.map((m,i)=>`<figure><button type="button" class="ms-b" data-i="${i}" aria-label="הגדלת תמונה ${i+1}"><img src="img/${m}.jpg" alt="ארכיון לפני סריקה" loading="lazy" draggable="false"></button></figure>`).join('');
+(function(){const lb=document.getElementById('lb'),im=document.getElementById('lbImg');let k=0;
+ const open=i=>{k=(i+MS.length)%MS.length;im.src='img/'+MS[k]+'.jpg';lb.hidden=false};
+ document.getElementById('masonry').addEventListener('click',e=>{const b=e.target.closest('.ms-b');if(b)open(+b.dataset.i)});
+ document.getElementById('lbX').onclick=()=>lb.hidden=true; lb.addEventListener('click',e=>{if(e.target===lb)lb.hidden=true});
+ document.getElementById('lbNext').onclick=()=>open(k+1); document.getElementById('lbPrev').onclick=()=>open(k-1);
+ addEventListener('keydown',e=>{if(lb.hidden)return; if(e.key==='Escape')lb.hidden=true; if(e.key==='ArrowLeft')open(k+1); if(e.key==='ArrowRight')open(k-1)});})();
+
+const VIDS=`<figure><video src="vid/w3.mp4" poster="vid/p3.jpg" controls muted playsinline preload="none"></video><figcaption>לשכת הסריקה: סריקה בסורקים מקצועיים</figcaption></figure>
+ <figure><video src="vid/w1.mp4" poster="vid/p1.jpg" controls muted playsinline preload="none"></video><figcaption>הארגזים על המדפים, לפני סריקה</figcaption></figure>
+ <figure><video src="vid/w2.mp4" poster="vid/p2.jpg" controls muted playsinline preload="none"></video><figcaption>הכנת הדפים: חירור והחזרה לקלסר</figcaption></figure>`;
+const CAPS=['קיץ של מפגשים משפחתיים', 'ראש השנה', 'אלבומים שמחכים בארגז', 'תשליך של זיכרונות', 'יום העצמאות', 'אלבום שחוזר לחיים', 'יום הזיכרון', 'מהמדף אל המסך', 'האלבום מדבר', 'איפה עושים סדר לפסח?', 'סיפור מהסלון', 'בר מצווה 1982', 'סריקת אלבומים ושקופיות', 'הילדים מוצאים מזוודה', 'גם סרטים ישנים', 'סבתא ממליצה', 'מהקופסה לטלוויזיה','שקופיות שמתעוררות','תמונות שחוזרות לחיים','מסגרות שמספרות','אלבומים על הרצפה','סיפורים לדורות הבאים','צריכים לפנות ארגזים?','חבל על הזכרונות','סבתא מספרת','אלבומים שמעלים אבק?','מתנה לסבא וסבתא','מהארגז למחשב','איסוף עד הבית','כמו בפרסומת בטלוויזיה','הדיסק און קי שאוסף זכרונות','מהאלבום לדיסק און קי'];
+function autoGallery(o){
+ const {main,thumbs,items,render,interval,isVideo}=o; let cur=-1, hold=0, timer=null;
+ thumbs.innerHTML=items.map((it,i)=>`<button type="button" class="g-th" data-i="${i}" aria-label="${it.alt}"><img src="${it.thumb}" alt="" loading="lazy" draggable="false"></button>`).join('');
+ function show(i,user){cur=(i+items.length)%items.length; render(items[cur],cur,user);
+  thumbs.querySelectorAll('.g-th').forEach((b,k)=>b.classList.toggle('on',k===cur));
+  const b=thumbs.children[cur]; if(b&&user!==undefined){const tr=thumbs.getBoundingClientRect(),br=b.getBoundingClientRect(); if(br.top<tr.top||br.bottom>tr.bottom) thumbs.scrollTop+=br.top-tr.top-8;}
+  if(user) hold=Date.now()+8000;}
+ thumbs.addEventListener('click',e=>{const b=e.target.closest('.g-th'); if(b) show(+b.dataset.i,true)});
+ if(interval) timer=setInterval(()=>{if(Date.now()<hold) return; if(main.closest('[data-page]').hidden) return; show(cur+1,false)},interval);
+ show(0); return {show,get cur(){return cur}};
+}
+(function(){
+ const v=document.getElementById('plVid'),title=document.getElementById('plTitle'),num=document.getElementById('plNum');
+ const items=CAPS.map((c,i)=>{const n=String(i+1).padStart(2,'0');return {src:`alb/v${n}.mp4`,thumb:`alb/v${n}.jpg`,alt:c,title:c}});
+ let visible=false;
+ const g=autoGallery({main:v,thumbs:document.getElementById('plThumbs'),items,render:(it,i,user)=>{
+   v.src=it.src; v.poster=it.thumb; title.textContent=it.title; num.textContent=(i+1)+' / '+items.length;
+   if(visible||user) v.play().catch(()=>{});}});
+ v.addEventListener('ended',()=>g.show(g.cur+1,false));
+ if('IntersectionObserver' in window) new IntersectionObserver(es=>es.forEach(e=>{visible=e.isIntersecting; if(visible) v.play().catch(()=>{}); else v.pause()}),{threshold:.4}).observe(v);
+})();
+(function(){
+ const big=document.getElementById('labBig'),cap=document.getElementById('labCap');
+ const items=Array.from({length:21},(_,i)=>{const n=String(i+1).padStart(2,'0');return {src:`alb/lab/l${n}.jpg`,thumb:`alb/lab/l${n}.jpg`,alt:'תמונה '+(i+1)}});
+ autoGallery({main:big,thumbs:document.getElementById('labThumbs'),items,interval:3500,render:(it,i)=>{
+   big.classList.remove('fade'); void big.offsetWidth; big.src=it.src; big.classList.add('fade'); cap.textContent=(i+1)+' / '+items.length;}});
+ document.getElementById('labGal').addEventListener('contextmenu',e=>e.preventDefault());
+})();
+document.querySelectorAll('video').forEach(x=>x.addEventListener('play',()=>document.querySelectorAll('video').forEach(o=>{if(o!==x)o.pause()})));
+document.getElementById('vidsHome').innerHTML=VIDS;
+
+// ---------- sequence: one big card slow -> fast, then grid with a centre piece ----------
+const RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
+function makeSeq(el,o){ // o:{items:[url], fit:'contain'|'cover', center:html, cw,ch, n, slow, fast, grid:(w)=>({c,r})}
+ let timers=[]; const T=(f,t)=>timers.push(setTimeout(f,t));
+ function grid(animate){
+  const {c,r,cw,ch}=o.grid(el.clientWidth); const cs=(c-cw)/2+1, rs=Math.max(1,Math.round((r-ch)/2)+1);
+  let h=`<div class="sq-grid ${animate?'build':''} fit-${o.fit}" style="--c:${c};--r:${r}"><div class="t ctr" style="grid-column:${cs}/span ${cw};grid-row:${rs}/span ${ch}">${o.center}</div>`;
+  const n=c*r-cw*ch; for(let i=0;i<n;i++) h+=`<div class="t"><img src="${o.items[(i*7)%o.items.length]}" alt="" loading="lazy" draggable="false"></div>`;
+  el.innerHTML=h+'</div>'; const g=el.firstChild, tiles=[...g.children];
+  if(!animate){tiles.forEach(t=>t.classList.add('in'));return 0}
+  const order=tiles.slice(1).sort(()=>Math.random()-.5);
+  const st=o.stagger||40; order.forEach((t,i)=>T(()=>t.classList.add('in'),i*st)); T(()=>tiles[0].classList.add('in'),order.length*st+250);
+  return order.length*st+900;
+ }
+ let tok=0; const cache={};
+ const load=u=>cache[u]||(cache[u]=new Promise(r=>{const im=new Image(); const to=setTimeout(()=>r(im),5000); im.onload=()=>{clearTimeout(to); (im.decode?im.decode():Promise.resolve()).catch(()=>{}).then(()=>r(im))}; im.onerror=()=>{clearTimeout(to); r(null)}; im.src=u}));
+ const sleep=ms=>new Promise(r=>T(r,ms));
+ async function play(done){
+  stop(); const my=++tok; const N=o.n||o.items.length; const cover=o.fit==='cover';
+  el.innerHTML=cover?`<div class="slides"><div class="sl"><i></i><img alt="" draggable="false"></div><div class="sl"><i></i><img alt="" draggable="false"></div><span class="cnt"></span></div>`:`<div class="one fit-${o.fit}"><img alt="" draggable="false"></div>`;
+  const box=el.firstChild, cnt=box.querySelector('.cnt'); let flip=0, d=o.slow, total=0;
+  for(let k=0;k<N;k++){
+   const u=o.items[k%o.items.length]; const im=await load(u); if(my!==tok) return;
+   const wait=(o.pace?o.pace(k,N):d);
+   if(im){
+    if(cover){const a=box.children[flip], b=box.children[1-flip]; const ar=im.naturalWidth/im.naturalHeight, sr=box.clientWidth/box.clientHeight; a.classList.toggle('fill',Math.max(ar,sr)/Math.min(ar,sr)<1.4); a.querySelector('img').src=u; a.classList.add('on'); b.classList.remove('on'); flip=1-flip;}
+    else {const one=box, img=one.firstChild; img.src=u; one.classList.remove('pop'); void one.offsetWidth; one.classList.add('pop')}
+    if(cnt) cnt.textContent=(k+1)+' / '+N;
+   }
+   if(k===0&&o.onStart) o.onStart();
+   await sleep(wait); if(my!==tok) return; total+=wait; d=Math.max(o.fast,d*(o.decay||0.9));
+  }
+  const g=grid(true); T(()=>done&&done(),g+(o.hold||4500));
+ }
+ function stop(){tok++; timers.forEach(clearTimeout); timers=[]}
+ function est(){const N=o.n||o.items.length; let d=o.slow,t=0; for(let k=0;k<N;k++){t+=o.pace?o.pace(k,N):d; d=Math.max(o.fast,d*(o.decay||0.9))} return t}
+ return {play,stop,grid,est};
+}
+const SC_CENTER=`<div class="ctr-sc"><img src="img/logo.png" alt="SoftCopy"></div>`;
+const LGURL=LG.map(c=>'img/logos/'+c[0]+'.png');
+const FEAT=['b17','b13','b10','b20','b09','b08','b15','b14','b21','b03'];
+const PICS=[...FEAT,...MS.filter(m=>!FEAT.includes(m))].map(m=>'img/'+m+'.jpg');
+[...LGURL,...PICS].forEach(u=>{const i=new Image(); i.src=u});
+function sysMock(){return `<div class="sys"><div class="sys-top"><img src="img/logo.png" alt="SoftCopy"><span>ארכיון דיגיטלי</span></div>
+ <div class="sys-search"><span class="typing">חוזה שכירות 2019</span><i></i></div>
+ <div class="sys-rows"><div class="r on"><b>חוזה שכירות 2019 — חתום</b><small>PDF · נמצא תוך 0.3 שניות</small></div><div class="r"><b>חוזה שכירות — נספח א׳</b><small>PDF</small></div><div class="r"><b>חוזה שכירות — סניף מרכז</b><small>PDF</small></div></div>
+ <div class="sys-slogan">הכל זמין בכל מחשב<span>נגיש. מאובטח. ירוק.</span></div></div>`}
+
+// ---------- home show: video -> archives -> logos ----------
+(function(){
+ const show=document.getElementById('show'), v=document.getElementById('heroVid'), bar=document.getElementById('shBar'), snd=document.getElementById('shSound');
+ const layers=[...show.querySelectorAll('.sh-layer')], tabs=[...document.querySelectorAll('.sh-tabs [data-go]')];
+ const seq=makeSeq(document.getElementById('lgSeq'),{items:LGURL,fit:'contain',center:SC_CENTER,slow:1100,fast:300,decay:0.9,stagger:45,hold:6000,pace:(i,N)=>{const f=i/N; return f<0.12?Math.max(600,1200*Math.pow(0.88,i)):f<0.5?Math.round(520-(f-0.12)/0.38*300):f<0.75?Math.round(200-(f-0.5)/0.25*120):55},
+   grid:w=>w>900?{c:12,r:6,cw:4,ch:2}:w>560?{c:9,r:6,cw:3,ch:2}:{c:6,r:5,cw:4,ch:2}});
+ const ARCH_PACE=(k,N)=>k<7?2600:k<10?2000:Math.max(160,Math.round(520*Math.pow(0.86,k-10)));
+ const arch=makeSeq(document.getElementById('archSeq'),{items:PICS,fit:'cover',center:sysMock(),slow:2600,fast:380,pace:ARCH_PACE,stagger:60,hold:5000,
+   grid:w=>w>900?{c:10,r:5,cw:4,ch:3}:w>560?{c:8,r:5,cw:4,ch:3}:{c:5,r:5,cw:5,ch:3}});
+ let ph=-1, phT=null, started=false;
+ function setBar(ms){bar.style.transition='none';bar.style.width='0';void bar.offsetWidth;bar.style.transition=`width ${ms}ms linear`;bar.style.width='100%'}
+ function go(p){
+  clearTimeout(phT); seq.stop(); arch.stop(); ph=p;
+  layers.forEach((l,i)=>l.classList.toggle('on',i===p)); tabs.forEach((t,i)=>{t.classList.toggle('on',i===p);t.setAttribute('aria-selected',i===p)});
+  if(p!==0) v.pause();
+  if(p===0){v.currentTime=0; v.play().catch(()=>{}); setBar((v.duration||36)*1000)}
+  if(p===1){arch.play(()=>go(2)); setBar(arch.est()+3400)}
+  if(p===2){seq.play(()=>go(0)); setBar(seq.est()+9000)}
+ }
+ v.addEventListener('ended',()=>{if(ph===0) go(1)});
+ tabs.forEach(t=>t.addEventListener('click',()=>go(+t.dataset.go)));
+ snd.addEventListener('click',()=>{v.muted=!v.muted; snd.classList.toggle('unmuted',!v.muted); snd.querySelector('span').textContent=v.muted?'הפעלת קול':'השתקה'; if(ph!==0) go(0); else v.play().catch(()=>{})});
+ // narration is baked into the video soundtrack (ElevenLabs); the button turns sound on and shows subtitles
+ const CUES=[[0.4,4.1,'מחפשים מסמך חשוב... ופשוט לא מוצאים אותו.'],[7,11.8,'נכנסים לחדר הארכיון... ערימות של קלסרים, בלי סוף.'],[13.1,16.2,'עדיין מחפשים ככה? יש דרך פשוטה יותר.'],[16.7,24.5,'סופט קופי סורקת את כל הארכיון שלכם: מהר, בטוח ומסודר. הכל אצלכם, במחשב ובדיסק און קי.'],[24.7,28.5,'ועכשיו, כל מסמך נמצא בשנייה, בחיפוש חכם.'],[30.9,34.8,'סופט קופי. סורקים, מארכבים, מוצאים.']];
+ const nb=document.getElementById('shNarr'), sub=document.getElementById('shSub'); let narr=false;
+ v.addEventListener('timeupdate',()=>{if(!narr||ph!==0){sub.hidden=true;return} const c=CUES.find(([a,b])=>v.currentTime>=a&&v.currentTime<=b); sub.hidden=!c; if(c) sub.textContent=c[2]});
+ nb.addEventListener('click',e=>{e.stopPropagation(); narr=!narr; nb.classList.toggle('on',narr); nb.textContent=narr?'🎙️ קריינות פעילה':'🎙️ עם קריינות';
+   if(narr){v.muted=false; v.volume=1; snd.classList.add('unmuted'); snd.querySelector('span').textContent='השתקה'; go(0)} else {sub.hidden=true; v.muted=true; snd.classList.remove('unmuted'); snd.querySelector('span').textContent='הפעלת קול'}});
+ window.homeShow={start(){if(!started){started=true; go(0)} else if(ph===0) v.play().catch(()=>{})}, pause(){v.pause()}};
+ if(RM){seq.grid(false)}
+})();
+
+// ---------- before/after show ----------
+(function(){
+ const el=document.getElementById('baSeq'), bar=document.getElementById('baBar');
+ const seq=makeSeq(el,{items:PICS,fit:'cover',center:sysMock(),slow:2600,fast:380,pace:(k,N)=>k<7?2600:k<10?2000:Math.max(160,Math.round(520*Math.pow(0.86,k-10))),stagger:60,hold:999999,
+   grid:w=>w>900?{c:10,r:6,cw:4,ch:4}:w>560?{c:8,r:6,cw:4,ch:4}:{c:5,r:6,cw:5,ch:4}});
+ function run(){seq.play(); const t=seq.est(); bar.style.transition='none';bar.style.width='0';void bar.offsetWidth;bar.style.transition=`width ${t+1500}ms linear`;bar.style.width='100%'}
+ document.getElementById('baReplay').onclick=run;
+ window.baShow={start:run, stop:seq.stop};
+})();
+
+// ---------- work: process + chained player ----------
+(function(){
+ const P=[['באתר הלקוח',[['הגעה למקום','צוות סופט קופי מגיע לארגון, ממפה את הארכיון ומתכנן את האיסוף.'],['אריזה מקצועית לפי תקן','החומר נארז בארגזי ארכיב תקניים, מסודר ומוגן.'],['רישום כל תיק וקלסר','כל תיק או קלסר שנכנס לארגז נרשם, כך שידוע בדיוק מה יצא ומה יחזור.']]],
+  ['במרכז הסריקה',[['קליטה ורישום','הארגזים נקלטים במרכז הסריקה ונרשמים בצורה מסודרת, וצוות קבוע משויך לפרויקט.'],['הכנת החומר לסריקה','הוצאת המסמכים מהקלסרים, פירוק חוברות, הסרת סיכות שדכן, יישור קמטים וצילום מסמכים ישנים ועדינים.'],['סריקה בציוד מקצועי','שיקוף מדויק של החומר לקובצי PDF במתכונת שנקבעה מראש. מסמכים נסרקים ב־200 DPI, ושרטוטים באיכות שמאפשרת הדפסה חוזרת.'],['קטלוג','כל מסמך מקוטלג לפי מתווה שנקבע עם הלקוח: שם, תיקייה ומפתחות חיפוש.'],['בקרת איכות כפולה','בקרה כמותית: השוואת הקבצים הסרוקים מול מסמכי המקור. בקרה תוכנית מדגמית: וידוא התוכן ומספר העמודים מול רשומות המקור.'],['הטמעה במערכת ניהול מסמכים','הקבצים נטענים למערכת שתבחרו, לאחזור מהיר בלחיצת כפתור ולהוספה שוטפת של מסמכים חדשים.'],['דיגיטציה','הטמעת תהליכי עבודה במעבר ל״משרד דיגיטלי״: פחות נייר וניהול שוטף בדיגיטל.']]],
+  ['חזרה ללקוח',[['אריזה והחזרה','החומר המקורי נארז בחזרה ומוחזר ללקוח, שלם ומסודר.'],['ובדרך ללקוח הבא','הצוות מסכם את הפרויקט ומתפנה לארכיון הבא.']]]];
+ window.WSTEPS=P; let n=0; document.getElementById('process').innerHTML=P.map((ph,pi)=>`<div class="ph anim" style="--i:${pi}"><div class="ph-h"><span>${pi+1}</span>${ph[0]}</div><ol class="steps">${ph[1].map(st=>{n++;return `<li class="anim" style="--i:${n}"><b class="sn">${n}</b><div><h3>${st[0]}</h3><p>${st[1]}</p></div></li>`}).join('')}</ol></div>`).join('');
+ const items=[{t:'v',src:'vid/w1.mp4',th:'vid/p1.jpg',title:'הארגזים על המדפים, לפני סריקה'},{t:'v',src:'vid/w3.mp4',th:'vid/p3.jpg',title:'סריקה בסורקים מקצועיים'},{t:'v',src:'vid/w2.mp4',th:'vid/p2.jpg',title:'הכנת הדפים: חירור והחזרה לקלסר'},
+  {t:'i',src:'img/o1.jpg',title:'עמדת סריקה עם סורק Kodak'},{t:'i',src:'img/o5.jpg',title:'סריקה בבית הלקוח'},{t:'i',src:'img/o2.jpg',title:'לשכת הסריקה של סופט קופי'},{t:'i',src:'img/o3.jpg',title:'עמדת סריקה וקטלוג'},{t:'i',src:'img/o4.jpg',title:'עמדת סריקה עם קיר הלקוחות'}];
+ const main=document.getElementById('chMain'), th=document.getElementById('chThumbs'), ti=document.getElementById('chTitle'), nu=document.getElementById('chNum');
+ th.innerHTML=items.map((it,i)=>`<button type="button" class="g-th" data-i="${i}" aria-label="${it.title}"><img src="${it.th||it.src}" alt="" loading="lazy">${it.t==='v'?'<em>▶</em>':''}</button>`).join('');
+ let cur=0, tm=null, active=false;
+ function play(i){clearTimeout(tm); cur=(i+items.length)%items.length; const it=items[cur];
+  th.querySelectorAll('.g-th').forEach((b,k)=>b.classList.toggle('on',k===cur)); ti.textContent=it.title; nu.textContent=(cur+1)+' / '+items.length;
+  if(it.t==='v'){main.innerHTML=`<video src="${it.src}" poster="${it.th}" muted playsinline controls autoplay></video>`; const vv=main.firstChild; vv.addEventListener('ended',()=>play(cur+1)); if(active) vv.play().catch(()=>{})}
+  else {main.innerHTML=`<img src="${it.src}" alt="${it.title}" class="fade">`; if(active) tm=setTimeout(()=>play(cur+1),4000)}}
+ th.addEventListener('click',e=>{const b=e.target.closest('.g-th'); if(b){active=true; play(+b.dataset.i)}});
+ window.workChain={start(){active=true; play(0)}, stop(){active=false; clearTimeout(tm); const vv=main.querySelector('video'); if(vv) vv.pause()}};
+ play(0);
+})();
+
+// ---------- work: visual tour with narration ----------
+(function(){
+ const B='#26508E',G='#92AE31',K='#111317',W='#fff',BX='#C9A274',BXD='#A9824F';
+ const truck=(cls)=>`<g class="${cls}"><rect x="120" y="150" width="120" height="62" rx="6" fill="${B}"/><text x="180" y="188" font-size="16" fill="#fff" text-anchor="middle" font-family="Arial" font-weight="700">SoftCopy</text><path d="M240 165h34l20 22v25h-54z" fill="${G}"/><rect x="250" y="171" width="20" height="14" rx="2" fill="#E6F0FA"/><g class="a-spin"><circle cx="150" cy="214" r="13" fill="${K}"/><circle cx="150" cy="214" r="5" fill="#ccc"/></g><g class="a-spin"><circle cx="268" cy="214" r="13" fill="${K}"/><circle cx="268" cy="214" r="5" fill="#ccc"/></g></g>`;
+ const road=`<rect y="226" width="400" height="54" fill="#B8C7D8"/><path d="M0 252h400" stroke="#fff" stroke-width="4" stroke-dasharray="22 16"/>`;
+ const box=(x,y,s=1)=>`<g transform="translate(${x} ${y}) scale(${s})"><rect x="0" y="0" width="110" height="78" rx="4" fill="${BX}"/><rect x="0" y="0" width="110" height="16" fill="${BXD}"/><rect x="34" y="34" width="42" height="22" rx="3" fill="#fff"/><path d="M40 41h30M40 48h20" stroke="#9AA6B4" stroke-width="3"/></g>`;
+ const binder=(x,y,c,cls='')=>`<g class="${cls}"><rect x="${x}" y="${y}" width="18" height="62" rx="2" fill="${c}"/><rect x="${x+3}" y="${y+8}" width="12" height="20" fill="#fff"/><circle cx="${x+9}" cy="${y+46}" r="4" fill="#fff"/></g>`;
+ const page=(x,y,cls='')=>`<g class="${cls}"><rect x="${x}" y="${y}" width="74" height="96" rx="4" fill="#fff" stroke="#C9D3DF" stroke-width="2"/>${[0,1,2,3,4,5].map(i=>`<path d="M${x+12} ${y+20+i*12}h${i%2?38:50}" stroke="#AAB6C4" stroke-width="4" stroke-linecap="round"/>`).join('')}</g>`;
+ const S=[
+  ()=>road+`<g transform="translate(300 60)"><rect x="0" y="40" width="80" height="126" fill="#fff" stroke="#B8C7D8" stroke-width="3"/><path d="M-6 44l46-40 46 40z" fill="${B}"/><rect x="28" y="120" width="24" height="46" fill="${G}"/></g>`+truck('a-drive'),
+  ()=>box(145,150,1.4)+binder(170,40,B,'a-drop')+binder(195,40,G,'a-drop d2')+binder(220,40,'#E25B45','a-drop d3')+`<text x="200" y="40" text-anchor="middle" font-size="15" fill="${B}" font-family="Arial" font-weight="700">ארגז ארכיב תקני</text>`,
+  ()=>`<rect x="120" y="30" width="160" height="214" rx="10" fill="#fff" stroke="${B}" stroke-width="4"/><rect x="165" y="20" width="70" height="22" rx="6" fill="${B}"/>`+[0,1,2,3].map(i=>`<rect x="140" y="${70+i*42}" width="22" height="22" rx="4" fill="none" stroke="${B}" stroke-width="3"/><path class="a-tick d${i+1}" d="M144 ${81+i*42}l6 6 10-12" fill="none" stroke="${G}" stroke-width="4" stroke-linecap="round"/><path d="M174 ${81+i*42}h${80-i*8}" stroke="#AAB6C4" stroke-width="5" stroke-linecap="round"/>`).join(''),
+  ()=>box(70,140,1.3)+box(220,140,1.3)+`<g class="a-beam"><rect x="40" y="60" width="320" height="4" fill="#E25B45" opacity=".8"/></g><g transform="translate(270 20)"><rect width="70" height="44" rx="8" fill="${K}"/><rect x="8" y="8" width="54" height="20" fill="#7EE0A0"/></g><text x="80" y="40" font-size="15" fill="${B}" font-family="Arial" font-weight="700">קליטה ורישום</text>`,
+  ()=>`<g class="a-flat">${page(160,70)}</g><g class="a-pop"><path d="M185 74h24v8h-24z" fill="#8A97A6"/><path d="M185 74v14M209 74v14" stroke="#8A97A6" stroke-width="4"/></g><text x="200" y="210" text-anchor="middle" font-size="15" fill="${B}" font-family="Arial" font-weight="700">יישור קמטים · הסרת סיכות</text>`,
+  ()=>`<rect x="100" y="140" width="200" height="80" rx="14" fill="#fff" stroke="#C9D3DF" stroke-width="3"/><rect x="100" y="140" width="200" height="22" rx="10" fill="${B}"/><rect x="130" y="128" width="140" height="16" rx="6" fill="#E3E9F0" stroke="#C9D3DF" stroke-width="2"/><g class="a-feed">${page(163,30)}</g><g class="a-light"><rect x="120" y="190" width="8" height="18" rx="3" fill="${G}"/></g><text x="200" y="244" text-anchor="middle" font-size="14" fill="${B}" font-family="Arial" font-weight="700">200 DPI · PDF</text>`,
+  ()=>[0,1,2].map(i=>`<g class="a-in d${i+1}" transform="translate(${70+i*95} 80)"><path d="M0 14h30l8 10h42v66H0z" fill="#F2C14E"/><rect x="6" y="40" width="68" height="12" rx="3" fill="#fff"/><text x="40" y="50" font-size="10" text-anchor="middle" fill="${B}" font-family="Arial">${['חוזים','2019','לקוחות'][i]}</text></g>`).join('')+`<g class="a-in d4"><rect x="120" y="196" width="160" height="30" rx="15" fill="${G}"/><text x="200" y="216" text-anchor="middle" font-size="14" fill="#16260A" font-family="Arial" font-weight="700">מפתחות חיפוש</text></g>`,
+  ()=>page(110,60)+page(220,60)+`<g class="a-mag"><circle cx="140" cy="100" r="30" fill="rgba(146,174,49,.18)" stroke="${B}" stroke-width="6"/><path d="M162 122l26 26" stroke="${B}" stroke-width="10" stroke-linecap="round"/></g><g transform="translate(150 200)"><rect width="100" height="34" rx="17" fill="${B}"/><text x="50" y="23" text-anchor="middle" font-size="15" fill="#fff" font-family="Arial" font-weight="700">450 / 450 ✓</text></g>`,
+  ()=>`<rect x="70" y="30" width="260" height="170" rx="12" fill="${K}"/><rect x="80" y="40" width="240" height="150" rx="4" fill="#F5F8FC"/><rect x="80" y="40" width="240" height="24" fill="${B}"/><rect x="96" y="76" width="208" height="24" rx="12" fill="#fff" stroke="${B}" stroke-width="2"/><path class="a-type" d="M290 88h-160" stroke="${K}" stroke-width="5"/>`+[0,1,2].map(i=>`<rect class="a-in d${i+2}" x="96" y="${110+i*24}" width="208" height="18" rx="4" fill="${i?'#fff':'#EEF7E6'}" stroke="${i?'#DCE3EB':G}"/>`).join('')+`<path d="M50 200h300l-20 18H70z" fill="#C2C9D3"/>`,
+  ()=>page(70,90,'a-float')+`<g transform="translate(220 70)"><rect width="120" height="90" rx="10" fill="#fff" stroke="${B}" stroke-width="4"/><rect x="10" y="10" width="100" height="14" rx="4" fill="${B}"/><rect x="10" y="32" width="46" height="46" rx="6" fill="#EEF7E6"/><rect x="64" y="32" width="46" height="20" rx="4" fill="#E3E9F0"/><rect x="64" y="58" width="46" height="20" rx="4" fill="#E3E9F0"/></g><g class="a-pulse"><circle cx="280" cy="200" r="22" fill="${G}"/><path d="M270 200l7 7 13-14" stroke="#16260A" stroke-width="4" fill="none" stroke-linecap="round"/></g><text x="130" y="230" text-anchor="middle" font-size="15" fill="${B}" font-family="Arial" font-weight="700">פחות נייר</text>`,
+  ()=>road+`<g transform="translate(40 50)"><rect x="0" y="40" width="80" height="126" fill="#fff" stroke="#B8C7D8" stroke-width="3"/><path d="M-6 44l46-40 46 40z" fill="${B}"/><rect x="28" y="120" width="24" height="46" fill="${G}"/></g>`+`<g class="a-back">${truck('').replace('<g class="">','<g>')}</g>`,
+  ()=>road+truck('a-drive')+`<g transform="translate(330 70)" class="a-pulse"><path d="M0 0c-18 0-30 12-30 28 0 22 30 50 30 50s30-28 30-50C30 12 18 0 0 0z" fill="${G}"/><circle cx="0" cy="28" r="10" fill="#fff"/></g><text x="100" y="70" font-size="16" fill="${B}" font-family="Arial" font-weight="700">ללקוח הבא →</text>`
+ ];
+ const FLAT=[]; window.WSTEPS.forEach((ph,pi)=>ph[1].forEach(st=>FLAT.push({ph:ph[0],h:st[0],p:st[1]})));
+ const art=document.getElementById('tourArt'),H=document.getElementById('tourH'),Pp=document.getElementById('tourP'),Nn=document.getElementById('tourN'),Ph=document.getElementById('tourPh'),dots=document.getElementById('tourDots'),play=document.getElementById('tourPlay'),note=document.getElementById('tourNote');
+ dots.innerHTML=FLAT.map((_,i)=>`<button type="button" data-i="${i}" aria-label="שלב ${i+1}">${i+1}</button>`).join('');
+ let cur=0,playing=false,tm=null;
+ function show(i){cur=(i+FLAT.length)%FLAT.length;const f=FLAT[cur];
+  art.innerHTML=`<svg viewBox="0 0 400 280" xmlns="http://www.w3.org/2000/svg" direction="ltr">${(S[cur]||S[0])()}</svg>`;
+  Ph.textContent=f.ph; Nn.textContent=String(cur+1).padStart(2,'0'); H.textContent=f.h; Pp.textContent=f.p;
+  [H,Pp].forEach(e=>{e.style.animation='none';void e.offsetWidth;e.style.animation=''});
+  dots.querySelectorAll('button').forEach((b,k)=>{b.classList.toggle('on',k===cur);b.classList.toggle('done',k<cur)});}
+ const synth=window.speechSynthesis; let voice=null;
+ function pickVoice(){if(!synth)return;const vs=synth.getVoices();voice=vs.find(v=>/^he|^iw/i.test(v.lang))||null}
+ if(synth){pickVoice();synth.onvoiceschanged=pickVoice}
+ function speakStep(){clearTimeout(tm);const f=FLAT[cur];const txt=`שלב ${cur+1}. ${f.h}. ${f.p}`;
+  const next=()=>{if(!playing)return; if(cur<FLAT.length-1){show(cur+1);speakStep()} else stopTour()};
+  if(synth&&voice){synth.cancel();const u=new SpeechSynthesisUtterance(txt);u.voice=voice;u.lang=voice.lang;u.rate=1;u.onend=()=>{tm=setTimeout(next,600)};u.onerror=()=>{tm=setTimeout(next,5200)};synth.speak(u)}
+  else {note.hidden=false;note.textContent='לא נמצא קול עברי בדפדפן הזה, לכן הסיור מתקדם בלי קריינות.';tm=setTimeout(next,5500)}}
+ function startTour(){playing=true;play.textContent='❚❚ עצירה';pickVoice();speakStep()}
+ function stopTour(){playing=false;clearTimeout(tm);if(synth)synth.cancel();play.textContent='▶ הפעלה עם קריינות'}
+ play.onclick=()=>playing?stopTour():startTour();
+ document.getElementById('tourNext').onclick=()=>{show(cur+1);if(playing)speakStep()};
+ document.getElementById('tourPrev').onclick=()=>{show(cur-1);if(playing)speakStep()};
+ dots.addEventListener('click',e=>{const b=e.target.closest('button');if(b){show(+b.dataset.i);if(playing)speakStep()}});
+ let auto=null; window.workTour={start(){show(0);clearInterval(auto);auto=setInterval(()=>{if(!playing)show(cur+1)},5000)},stop(){clearInterval(auto);stopTour()}};
+ show(0);
+})();
+
+// ---------- contact: personal material -> Album BeClick ----------
+document.getElementById('cSize').addEventListener('change',e=>{document.getElementById('albGo').hidden=e.target.value!=='album'});
+
+// price count-up
+function countUp(root){root.querySelectorAll('[data-count]').forEach(b=>{const to=+b.dataset.count; if(RM){b.textContent=to;return} let s=null; const step=t=>{s=s||t; const p=Math.min(1,(t-s)/900); b.textContent=Math.round(to*(1-Math.pow(1-p,3))); if(p<1) requestAnimationFrame(step)}; requestAnimationFrame(step)})}
+
+const v=document.getElementById('heroVid');
+// routing
+const PAGES=['home','services','clients','archive','work','album','jobs','contact'];
+function show(){let id=(location.hash||'#home').slice(1);if(!PAGES.includes(id))id='home';
+ document.querySelectorAll('[data-page]').forEach(s=>s.hidden=s.dataset.page!==id);
+ document.querySelectorAll('nav.main a').forEach(a=>{if(a.getAttribute('href')==='#'+id)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current')});
+ document.querySelectorAll('video').forEach(x=>{if(!x.closest('[data-page="'+id+'"]')) x.pause()});
+ const sec=document.querySelector('[data-page="'+id+'"]'); sec.classList.remove('entered'); void sec.offsetWidth; sec.classList.add('entered');
+ if(id==='home') homeShow.start(); else homeShow.pause();
+ if(id==='archive') baShow.start(); else baShow.stop();
+ if(id==='work'){workChain.start();workTour.start()} else {workChain.stop();workTour.stop()}
+ if(id==='services') countUp(sec);
+ nav.classList.remove('open');mb.setAttribute('aria-expanded','false');window.scrollTo(0,0)}
+const nav=document.getElementById('mainNav'),mb=document.getElementById('menuBtn');
+mb.addEventListener('click',()=>{const o=nav.classList.toggle('open');mb.setAttribute('aria-expanded',o)});
+addEventListener('hashchange',show);show();
+
+// forms (page only; real submission isn't available here)
+function wire(fid,oid,msg){const f=document.getElementById(fid),ok=document.getElementById(oid);
+ f.addEventListener('submit',e=>{e.preventDefault();const req=[...f.querySelectorAll('[required]')].filter(i=>!i.value.trim());
+  if(req.length){ok.hidden=false;ok.textContent='חסרים שם וטלפון. מלאו אותם ושלחו שוב.';req[0].focus();return}
+  ok.hidden=false;ok.innerHTML=msg})}
+wire('jobForm','jobOk','תודה! הפרטים נקלטו. לתשובה מהירה שלחו גם הודעה בוואטסאפ ל־<b class="ltr">058-4858600</b>.');
+wire('cForm','cOk','תודה! נחזור אליכם בהקדם. אפשר גם להתקשר: <b class="ltr">03-9231111</b>.');
+</script>
+
+</body>
+</html>
