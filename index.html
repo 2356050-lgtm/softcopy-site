@@ -376,6 +376,8 @@ section[data-page].entered .fc-bar i{animation:grow 1.2s cubic-bezier(.2,.8,.2,1
 @keyframes panX{from{object-position:0% 50%}to{object-position:100% 50%}}
 .slides .cnt{position:absolute;bottom:12px;left:12px;z-index:2;direction:ltr;background:rgba(0,0,0,.6);color:#fff;font-size:.8rem;padding:2px 10px;border-radius:99px;font-variant-numeric:tabular-nums}
 @media (prefers-reduced-motion:reduce){.slides .sl.on{animation:none}}
+.ba-vid{max-width:1080px;margin:0 auto;border-radius:20px;overflow:hidden;background:#000;box-shadow:0 30px 60px -30px rgba(0,0,0,.6)}
+.ba-vid video{width:100%;display:block;aspect-ratio:16/9;max-width:100%}
 /* hero */
 .hero{background:linear-gradient(180deg,var(--blue-deep),#0B1E36);color:#fff;padding-block:48px 64px}
 .hero-grid{display:grid;grid-template-columns:1fr 1.35fr;gap:40px;align-items:center}
@@ -791,6 +793,12 @@ footer a{color:#C9D6E6}
       <div class="eyebrow anim" style="--i:0">לפני ואחרי</div>
       <h1 class="anim" style="--i:1">מחדר מלא קלסרים <span>למחשב אחד</span></h1>
       <p class="anim" style="--i:2">ארכיונים שקיבלנו, כמו שהם. אחרי הסריקה כל אחד מהם זמין בכל מחשב, עם חיפוש חכם.</p>
+    </div>
+  </div>
+  <div class="band" style="padding-top:36px;padding-bottom:0">
+    <div class="wrap">
+      <div class="ba-vid"><video src="vid/ba.mp4" poster="vid/ba.jpg" controls playsinline preload="metadata"></video></div>
+      <p class="fine" style="text-align:center">סרטון עם קריינות: לחצו ▶ לצפייה עם קול.</p>
     </div>
   </div>
   <div class="band" style="padding-top:36px">
