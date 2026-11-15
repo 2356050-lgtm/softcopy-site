@@ -172,6 +172,7 @@ section[data-page].entered .words span{display:inline-block;animation:rise .8s c
 .sys-slogan{background:#16305A;color:#fff;text-align:center;padding:6px 8px;font-family:var(--f-display);display:grid}
 .sys-slogan span{color:#92AE31;font-size:1.15em}
 .show-ba{aspect-ratio:16/9}
+.sup-no{display:inline-block;margin-top:12px;padding:8px 16px;border-radius:12px;background:rgba(146,174,49,.14);border:1px solid rgba(146,174,49,.45);font-weight:700}.sup-no b{font-family:var(--f-display);letter-spacing:.06em;color:var(--green-ink);font-size:1.15em;direction:ltr;display:inline-block}
 
 /* generic page hero */
 .pg-hero{background:radial-gradient(120% 120% at 80% 0%,#24508E 0%,#132C50 55%,#0B1A30 100%);color:#fff;padding-block:56px 60px}
@@ -793,8 +794,17 @@ footer a{color:#C9D6E6}
       <div class="mod anim" style="--i:0">
         <div class="mod-logo"><img src="img/logos/m85.png" alt="משרד הביטחון"></div>
         <div><div class="eyebrow">אישור רשמי</div><h2>ספק מורשה של משרד הביטחון</h2>
-          <p>סופט קופי מורשית לסרוק חומר עבור משרד הביטחון ומערכת הביטחון. עבודה על חומר רגיש מתבצעת בידי צוותים מאושרים, לפי נהלי אבטחת מידע.</p></div>
+          <p>סופט קופי מורשית לסרוק חומר עבור משרד הביטחון ומערכת הביטחון. עבודה על חומר רגיש מתבצעת בידי צוותים מאושרים, לפי נהלי אבטחת מידע.</p>
+          <div class="sup-no">מספר ספק במשרד הביטחון: <b>11018004</b></div></div>
       </div>
+      <div class="show cl-show" id="clShow" style="margin-top:44px" aria-label="הלקוחות שלנו">
+        <div class="sh-layer sh-logos on">
+          <div class="sh-cap"><small>סומכים עלינו</small><b>מאות לקוחות לא טועים</b></div>
+          <div class="seq" id="clSeq"></div>
+        </div>
+        <div class="sh-prog" aria-hidden="true"><i id="clBar"></i></div>
+      </div>
+      <div class="sh-tabs"><button type="button" id="clReplay" class="on">צפו שוב</button></div>
       <div class="head" style="margin-top:48px"><h2>חלק מהארגונים שעובדים איתנו</h2></div>
       <div class="logo-wall" id="logos"></div>
       <figure class="big-photo"><img src="img/o4.jpg" alt="קיר לוגואים של לקוחות סופט קופי בעמדת סריקה" loading="lazy"></figure>
@@ -1239,6 +1249,16 @@ function sysMock(){return `<div class="sys"><div class="sys-top"><img src="img/l
  if(RM){seq.grid(false)}
 })();
 
+// ---------- clients page show ----------
+(function(){
+ const el=document.getElementById('clSeq'), bar=document.getElementById('clBar');
+ const seq=makeSeq(el,{items:LGURL,fit:'contain',center:SC_CENTER,slow:1100,fast:300,decay:0.9,stagger:45,hold:999999,pace:(i,N)=>{const f=i/N; return f<0.12?Math.max(600,1200*Math.pow(0.88,i)):f<0.5?Math.round(520-(f-0.12)/0.38*300):f<0.75?Math.round(200-(f-0.5)/0.25*120):55},
+   grid:w=>w>900?{c:12,r:6,cw:4,ch:2}:w>560?{c:9,r:6,cw:3,ch:2}:{c:6,r:5,cw:4,ch:2}});
+ function run(){seq.play(); const t=seq.est(); bar.style.transition='none';bar.style.width='0';void bar.offsetWidth;bar.style.transition=`width ${t+1500}ms linear`;bar.style.width='100%'}
+ document.getElementById('clReplay').onclick=run;
+ window.clShow={start:run, stop:seq.stop};
+})();
+
 // ---------- before/after show ----------
 (function(){
  const el=document.getElementById('baSeq'), bar=document.getElementById('baBar');
@@ -1334,6 +1354,7 @@ function show(){let id=(location.hash||'#home').slice(1),sub=null;if(ALIAS[id]){
  const sec=document.querySelector('[data-page="'+id+'"]'); sec.classList.remove('entered'); void sec.offsetWidth; sec.classList.add('entered');
  if(id==='home') homeShow.start(); else homeShow.pause();
  if(id==='archive') baShow.start(); else baShow.stop();
+ if(id==='clients') clShow.start(); else clShow.stop();
  if(id==='work'){workChain.start();workTour.start()} else {workChain.stop();workTour.stop()}
  if(id==='services') countUp(sec);
  nav.classList.remove('open');mb.setAttribute('aria-expanded','false');window.scrollTo(0,0);if(sub)setTimeout(()=>{const el=document.getElementById(sub);if(el)el.scrollIntoView({behavior:'smooth',block:'start'})},80)}
