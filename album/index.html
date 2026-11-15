@@ -127,6 +127,27 @@ nav a:hover{background:var(--gold-s)}
 .trust span{font-size:1.02rem;color:#C9D2DE}
 
 
+/* products: rows with logo, text and video */
+.prd-list{display:grid;gap:clamp(48px,7vw,90px)}
+.prd{display:grid;grid-template-columns:1fr 1.1fr;gap:clamp(28px,5vw,64px);align-items:center}
+.prd>*{min-width:0}
+.prd.flip .prd-media{order:2}
+.prd-media{display:grid;place-items:center}
+.pf-phone{width:min(300px,70vw);aspect-ratio:9/16;background:#0A0F18;border-radius:36px;padding:10px;box-shadow:0 40px 70px -30px rgba(0,0,0,.8),0 0 0 2px rgba(233,207,152,.25)}
+.pf-wide{width:100%;aspect-ratio:16/9;background:#0A0F18;border-radius:18px;padding:8px;box-shadow:0 40px 70px -30px rgba(0,0,0,.8),0 0 0 2px rgba(233,207,152,.25)}
+.pf-phone video{width:100%;height:100%;object-fit:cover;border-radius:28px;display:block;background:#000}
+.pf-wide video{width:100%;height:100%;object-fit:cover;border-radius:12px;display:block;background:#000}
+.pf-art{width:min(300px,70vw);aspect-ratio:1}
+.pf-art .flame{transform-origin:100px 86px;animation:flk 2.4s ease-in-out infinite alternate}
+@keyframes flk{to{transform:scale(1.06,1.12) rotate(2deg)}}
+.prd-logo{height:84px;width:auto;background:#fff;border-radius:18px;padding:8px;margin-bottom:18px;box-shadow:0 10px 24px -14px rgba(0,0,0,.6)}
+.prd-txt h3{color:#fff;font-size:clamp(2rem,4vw,2.8rem);margin-top:8px}
+.prd-txt p{color:#CBD5E2;font-size:1.22rem;margin-top:12px}
+.prd-txt ul{list-style:none;padding:0;margin:18px 0 24px;display:grid;gap:8px}
+.prd-txt li{display:flex;gap:10px;color:#F1EADD;font-weight:600}
+.prd-txt li::before{content:"✦";color:var(--gold-l)}
+@media (max-width:860px){.prd{grid-template-columns:1fr}.prd.flip .prd-media{order:0}}
+@media (prefers-reduced-motion:reduce){.pf-art .flame{animation:none}}
 /* more products */
 .prods{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
 .pd{display:grid;gap:12px;align-content:start;text-decoration:none;color:#F3ECE0;background:rgba(255,255,255,.05);border:1px solid rgba(233,207,152,.25);border-radius:var(--r);padding:30px 28px;transition:transform .3s,background .3s}
@@ -492,11 +513,38 @@ footer b,footer a{color:#fff}
 
 <section class="sec navy" id="more">
   <div class="wrap">
-    <div class="head c rv"><div class="kicker">עוד מבית אלבום בקליק</div><h2 style="color:#fff"><span class="ul">הזיכרונות שלכם, גם מכאן והלאה</span></h2><p class="lead">שירותים דיגיטליים שממשיכים לשמור על הסיפור של המשפחה.</p></div>
-    <div class="prods">
-      <a class="pd rv" href="https://pick-a-pick.albumbclick.co.il" target="_blank" rel="noopener"><span class="ic"><svg viewBox="0 0 48 48"><rect x="6" y="10" width="36" height="28" rx="4"/><path d="M6 30l10-9 9 8 6-5 11 9"/><circle cx="32" cy="18" r="3"/></svg></span><h3>Pick A Pic</h3><p>ציר הזמן של המשפחה: כל התמונות במקום אחד, ומצגת וסרטון מוכנים לכל אירוע.</p><span class="go">לאתר ←</span></a>
-      <a class="pd rv" style="--i:1" href="https://trip.albumbclick.co.il" target="_blank" rel="noopener"><span class="ic"><svg viewBox="0 0 48 48"><path d="M8 12l10-4 12 4 10-4v28l-10 4-12-4-10 4z"/><path d="M18 8v28M30 12v28"/></svg></span><h3>אלבום טיול אוטומטי</h3><p>כל המשתתפים מעלים תמונות, והאלבום מתעצב לבד: אלבום דיגיטלי מדפדף ואלבום מודפס.</p><span class="go">לאתר ←</span></a>
-      <a class="pd rv" style="--i:2" href="https://zochrim.albumbclick.co.il" target="_blank" rel="noopener"><span class="ic"><svg viewBox="0 0 48 48"><path d="M24 6c-3 5-6 7-6 12a6 6 0 0012 0c0-5-3-7-6-12z"/><path d="M18 30h12l2 12H16z"/></svg></span><h3>זוכרים</h3><p>אתר הנצחה מכובד ועדין: סיפור חיים, ציר זמן וסרט זיכרון עם קריינות.</p><span class="go">לאתר ←</span></a>
+    <div class="head c rv"><div class="kicker">עוד מבית אלבום בקליק</div><h2 style="color:#fff"><span class="ul">הזיכרונות שלכם, גם מכאן והלאה</span></h2><p class="lead">אפליקציות ושירותים שממשיכים לשמור על הסיפור של המשפחה. צפו בסרטון של כל אחד מהם.</p></div>
+    <div class="prd-list">
+      <article class="prd  rv">
+        <div class="prd-media"><div class="pf-wide"><video src="p/plus.mp4" poster="p/plus.jpg" controls playsinline preload="none"></video></div></div>
+        <div class="prd-txt"><img class="prd-logo" src="m/logo.png" alt=""><div class="kicker">אחרי הסריקה</div><h3>אלבום בקליק+</h3><p>התמונות הסרוקות חוזרות לחיים באפליקציה אחת: מסודרות באלבומים לפי אירועים ושנים, עם ציר זמן ולוח שנה שמזכירים מה קרה ביום הזה.</p>
+          <ul><li>חיפוש לפי שם, מקום או שנה</li><li>חיתוך ויישור בכמה לחיצות</li><li>קולאז׳ים וסיפור מרגש מהאלבום</li></ul>
+          <a class="btn btn-gold" href="https://plus.albumbclick.co.il" target="_blank" rel="noopener">לאתר plus ←</a></div>
+      </article>
+      <article class="prd flip rv">
+        <div class="prd-media"><div class="pf-phone"><video src="p/pickapic.mp4" poster="p/pickapic.jpg" controls playsinline preload="none"></video></div></div>
+        <div class="prd-txt"><img class="prd-logo" src="p/logo_pickapic.png" alt=""><div class="kicker">ציר הזמן של המשפחה</div><h3>Pick A Pic</h3><p>הרגעים שלכם, מסודרים מהיום הראשון. כל התמונות של המשפחה במקום אחד, ולכל אירוע מקבלים מצגת וסרטון מוכנים.</p>
+          <ul><li>מתאים לכל המשפחה</li><li>מצגת וסרטון לכל אירוע</li><li>הצטרפות פשוטה, גם בסריקת קוד</li></ul>
+          <a class="btn btn-gold" href="https://pick-a-pick.albumbclick.co.il" target="_blank" rel="noopener">לאתר pick-a-pick ←</a></div>
+      </article>
+      <article class="prd  rv">
+        <div class="prd-media"><div class="pf-phone"><video src="p/trip.mp4" poster="p/trip.jpg" controls playsinline preload="none"></video></div></div>
+        <div class="prd-txt"><img class="prd-logo" src="p/logo_trip.png" alt=""><div class="kicker">אלבום משותף לטיול</div><h3>אלבום טיול אוטומטי</h3><p>כל המשתתפים מעלים את התמונות, והאלבום מתעצב לבד: הכי יפות נבחרות, כפולות מתאחדות, וכותרות נכתבות אוטומטית.</p>
+          <ul><li>אלבום דיגיטלי מדפדף</li><li>אלבום מודפס לכל משתתף</li><li>סרטונים כקוד QR בתוך האלבום</li></ul>
+          <a class="btn btn-gold" href="https://trip.albumbclick.co.il" target="_blank" rel="noopener">לאתר trip ←</a></div>
+      </article>
+      <article class="prd flip rv">
+        <div class="prd-media"><div class="pf-wide"><video src="p/ai.mp4" poster="p/ai.jpg" controls playsinline preload="none"></video></div></div>
+        <div class="prd-txt"><img class="prd-logo" src="p/logo_ai.png" alt=""><div class="kicker">בינה מלאכותית לזיכרונות</div><h3>אלבום AI</h3><p>חזרתם מטיול עם מאות תמונות? הכל מסתדר במקום אחד, ואם קשה להקליד, פשוט לוחצים ומספרים בקול.</p>
+          <ul><li>מצגת מרגשת בלחיצה</li><li>סרטון קצר ומפה של הטיול</li><li>נכס דיגיטלי למשפחה, לדורות</li></ul>
+          <a class="btn btn-gold" href="https://app.albumbclick.co.il" target="_blank" rel="noopener">לאתר app ←</a></div>
+      </article>
+      <article class="prd  rv">
+        <div class="prd-media"><div class="pf-art"><svg viewBox="0 0 200 200" aria-hidden="true"><circle cx="100" cy="100" r="92" fill="rgba(233,207,152,.10)" stroke="#E9CF98" stroke-width="2"/><path class="flame" d="M100 46c-10 16-20 24-20 40a20 20 0 0040 0c0-16-10-24-20-40z" fill="#E9CF98"/><rect x="82" y="106" width="36" height="60" rx="4" fill="#FBF7EF"/><path d="M70 170h60" stroke="#E9CF98" stroke-width="4" stroke-linecap="round"/></svg></div></div>
+        <div class="prd-txt"><div class="kicker">הנצחה</div><h3>זוכרים</h3><p>אתר הנצחה מכובד ועדין: סיפור חיים, ציר זמן, תמונות וסרט זיכרון עם קריינות, במקום אחד שכל המשפחה יכולה לבקר בו.</p>
+          <ul><li>סיפור חיים וציר זמן</li><li>סרט זיכרון עם קריינות</li><li>שיתוף עם המשפחה והחברים</li></ul>
+          <a class="btn btn-gold" href="https://zochrim.albumbclick.co.il" target="_blank" rel="noopener">לאתר zochrim ←</a></div>
+      </article>
     </div>
   </div>
 </section>
