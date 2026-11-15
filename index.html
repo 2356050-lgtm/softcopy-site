@@ -1320,15 +1320,14 @@ function sysMock(){return `<div class="sys"><div class="sys-top"><img src="img/l
   Ph.textContent=f.ph; Nn.textContent=String(cur+1).padStart(2,'0'); H.textContent=f.h; Pp.textContent=f.p;
   [H,Pp].forEach(e=>{e.style.animation='none';void e.offsetWidth;e.style.animation=''});
   dots.querySelectorAll('button').forEach((b,k)=>{b.classList.toggle('on',k===cur);b.classList.toggle('done',k<cur)});}
- const synth=window.speechSynthesis; let voice=null;
- function pickVoice(){if(!synth)return;const vs=synth.getVoices();voice=vs.find(v=>/^he|^iw/i.test(v.lang))||null}
- if(synth){pickVoice();synth.onvoiceschanged=pickVoice}
- function speakStep(){clearTimeout(tm);const f=FLAT[cur];const txt=`שלב ${cur+1}. ${f.h}. ${f.p}`;
+ // professional narration (ElevenLabs: Noa / Itamar), one clip per step
+ const VO=new Audio(); VO.preload='auto';
+ function speakStep(){clearTimeout(tm);
   const next=()=>{if(!playing)return; if(cur<FLAT.length-1){show(cur+1);speakStep()} else stopTour()};
-  if(synth&&voice){synth.cancel();const u=new SpeechSynthesisUtterance(txt);u.voice=voice;u.lang=voice.lang;u.rate=1;u.onend=()=>{tm=setTimeout(next,600)};u.onerror=()=>{tm=setTimeout(next,5200)};synth.speak(u)}
-  else {note.hidden=false;note.textContent='לא נמצא קול עברי בדפדפן הזה, לכן הסיור מתקדם בלי קריינות.';tm=setTimeout(next,5500)}}
- function startTour(){playing=true;play.textContent='❚❚ עצירה';pickVoice();speakStep()}
- function stopTour(){playing=false;clearTimeout(tm);if(synth)synth.cancel();play.textContent='▶ הפעלה עם קריינות'}
+  VO.onended=()=>{tm=setTimeout(next,700)}; VO.onerror=()=>{tm=setTimeout(next,5200)};
+  VO.src='vid/tour/tour'+String(cur+1).padStart(2,'0')+'.mp3'; VO.currentTime=0; VO.play().catch(()=>{tm=setTimeout(next,5200)})}
+ function startTour(){playing=true;play.textContent='❚❚ עצירה';speakStep()}
+ function stopTour(){playing=false;clearTimeout(tm);VO.pause();play.textContent='▶ הפעלה עם קריינות'}
  play.onclick=()=>playing?stopTour():startTour();
  document.getElementById('tourNext').onclick=()=>{show(cur+1);if(playing)speakStep()};
  document.getElementById('tourPrev').onclick=()=>{show(cur-1);if(playing)speakStep()};
