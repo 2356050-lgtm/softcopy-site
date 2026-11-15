@@ -300,6 +300,7 @@ nav a:hover{background:var(--gold-s)}
 /* gift */
 .gift{display:grid;grid-template-columns:1fr 1.25fr;gap:44px;align-items:center}
 .gift>*{min-width:0}
+.ev-v{box-shadow:0 40px 70px -30px rgba(20,42,71,.6),0 0 0 2px var(--gold-l)}
 .posters{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
 .posters img{width:100%;border-radius:14px;background:#fff;box-shadow:0 22px 40px -24px rgba(0,0,0,.55);border:6px solid #fff}
 .posters img:nth-child(2){transform:translateY(24px)}
@@ -364,7 +365,7 @@ footer b,footer a{color:#fff}
   <div class="wrap">
     <a class="lg" href="#top" aria-label="אלבום בקליק"><img src="m/logo.png" alt="אלבום בקליק"></a>
     <nav aria-label="ניווט">
-      <a href="#services">מה סורקים</a><a href="#how">איך זה עובד</a><a href="#prices">מחירון</a><a href="#videos">סרטונים</a><a href="#reviews">ממליצים</a><a href="#more">עוד מאיתנו</a><a href="#contact">צור קשר</a>
+      <a href="#services">מה סורקים</a><a href="#how">איך זה עובד</a><a href="#prices">מחירון</a><a href="#videos">סרטונים</a><a href="#events">אירועים</a><a href="#reviews">ממליצים</a><a href="#more">עוד מאיתנו</a><a href="#contact">צור קשר</a>
     </nav>
     <div class="tools">
       <button class="big-t" id="bigT" type="button" aria-pressed="false" title="הגדלת טקסט">א+</button>
@@ -495,19 +496,15 @@ footer b,footer a{color:#fff}
   </div>
 </section>
 
-<section class="sec">
+<section class="sec" id="events">
   <div class="wrap gift">
     <div class="rv">
-      <div class="kicker">מתנה שאין לאף אחד</div>
-      <h2 style="margin-top:12px">חוגגים להורים יום הולדת?</h2>
-      <p class="lead" style="margin-top:16px">תנו להם את הזיכרונות שלהם כנכס דיגיטלי, מסודר ושמור, עם עותק לכל אחד מהנכדים.</p>
-      <p style="margin-top:26px"><a class="btn btn-navy" href="#contact">להזמנת מתנה</a></p>
+      <div class="kicker">לכל אירוע במשפחה</div>
+      <h2 style="margin-top:12px">יום הולדת, בר מצווה, חתונה או אזכרה?</h2>
+      <p class="lead" style="margin-top:16px">לכל אירוע יש לנו רעיון מרגש: מצגת, סרטון, אלבום מעוצב או אתר הנצחה, עם עותק לכל אחד מבני המשפחה. צפו בסרטון עם קול.</p>
+      <p style="margin-top:26px"><a class="btn btn-navy" href="#contact">לתכנון האירוע שלכם</a></p>
     </div>
-    <div class="posters rv" style="--i:1">
-      <img src="m/p80.jpg" alt="חוגגים לסבתא 80?" loading="lazy">
-      <img src="m/pbday.jpg" alt="חוגגים להורים יום הולדת?" loading="lazy">
-      <img src="m/mascot.jpg" alt="אלבום בקליק: המרת תמונות לקבצי מחשב" loading="lazy">
-    </div>
+    <div class="rv" style="--i:1"><div class="pf-wide ev-v"><video src="v/events.mp4" poster="v/events.jpg" controls playsinline preload="none"></video></div></div>
   </div>
 </section>
 
