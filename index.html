@@ -403,8 +403,19 @@ section[data-page].entered .fc-bar i{animation:grow 1.2s cubic-bezier(.2,.8,.2,1
 .svc .ic svg{width:28px;height:28px}
 .svc p{color:var(--muted)}
 .why{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:28px}
-.why div{border-top:4px solid var(--green);padding-top:14px}
+.why div{background:var(--card,#fff);border:1px solid rgba(38,80,142,.12);border-top:4px solid var(--green);border-radius:18px;padding:22px 22px 20px;box-shadow:0 14px 30px -18px rgba(22,48,90,.35);transition:transform .25s,box-shadow .25s}
+.why div:hover{transform:translateY(-4px);box-shadow:0 22px 40px -18px rgba(22,48,90,.45)}
+.why i{display:grid;place-items:center;width:52px;height:52px;border-radius:14px;background:rgba(146,174,49,.16);margin-bottom:12px}
+.why svg,.ours-chips svg{width:28px;height:28px;fill:none;stroke:var(--blue);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.why h3{font-size:1.3rem}
 .why p{color:var(--muted);margin-top:6px}
+h2.ours{line-height:1.25}h2.ours span{color:var(--green-ink);display:inline-block;margin-top:4px}
+.ours-chips{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0 6px}
+.ours-chips span{display:inline-flex;align-items:center;gap:8px;padding:8px 16px 8px 14px;border-radius:999px;background:var(--card,#fff);border:1px solid rgba(38,80,142,.18);font-weight:700;font-size:.95rem}
+.ours-chips svg{width:22px;height:22px}
+.ours-chips span.you{background:var(--green);color:#16260A;border-color:var(--green)}.ours-chips span.you svg{stroke:#16260A}
+.ast{color:var(--green);font-size:.6em;vertical-align:super;margin-inline-start:2px}
+.pl-link{display:block;margin-top:6px;font-size:.82rem;color:var(--green);text-decoration:underline;text-underline-offset:3px}
 
 /* prices */
 .price-wrap{display:grid;grid-template-columns:1.2fr 1fr;gap:36px;align-items:start}
@@ -632,7 +643,7 @@ footer a{color:#C9D6E6}
         </div>
       </div>
       <div class="facts facts-big">
-        <div><b>99 ₪</b>לקלסר גדול, מחיר קבוע</div>
+        <div><b>99 ₪<sup class="ast">*</sup></b>לקלסר גדול, מחיר קבוע<a class="pl-link" href="#prices">* לפי סוג הקלסר · למחירון המלא ←</a></div>
         <div><b>A0–A4</b>מכל גודל, כולל שרטוטים</div>
         <div><b>במשרדכם</b>בלי להוציא חומר החוצה</div>
       </div>
@@ -649,12 +660,18 @@ footer a{color:#C9D6E6}
 
   <div class="band alt">
     <div class="wrap">
-      <div class="head"><div class="eyebrow">סריקה בבית הלקוח</div><h2>סורקים שלנו, מחשבים שלנו, אנשים שלנו. רק הקלסרים שלכם.</h2>
+      <div class="head"><div class="eyebrow">סריקה בבית הלקוח</div><h2 class="ours">סורקים שלנו, מחשבים שלנו, אנשים שלנו.<br><span>רק הקלסרים שלכם.</span></h2>
+        <div class="ours-chips">
+          <span><svg viewBox="0 0 24 24"><rect x="3" y="10" width="18" height="8" rx="2"/><path d="M6 10V6h12v4M7 14h6"/></svg>סורקים שלנו</span>
+          <span><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg>מחשבים שלנו</span>
+          <span><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M3 19c0-3.3 2.7-5 6-5s6 1.7 6 5M15 14.5c3 0 5 1.5 5 4.5"/></svg>אנשים שלנו</span>
+          <span class="you"><svg viewBox="0 0 24 24"><path d="M4 4h5v16H4zM10 4h5v16h-5zM16 5l4 1-3 14-4-1z"/></svg>הקלסרים שלכם</span>
+        </div>
         <p class="lead">סופט קופי הוקמה סביב הקונספט של סריקה באתר הלקוח. החומר לא יוצא מהארגון, ושירות זה אינו מייקר את עלות הסריקה.</p></div>
       <div class="why">
-        <div><h3>נגישות</h3><p>בזמן העבודה אפשר לשלוף כל מסמך שצריך, בלי לעצור את השגרה.</p></div>
-        <div><h3>ביטוחיות</h3><p>הוצאת מסמכים מהמשרד מסכנת אותם. כשהסריקה אצלכם, אין סיכון של אובדן בדרך.</p></div>
-        <div><h3>בטחון שדה</h3><p>החומר לא יוצא ממשרדי החברה הנסרקת. מתאים לחומר רגיש: משפטי, רפואי ופיננסי.</p></div>
+        <div><i><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6"/><path d="M16 16l5 5"/></svg></i><h3>נגישות</h3><p>בזמן העבודה אפשר לשלוף כל מסמך שצריך, בלי לעצור את השגרה.</p></div>
+        <div><i><svg viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg></i><h3>ביטוחית</h3><p>הוצאת מסמכים מהמשרד מסכנת אותם. כשהסריקה אצלכם, אין סיכון של אובדן בדרך.</p></div>
+        <div><i><svg viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 018 0v3M12 14v2"/></svg></i><h3>ביטחון המידע</h3><p>החומר לא יוצא ממשרדי החברה הנסרקת. מתאים לחומר רגיש: משפטי, רפואי ופיננסי.</p></div>
       </div>
     </div>
   </div>
@@ -701,7 +718,7 @@ footer a{color:#C9D6E6}
     </div>
   </div>
 
-  <div class="fix-band">
+  <div class="fix-band" id="prices">
     <div class="wrap">
       <div class="fix-head">
         <span class="fix-badge anim" style="--i:0">לראשונה בישראל</span>
@@ -1309,7 +1326,8 @@ function countUp(root){root.querySelectorAll('[data-count]').forEach(b=>{const t
 const v=document.getElementById('heroVid');
 // routing
 const PAGES=['home','services','clients','archive','work','album','jobs','contact'];
-function show(){let id=(location.hash||'#home').slice(1);if(!PAGES.includes(id))id='home';
+const ALIAS={prices:'services'};
+function show(){let id=(location.hash||'#home').slice(1),sub=null;if(ALIAS[id]){sub=id;id=ALIAS[id]}if(!PAGES.includes(id))id='home';
  document.querySelectorAll('[data-page]').forEach(s=>s.hidden=s.dataset.page!==id);
  document.querySelectorAll('nav.main a').forEach(a=>{if(a.getAttribute('href')==='#'+id)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current')});
  document.querySelectorAll('video').forEach(x=>{if(!x.closest('[data-page="'+id+'"]')) x.pause()});
@@ -1318,7 +1336,7 @@ function show(){let id=(location.hash||'#home').slice(1);if(!PAGES.includes(id))
  if(id==='archive') baShow.start(); else baShow.stop();
  if(id==='work'){workChain.start();workTour.start()} else {workChain.stop();workTour.stop()}
  if(id==='services') countUp(sec);
- nav.classList.remove('open');mb.setAttribute('aria-expanded','false');window.scrollTo(0,0)}
+ nav.classList.remove('open');mb.setAttribute('aria-expanded','false');window.scrollTo(0,0);if(sub)setTimeout(()=>{const el=document.getElementById(sub);if(el)el.scrollIntoView({behavior:'smooth',block:'start'})},80)}
 const nav=document.getElementById('mainNav'),mb=document.getElementById('menuBtn');
 mb.addEventListener('click',()=>{const o=nav.classList.toggle('open');mb.setAttribute('aria-expanded',o)});
 addEventListener('hashchange',show);show();
