@@ -114,12 +114,12 @@ nav a:hover{background:var(--gold-s)}
 
 /* trust */
 .trust{background:var(--navy-dd);color:#E9E1D2}
-.trust .wrap{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));padding-block:30px}
+.trust .wrap{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));max-width:760px;padding-block:30px}
 .trust div{display:grid;gap:4px;text-align:center;padding:6px 10px;border-inline-start:1px solid rgba(233,207,152,.22)}
 .trust div:first-child{border:0}
 .trust b{font-family:var(--f-display);font-size:1.75rem;line-height:1.1;color:var(--gold-l);font-weight:700}
 .trust span{font-size:1.02rem;color:#C9D2DE}
-@media (max-width:760px){.trust .wrap{grid-template-columns:1fr 1fr;row-gap:22px}.trust div:nth-child(3){border:0}}
+
 
 /* services */
 .svcs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:26px}
@@ -298,9 +298,7 @@ footer b,footer a{color:#fff}
 
 <div class="trust"><div class="wrap">
   <div class="rv"><b>20+ שנה</b><span>של סריקה ושחזור</span></div>
-  <div class="rv" style="--i:1"><b>תו אמון הציבור</b><span>הגינות ושירות</span></div>
-  <div class="rv" style="--i:2"><b>ציוד Kodak</b><span>סורקים מקצועיים</span></div>
-  <div class="rv" style="--i:3"><b>עד הבית</b><span>שליח הלוך וחזור</span></div>
+  <div class="rv" style="--i:1"><b>עד הבית</b><span>שליח הלוך וחזור</span></div>
 </div></div>
 
 <section class="sec" id="services">
