@@ -4,232 +4,275 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>אלבום בקליק</title>
+<meta name="description" content="אלבום בקליק – סריקת אלבומים, תמונות, שקופיות, נגטיבים וקלטות וידאו. איסוף עד הבית, שחזור צבע ללא עלות. מבית סופט קופי.">
 <meta name="robots" content="noindex, nofollow">
-<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
-
-
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@500;700;900&family=Assistant:wght@400;600;700;800&display=swap">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@400;500;700;900&family=Assistant:wght@400;500;600;700;800&display=swap">
 <style>
-/* Layout: one long mobile-first page, warm paper sections alternating with deep navy; sticky call bar on phones */
+/* Classic family-album look: warm paper, deep navy, softened brand amber; large type for older readers */
 :root{
-  --orange:#F39200; --orange-d:#C97400; --navy:#1F3F63; --navy-d:#142B45; --cream:#FBF6EE; --paper:#FFFDF9;
-  --ink:#1D2633; --muted:#5E6878; --line:#EADFCC; --card:#FFFFFF; --soft:#FFF1DC;
+  --navy:#1F3F63; --navy-d:#142A47; --navy-dd:#0E1E33;
+  --gold:#C8902A; --gold-d:#9E6F1C; --gold-l:#E9CF98; --gold-s:#F6EBD3;
+  --paper:#FCF9F3; --cream:#F5EEE2; --card:#FFFFFF; --ink:#1C2430; --muted:#4A5463; --line:#E6DAC4;
   --f-display:"Frank Ruhl Libre","David Libre",Georgia,serif;
   --f-body:"Assistant","Arial Hebrew",Arial,sans-serif;
-  --r:18px;
+  --r:20px; --shadow:0 24px 50px -28px rgba(20,42,71,.45);
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
-  --cream:#14110D; --paper:#1B1712; --ink:#F2ECE2; --muted:#B9AE9C; --line:#3A3127; --card:#221D17; --soft:#2E2417; color-scheme:dark}}
-:root[data-theme="dark"]{--cream:#14110D; --paper:#1B1712; --ink:#F2ECE2; --muted:#B9AE9C; --line:#3A3127; --card:#221D17; --soft:#2E2417; color-scheme:dark}
+  --paper:#15120E; --cream:#1C1813; --card:#231E18; --ink:#F3EDE3; --muted:#C7BCAA; --line:#3B3228; --gold-s:#2F2618; color-scheme:dark}}
+:root[data-theme="dark"]{--paper:#15120E; --cream:#1C1813; --card:#231E18; --ink:#F3EDE3; --muted:#C7BCAA; --line:#3B3228; --gold-s:#2F2618; color-scheme:dark}
 *{box-sizing:border-box}
-body{background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:17px;line-height:1.6;direction:rtl}
-h1,h2,h3{font-family:var(--f-display);line-height:1.12;margin:0;text-wrap:balance}
-h1{font-size:clamp(2.3rem,7.5vw,4.4rem);font-weight:900}
-h2{font-size:clamp(1.8rem,4.6vw,2.9rem);font-weight:700}
-h3{font-size:1.3rem;font-weight:700}
+html{scroll-behavior:smooth;font-size:100%}
+html.big{font-size:114%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:1.19rem;font-weight:500;line-height:1.7;direction:rtl;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+[hidden]{display:none!important}
+h1,h2,h3{font-family:var(--f-display);line-height:1.15;margin:0;text-wrap:balance;font-weight:700}
+h1{font-size:clamp(2.5rem,7vw,4.6rem);font-weight:900;letter-spacing:-.01em}
+h2{font-size:clamp(2rem,4.8vw,3.1rem)}
+h3{font-size:1.45rem}
 p{margin:0}
 a{color:inherit}
-.wrap{max-width:1160px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
-.sec{padding-block:72px}
+.wrap{max-width:1180px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+.sec{padding-block:clamp(64px,9vw,110px)}
 .sec.cream{background:var(--cream)}
-.sec.navy{background:var(--navy-d);color:#F4EDE2}
-.kicker{font-weight:800;color:var(--orange);letter-spacing:.02em;font-size:.95rem}
-.lead{color:var(--muted);font-size:1.12rem;max-width:60ch}
-.navy .lead{color:#C9D3E0}
-.head{display:grid;gap:10px;margin-bottom:34px}
+.sec.navy{background:var(--navy-d);color:#F3ECE0}
+.kicker{display:inline-flex;align-items:center;gap:10px;font-weight:700;color:var(--gold-d);font-size:1.02rem;letter-spacing:.04em}
+.kicker::before{content:"";width:34px;height:1.5px;background:currentColor;opacity:.7}
+.navy .kicker,.hero .kicker{color:var(--gold-l)}
+.lead{color:var(--muted);font-size:1.25rem;max-width:56ch}
+.navy .lead{color:#CBD5E2}
+.head{display:grid;gap:14px;margin-bottom:46px}
 .head.c{text-align:center;justify-items:center}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-family:var(--f-body);font-weight:800;font-size:1.05rem;padding:13px 24px;border-radius:999px;border:2px solid transparent;text-decoration:none;cursor:pointer;transition:transform .15s,box-shadow .15s}
-.btn:hover{transform:translateY(-2px);box-shadow:0 10px 24px -12px rgba(0,0,0,.5)}
-.btn-o{background:var(--orange);color:#1E1200}
-.btn-n{background:var(--navy);color:#fff}
-.btn-g{border-color:currentColor;background:transparent}
-:focus-visible{outline:3px solid var(--orange);outline-offset:3px}
-@keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
-.rv{animation:rise .8s cubic-bezier(.2,.8,.2,1) both;animation-delay:calc(var(--i,0)*90ms)}
-@media (prefers-reduced-motion:reduce){.rv{animation:none}*{scroll-behavior:auto!important}}
-html{scroll-behavior:smooth}
+.head.c .lead{margin-inline:auto}
+/* hand-drawn gold underline under section titles */
+.ul{position:relative;display:inline-block}
+.ul::after{content:"";position:absolute;inset-inline:0;bottom:-.18em;height:.16em;background:linear-gradient(90deg,transparent,var(--gold) 15%,var(--gold) 85%,transparent);border-radius:9px;transform:scaleX(0);transform-origin:right;transition:transform 1.1s cubic-bezier(.2,.8,.2,1) .3s;opacity:.8}
+.in .ul::after,.ul.in::after{transform:scaleX(1)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:58px;font-family:var(--f-body);font-weight:800;font-size:1.15rem;padding:14px 30px;border-radius:999px;border:2px solid transparent;text-decoration:none;cursor:pointer;transition:transform .2s,box-shadow .2s,background .2s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 14px 28px -14px rgba(0,0,0,.45)}
+.btn-gold{background:linear-gradient(180deg,#D9A23E,var(--gold));color:#231503}
+.btn-navy{background:var(--navy);color:#fff}
+.btn-line{border-color:currentColor;background:transparent}
+.btn svg{width:22px;height:22px}
+:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+
+/* reveal on scroll */
+.rv{opacity:0;transform:translateY(26px);transition:opacity .9s ease,transform .9s cubic-bezier(.2,.8,.2,1);transition-delay:calc(var(--i,0)*110ms)}
+.rv.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}.kb,.float{animation:none!important}.ul::after{transform:scaleX(1);transition:none}}
 
 /* header */
-body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:20;background:var(--paper)}
-header{position:sticky;top:env(safe-area-inset-top,0px);z-index:19;background:color-mix(in srgb,var(--paper) 92%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
-header .wrap{display:flex;align-items:center;gap:18px;min-height:68px}
-.lg{background:#fff;border-radius:12px;padding:4px 8px;display:flex}
-.lg img{height:44px;width:auto}
-nav{display:flex;gap:2px;margin-inline-start:auto;flex-wrap:wrap}
-nav a{text-decoration:none;font-weight:600;padding:8px 11px;border-radius:9px}
-nav a:hover{background:var(--soft)}
-.hphone{font-weight:800;color:var(--orange);text-decoration:none;direction:ltr;white-space:nowrap}
-@media (max-width:900px){nav{display:none}.hphone{margin-inline-start:auto}}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:40;background:var(--paper)}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:39;background:color-mix(in srgb,var(--paper) 93%,transparent);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+header .wrap{display:flex;align-items:center;gap:16px;min-height:80px}
+.lg{background:#fff;border-radius:14px;padding:5px 10px;display:flex;box-shadow:0 4px 14px -8px rgba(0,0,0,.3)}
+.lg img{height:50px;width:auto}
+nav{display:flex;gap:4px;margin-inline-start:auto}
+nav a{text-decoration:none;font-weight:600;font-size:1.08rem;padding:10px 14px;border-radius:10px}
+nav a:hover{background:var(--gold-s)}
+.tools{display:flex;gap:10px;align-items:center}
+.big-t{min-height:46px;min-width:52px;border-radius:12px;border:1.5px solid var(--line);background:var(--card);color:var(--ink);font:inherit;font-weight:800;cursor:pointer;padding:0 10px}
+.big-t[aria-pressed="true"]{background:var(--gold-s);border-color:var(--gold)}
+.hphone{min-height:48px;padding:10px 20px;font-size:1.12rem;direction:ltr}
+@media (max-width:980px){nav{display:none}.tools{margin-inline-start:auto}}
+@media (max-width:520px){.hphone{display:none}.lg img{height:42px}}
 
 /* hero */
-.hero{background:radial-gradient(120% 90% at 85% 0%,#2C5683 0%,var(--navy-d) 60%,#0D1D30 100%);color:#fff;padding-block:48px 64px;overflow:hidden}
-.hero-g{display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:center}
+.hero{position:relative;background:radial-gradient(110% 90% at 80% 0%,#2B5482 0%,var(--navy-d) 55%,var(--navy-dd) 100%);color:#fff;padding-block:clamp(48px,7vw,90px) clamp(60px,8vw,110px);overflow:hidden}
+.hero::after{content:"";position:absolute;inset:auto 0 0;height:1px;background:linear-gradient(90deg,transparent,var(--gold-l),transparent);opacity:.5}
+.hero-g{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(30px,5vw,70px);align-items:center}
 .hero-g>*{min-width:0}
-.hero h1 span{color:var(--orange);display:block}
-.hero .sub{color:#D6DEE8;font-size:clamp(1.05rem,2.2vw,1.25rem);margin-top:18px;max-width:52ch}
-.whys{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
-.whys span{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:999px;padding:6px 14px;font-weight:600;font-size:.95rem}
-.ctas{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px}
-.hero .btn-g{color:#fff}
-.phone-fr{position:relative;justify-self:center;width:min(320px,80vw);aspect-ratio:9/16;border-radius:34px;background:#000;border:8px solid #0A1524;box-shadow:0 40px 80px -30px rgba(0,0,0,.8),0 0 0 2px rgba(255,255,255,.08);overflow:hidden;max-width:100%}
-.phone-fr video{width:100%;height:100%;object-fit:cover;display:block}
-.snd{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.65);color:#fff;border:1px solid rgba(255,255,255,.3);border-radius:999px;padding:7px 14px;font:inherit;font-weight:700;cursor:pointer;white-space:nowrap}
-.polaroid{position:absolute;background:#fff;padding:8px 8px 26px;box-shadow:0 14px 30px -10px rgba(0,0,0,.6);width:120px}
-.polaroid img{display:block;width:100%;aspect-ratio:1;object-fit:cover}
-.pl1{top:6%;right:-40px;transform:rotate(9deg)}
-.pl2{bottom:10%;left:-46px;transform:rotate(-8deg)}
-.hero-art{position:relative;display:grid;place-items:center}
-@media (max-width:860px){.hero-g{grid-template-columns:1fr}.pl1{right:2%}.pl2{left:2%}.polaroid{width:96px}}
+.hero h1 .g{display:block;color:var(--gold-l);font-weight:700;margin-top:.08em}
+.hero .sub{color:#D7DFEA;font-size:clamp(1.2rem,2.3vw,1.42rem);margin-top:24px;max-width:46ch}
+.ctas{display:flex;gap:14px;flex-wrap:wrap;margin-top:34px}
+.hero .btn-line{color:#fff;border-color:rgba(255,255,255,.55)}
+.ticks{display:flex;flex-wrap:wrap;gap:10px 24px;margin-top:30px;color:#E5D8BE;font-weight:600;list-style:none;padding:0}
+.ticks li{display:flex;align-items:center;gap:8px}
+.ticks li::before{content:"✓";display:grid;place-items:center;width:24px;height:24px;border-radius:50%;background:rgba(233,207,152,.18);color:var(--gold-l);font-size:.9rem}
+/* album-style framed photos with corner mounts */
+.art{position:relative;min-height:clamp(380px,46vw,560px)}
+.frame{position:absolute;background:#FBF7EF;padding:14px 14px 18px;box-shadow:0 34px 60px -26px rgba(0,0,0,.75);border-radius:4px}
+.frame .ph{overflow:hidden;position:relative}
+.frame img{width:100%;height:100%;object-fit:cover}
+.frame i{position:absolute;width:28px;height:28px;background:linear-gradient(135deg,#2A2A2A 50%,transparent 50%);opacity:.85}
+.frame i:nth-of-type(1){top:6px;right:6px;transform:rotate(90deg)}
+.frame i:nth-of-type(2){top:6px;left:6px}
+.frame i:nth-of-type(3){bottom:10px;left:6px;transform:rotate(-90deg)}
+.frame i:nth-of-type(4){bottom:10px;right:6px;transform:rotate(180deg)}
+.f1{inset:0 6% 8% 0;transform:rotate(-2.5deg)}
+.f1 .ph{height:100%}
+.f2{width:40%;aspect-ratio:3/4;left:-2%;bottom:-2%;transform:rotate(6deg);padding:10px 10px 34px}
+.f2 .ph{height:100%;filter:sepia(.25)}
+.f2 b{position:absolute;bottom:6px;inset-inline:0;text-align:center;font-family:var(--f-display);color:#5B4A30;font-weight:500;font-size:1rem}
+.kb{animation:kb 22s ease-in-out infinite alternate}
+@keyframes kb{from{transform:scale(1.02)}to{transform:scale(1.14) translate(-2%,1%)}}
+.float{animation:fl 7s ease-in-out infinite alternate}
+@keyframes fl{to{transform:rotate(4deg) translateY(-12px)}}
+@media (max-width:900px){.hero-g{grid-template-columns:1fr}.art{min-height:0;aspect-ratio:1/0.95;max-width:560px;width:100%;justify-self:center}}
 
 /* trust */
-.trust{background:var(--orange);color:#1E1200}
-.trust .wrap{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;padding-block:20px}
-.trust div{display:grid;gap:2px;text-align:center}
-.trust b{font-family:var(--f-display);font-size:1.5rem;line-height:1.1}
-.trust span{font-size:.92rem;font-weight:600}
-@media (max-width:700px){.trust .wrap{grid-template-columns:1fr 1fr;row-gap:16px}}
+.trust{background:var(--navy-dd);color:#E9E1D2}
+.trust .wrap{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));padding-block:30px}
+.trust div{display:grid;gap:4px;text-align:center;padding:6px 10px;border-inline-start:1px solid rgba(233,207,152,.22)}
+.trust div:first-child{border:0}
+.trust b{font-family:var(--f-display);font-size:1.75rem;line-height:1.1;color:var(--gold-l);font-weight:700}
+.trust span{font-size:1.02rem;color:#C9D2DE}
+@media (max-width:760px){.trust .wrap{grid-template-columns:1fr 1fr;row-gap:22px}.trust div:nth-child(3){border:0}}
 
 /* services */
-.svcs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
-.sv{background:var(--card);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;display:grid;grid-template-rows:auto 1fr;transition:transform .25s,box-shadow .25s}
-.sv:hover{transform:translateY(-5px);box-shadow:0 24px 44px -26px rgba(31,63,99,.55)}
-.sv img{width:100%;aspect-ratio:16/10;object-fit:cover;display:block}
-.sv .b{padding:18px 20px 20px;display:grid;gap:8px;align-content:start}
+.svcs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:26px}
+.sv{background:var(--card);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;display:grid;grid-template-rows:auto 1fr;box-shadow:var(--shadow);transition:transform .35s,box-shadow .35s}
+.sv:hover{transform:translateY(-6px);box-shadow:0 34px 60px -30px rgba(20,42,71,.55)}
+.sv .im{overflow:hidden}
+.sv img{width:100%;aspect-ratio:16/10;object-fit:cover;transition:transform .8s}
+.sv:hover img{transform:scale(1.06)}
+.sv .b{padding:22px 24px 24px;display:grid;gap:10px;align-content:start}
 .sv p{color:var(--muted)}
-.sv .pr{justify-self:start;background:var(--soft);color:var(--orange-d);font-weight:800;border-radius:999px;padding:3px 12px;font-size:.92rem}
-.free{display:flex;gap:16px;align-items:center;background:var(--navy);color:#fff;border-radius:var(--r);padding:20px 22px;margin-top:22px}
-.free b{font-family:var(--f-display);font-size:1.3rem;color:var(--orange)}
-.free svg{flex:0 0 46px}
-@media (max-width:860px){.svcs{grid-template-columns:1fr 1fr}}
-@media (max-width:560px){.svcs{grid-template-columns:1fr}}
+.pr{justify-self:start;margin-top:4px;color:var(--gold-d);font-family:var(--f-display);font-weight:700;font-size:1.25rem}
+.free{display:flex;gap:20px;align-items:center;background:var(--gold-s);border:1px solid var(--gold-l);border-radius:var(--r);padding:24px 28px;margin-top:30px}
+.free svg{flex:0 0 52px}
+.free b{font-family:var(--f-display);font-size:1.5rem;color:var(--navy)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .free b{color:var(--gold-l)}}
+@media (max-width:900px){.svcs{grid-template-columns:1fr 1fr}}
+@media (max-width:600px){.svcs{grid-template-columns:1fr}.free{flex-direction:column;text-align:center}}
 
-/* how */
-.steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;counter-reset:s;list-style:none;padding:0;margin:0}
-.steps li{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:22px 20px;display:grid;gap:8px;align-content:start;position:relative}
-.steps .n{width:46px;height:46px;border-radius:50%;background:var(--orange);color:#1E1200;display:grid;place-items:center;font-family:var(--f-display);font-weight:900;font-size:1.3rem}
-.steps p{color:var(--muted)}
-@media (max-width:860px){.steps{grid-template-columns:1fr 1fr}}
-@media (max-width:520px){.steps{grid-template-columns:1fr}.steps li{grid-template-columns:46px 1fr;column-gap:14px}.steps li .n{grid-row:span 2}}
+/* how: timeline */
+.steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:22px;list-style:none;padding:0;margin:0;position:relative}
+.steps::before{content:"";position:absolute;top:38px;inset-inline:12%;height:2px;background:repeating-linear-gradient(90deg,var(--gold) 0 10px,transparent 10px 18px);opacity:.6}
+.steps li{display:grid;gap:10px;justify-items:center;text-align:center;position:relative}
+.steps .n{width:76px;height:76px;border-radius:50%;background:var(--card);border:2px solid var(--gold);color:var(--navy);display:grid;place-items:center;font-family:var(--f-display);font-weight:900;font-size:2rem;box-shadow:0 0 0 8px var(--cream)}
+.steps p{color:var(--muted);max-width:26ch}
+@media (max-width:900px){.steps{grid-template-columns:1fr 1fr;row-gap:40px}.steps::before{display:none}}
+@media (max-width:520px){.steps{grid-template-columns:1fr}.steps li{grid-template-columns:76px 1fr;justify-items:start;text-align:start;column-gap:18px}.steps li .n{grid-row:span 2}}
 
-/* prices */
-.prices{display:grid;grid-template-columns:1.2fr 1fr;gap:22px;align-items:start}
-.prices>*{min-width:0}
-.pcard{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:var(--r);padding:22px}
-.pcard h3{color:var(--orange);margin-bottom:12px}
-.row{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:11px 0;border-bottom:1px dashed rgba(255,255,255,.18)}
-.row:last-child{border-bottom:0}
-.row span{color:#E7EDF4}
-.row small{display:block;color:#9FB0C4;font-size:.86rem}
-.row b{font-family:var(--f-display);font-size:1.5rem;color:#fff;white-space:nowrap;font-variant-numeric:tabular-nums}
-.row b em{font-style:normal;font-size:.85rem;color:#C9D3E0;font-family:var(--f-body);margin-inline-start:4px}
-.terms{list-style:none;padding:0;margin:16px 0 0;display:grid;gap:8px;color:#C9D3E0;font-size:.95rem}
-.terms li{display:flex;gap:10px}
-.terms li::before{content:"";flex:0 0 8px;height:8px;margin-top:9px;border-radius:50%;background:var(--orange)}
-.arow{display:grid;grid-template-columns:96px 1fr auto;align-items:center}
-.arow img{width:88px;height:auto;background:#fff;border-radius:8px;padding:4px}
-.sizes{display:grid;grid-template-columns:1fr 1.2fr;gap:22px;align-items:center;margin-top:22px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:var(--r);padding:22px}
-.sizes>*{min-width:0}
-.sizes h3{color:var(--orange);margin-bottom:8px}
-.sizes p{color:#C9D3E0}
-.sizes img{width:100%;background:#fff;border-radius:12px;padding:12px}
-.sz-list{list-style:none;padding:0;margin:12px 0 0;display:flex;flex-wrap:wrap;gap:6px}
-.sz-list li{background:rgba(255,255,255,.1);border-radius:999px;padding:4px 12px;font-variant-numeric:tabular-nums;direction:ltr}
-@media (max-width:860px){.prices{grid-template-columns:1fr}.sizes{grid-template-columns:1fr}}
-@media (max-width:420px){.arow{grid-template-columns:70px 1fr auto}.arow img{width:64px}}
-
-/* video player */
-.pl{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:18px;align-items:start}
-.pl-main{background:#000;border-radius:var(--r);overflow:hidden}
-.pl-main video,.pl-main img{width:100%;height:clamp(300px,46vw,560px);object-fit:contain;display:block;background:#000}
-.pl-cap{display:flex;justify-content:space-between;gap:10px;align-items:center;padding:10px 14px;background:var(--card);border-top:3px solid var(--orange)}
-.pl-cap b{font-family:var(--f-display);font-size:1.15rem}
+/* videos */
+.pl{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:22px;align-items:start}
+.pl-main{background:#000;border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow);border:6px solid #fff}
+.pl-main video,.pl-main img{width:100%;height:clamp(320px,46vw,580px);object-fit:contain;background:#000}
+.pl-cap{display:flex;justify-content:space-between;gap:12px;align-items:center;padding:14px 4px 0}
+.pl-cap b{font-family:var(--f-display);font-size:1.45rem}
 .pl-cap span{color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
-.thumbs{display:grid;grid-template-columns:repeat(auto-fill,minmax(72px,1fr));gap:8px;align-content:start;max-height:calc(clamp(300px,46vw,560px) + 50px);overflow-y:auto;padding:3px}
-.th{padding:0;border:0;background:#000;border-radius:10px;overflow:hidden;aspect-ratio:1;cursor:pointer;opacity:.72;transition:opacity .2s,transform .2s}
-.th img{width:100%;height:100%;object-fit:cover;display:block;pointer-events:none}
+.thumbs{display:grid;grid-template-columns:repeat(auto-fill,minmax(84px,1fr));gap:10px;align-content:start;max-height:calc(clamp(320px,46vw,580px) + 60px);overflow-y:auto;padding:4px}
+.th{padding:0;border:0;background:#000;border-radius:12px;overflow:hidden;aspect-ratio:1;cursor:pointer;opacity:.7;transition:opacity .25s,transform .25s}
+.th img{width:100%;height:100%;object-fit:cover;pointer-events:none}
 .th:hover{opacity:1}
-.th.on{opacity:1;box-shadow:0 0 0 3px var(--orange);transform:scale(.94)}
+.th.on{opacity:1;box-shadow:0 0 0 3px var(--gold);transform:scale(.93)}
 .photo .pl-main img{user-select:none;-webkit-user-drag:none;-webkit-touch-callout:none;pointer-events:none}
-.photo .pl-main img.f{animation:fd .6s ease}
-@keyframes fd{from{opacity:.2}}
-@media (max-width:760px){.pl{grid-template-columns:1fr}.thumbs{max-height:none;grid-template-columns:repeat(auto-fill,minmax(58px,1fr))}}
+.photo .pl-main img.f{animation:fd .7s ease}
+@keyframes fd{from{opacity:.15}}
+@media (max-width:800px){.pl{grid-template-columns:1fr}.thumbs{display:flex;max-height:none;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;padding:4px 2px 10px}.th{flex:0 0 76px;scroll-snap-align:start}}
 
-/* gifts */
-.gift{display:grid;grid-template-columns:1fr 1.3fr;gap:30px;align-items:center}
-.gift>*{min-width:0}
-.posters{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
-.posters img{width:100%;border-radius:14px;display:block;background:#fff;box-shadow:0 18px 34px -22px rgba(0,0,0,.5)}
-.posters img:nth-child(2){transform:translateY(18px)}
-@media (max-width:860px){.gift{grid-template-columns:1fr}}
-
-/* what */
-.what{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
-.what figure{margin:0;background:var(--card);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
-.what img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block}
-.what figcaption{padding:10px 14px;font-weight:700}
-.usb{display:grid;grid-template-columns:200px 1fr;gap:24px;align-items:center;margin-top:22px;background:var(--soft);border-radius:var(--r);padding:20px}
-.usb img{width:100%;border-radius:12px;background:#fff}
-@media (max-width:860px){.what{grid-template-columns:1fr 1fr}.usb{grid-template-columns:1fr;text-align:center;justify-items:center}.usb img{max-width:220px}}
+/* prices: menu style */
+.menu{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.menu>*{min-width:0}
+.mc{background:rgba(255,255,255,.04);border:1px solid rgba(233,207,152,.28);border-radius:var(--r);padding:30px 30px 18px;position:relative}
+.mc::before{content:"";position:absolute;inset:8px;border:1px solid rgba(233,207,152,.14);border-radius:14px;pointer-events:none}
+.mc h3{color:var(--gold-l);margin-bottom:16px;font-size:1.65rem}
+.it{display:grid;grid-template-columns:auto 1fr auto;align-items:baseline;gap:10px;padding:13px 0}
+.it .d{border-bottom:2px dotted rgba(233,207,152,.35);transform:translateY(-6px)}
+.it span{color:#F1EADD;font-weight:600}
+.it small{display:block;color:#A9B7C8;font-size:.95rem;font-weight:500}
+.it b{font-family:var(--f-display);font-size:1.7rem;color:#fff;white-space:nowrap;font-variant-numeric:tabular-nums}
+.it b em{font-style:normal;font-size:1rem;color:var(--gold-l);margin-inline-start:3px}
+.it.alb{grid-template-columns:84px auto 1fr auto}
+.it.alb img{width:78px;background:#fff;border-radius:8px;padding:4px;align-self:center}
+.notes{margin-top:26px;display:grid;gap:10px;color:#CBD5E2;font-size:1.05rem;list-style:none;padding:0}
+.notes li{display:flex;gap:12px}
+.notes li::before{content:"✦";color:var(--gold-l);flex:0 0 auto}
+.sizes{margin-top:22px;border:1px solid rgba(233,207,152,.28);border-radius:16px;padding:6px 22px}
+.sizes summary{color:var(--gold-l)}
+.sizes .sz{display:grid;grid-template-columns:1fr 1.2fr;gap:22px;align-items:center;padding-bottom:18px}
+.sizes .sz>*{min-width:0}
+.sizes img{background:#fff;border-radius:12px;padding:12px}
+.sz-list{list-style:none;padding:0;margin:12px 0 0;display:flex;flex-wrap:wrap;gap:8px}
+.sz-list li{background:rgba(255,255,255,.09);border-radius:999px;padding:4px 14px;direction:ltr}
+@media (max-width:900px){.menu{grid-template-columns:1fr}.sizes .sz{grid-template-columns:1fr}}
+@media (max-width:440px){.mc{padding:24px 18px 12px}.it.alb{grid-template-columns:64px auto 1fr auto}.it.alb img{width:58px}.it b{font-size:1.45rem}}
 
 /* reviews */
-.revs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
-.rev{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:24px 22px;display:grid;gap:14px;align-content:space-between;position:relative}
-.rev::before{content:"״";position:absolute;top:-6px;left:16px;font-family:var(--f-display);font-size:5rem;color:var(--orange);opacity:.35;line-height:1}
-.rev p{font-size:1.04rem}
-.rev b{color:var(--orange-d)}
-@media (max-width:860px){.revs{grid-template-columns:1fr}}
+.revs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:26px}
+.rev{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:34px 28px 26px;display:grid;gap:18px;align-content:space-between;position:relative;box-shadow:var(--shadow)}
+.rev::before{content:"״";position:absolute;top:-28px;right:22px;font-family:var(--f-display);font-size:6rem;color:var(--gold);line-height:1}
+.rev p{font-family:var(--f-display);font-size:1.28rem;line-height:1.6}
+.rev b{color:var(--gold-d);font-size:1.08rem}
+.stars{color:var(--gold);letter-spacing:3px}
+@media (max-width:900px){.revs{grid-template-columns:1fr}}
+
+/* gift */
+.gift{display:grid;grid-template-columns:1fr 1.25fr;gap:44px;align-items:center}
+.gift>*{min-width:0}
+.posters{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.posters img{width:100%;border-radius:14px;background:#fff;box-shadow:0 22px 40px -24px rgba(0,0,0,.55);border:6px solid #fff}
+.posters img:nth-child(2){transform:translateY(24px)}
+@media (max-width:900px){.gift{grid-template-columns:1fr}}
 
 /* faq */
-.faq{display:grid;gap:10px;max-width:860px;margin:0 auto}
-details{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:4px 18px}
-summary{cursor:pointer;font-weight:800;font-size:1.08rem;padding:14px 0;list-style:none;display:flex;justify-content:space-between;gap:12px}
-summary::after{content:"+";color:var(--orange);font-size:1.4rem;line-height:1}
-details[open] summary::after{content:"–"}
-details p{color:var(--muted);padding-bottom:16px}
+.faq{display:grid;gap:14px;max-width:880px;margin:0 auto}
+details{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:4px 24px}
+summary{cursor:pointer;font-weight:700;font-size:1.22rem;padding:18px 0;list-style:none;display:flex;justify-content:space-between;gap:14px;align-items:center}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";flex:0 0 36px;height:36px;border-radius:50%;display:grid;place-items:center;background:var(--gold-s);color:var(--gold-d);font-size:1.5rem;line-height:1;transition:transform .3s}
+details[open] summary::after{transform:rotate(45deg)}
+details p{color:var(--muted);padding-bottom:20px}
+.sizes summary::after{background:rgba(233,207,152,.15);color:var(--gold-l)}
+.sizes{background:transparent}
 
 /* family */
-.fam{display:grid;grid-template-columns:auto 1fr;gap:22px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:22px}
-.fam .lgs{display:flex;gap:10px;align-items:center}
-.fam .lgs img{height:56px;width:auto;background:#fff;border-radius:10px;padding:6px}
-.fam p{color:var(--muted)}
-@media (max-width:700px){.fam{grid-template-columns:1fr}}
+.fam{display:flex;gap:24px;align-items:center;justify-content:center;flex-wrap:wrap;text-align:center}
+.fam img{height:64px;width:auto;background:#fff;border-radius:12px;padding:6px 10px}
+.fam p{color:var(--muted);max-width:60ch}
 
-/* contact */
-.ct{display:grid;grid-template-columns:1fr 1fr;gap:30px}
+/* contact: one question at a time */
+.ct{display:grid;grid-template-columns:1fr 1.05fr;gap:44px;align-items:start}
 .ct>*{min-width:0}
-.ci{display:grid;gap:12px;margin-top:22px}
-.ci div{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);border-radius:14px;padding:14px 16px}
-.ci small{display:block;color:#9FB0C4}
-.ci b{font-size:1.2rem;user-select:all}
+.ci{display:grid;gap:14px;margin-top:30px}
+.ci a,.ci div{display:flex;align-items:center;gap:16px;background:rgba(255,255,255,.06);border:1px solid rgba(233,207,152,.22);border-radius:16px;padding:16px 20px;text-decoration:none}
+.ci small{display:block;color:#A9B7C8;font-size:.95rem}
+.ci b{font-size:1.35rem;color:#fff}
+.ci svg{width:28px;height:28px;flex:0 0 28px;stroke:var(--gold-l);fill:none;stroke-width:1.8}
 .ltr{direction:ltr;unicode-bidi:isolate}
-form{background:var(--card);color:var(--ink);border-radius:var(--r);padding:24px;display:grid;gap:12px}
-label{display:grid;gap:6px;font-weight:700}
-input,select,textarea{font:inherit;padding:11px 12px;border:1px solid var(--line);border-radius:10px;background:var(--paper);color:var(--ink);width:100%}
-.chk{display:flex;flex-wrap:wrap;gap:8px}
-.chk label{display:flex;align-items:center;gap:6px;font-weight:600;background:var(--soft);border-radius:999px;padding:6px 12px}
-.chk input{width:auto}
-.ok{background:var(--soft);border-radius:10px;padding:12px}
-@media (max-width:860px){.ct{grid-template-columns:1fr}}
-footer{background:#0B1828;color:#9FB0C4;padding-block:28px 96px;font-size:.95rem;text-align:center}
-footer b{color:#fff}
+.wiz{background:var(--card);color:var(--ink);border-radius:24px;padding:clamp(24px,4vw,40px);box-shadow:0 40px 80px -40px rgba(0,0,0,.7);min-height:380px;display:grid;align-content:start;gap:18px}
+.wiz .prog{display:flex;gap:8px}
+.wiz .prog i{flex:1;height:6px;border-radius:9px;background:var(--line);transition:background .4s}
+.wiz .prog i.on{background:var(--gold)}
+.q{display:grid;gap:16px;animation:qin .5s cubic-bezier(.2,.8,.2,1)}
+@keyframes qin{from{opacity:0;transform:translateX(-24px)}}
+.q label,.q legend{font-family:var(--f-display);font-size:1.6rem;font-weight:700;padding:0}
+.q fieldset{border:0;padding:0;margin:0;display:grid;gap:16px}
+.q input,.q textarea{font:inherit;font-size:1.3rem;padding:16px 18px;border:2px solid var(--line);border-radius:14px;background:var(--paper);color:var(--ink);width:100%}
+.q input:focus,.q textarea:focus{border-color:var(--gold);outline:none}
+.chips{display:flex;flex-wrap:wrap;gap:10px}
+.chips button{font:inherit;font-weight:700;font-size:1.1rem;min-height:52px;padding:10px 20px;border-radius:999px;border:2px solid var(--line);background:var(--paper);color:var(--ink);cursor:pointer}
+.chips button[aria-pressed="true"]{background:var(--gold-s);border-color:var(--gold)}
+.wiz .nav{display:flex;gap:12px;justify-content:space-between;align-items:center;margin-top:6px}
+.wiz .back{background:none;border:0;font:inherit;font-weight:700;color:var(--muted);cursor:pointer;min-height:48px;padding:0 6px}
+.err{color:#B3261E;font-weight:700}
+.done{text-align:center;display:grid;gap:14px;justify-items:center;padding-top:30px}
+.done .ok{width:84px;height:84px;border-radius:50%;background:var(--gold-s);display:grid;place-items:center}
+@media (max-width:900px){.ct{grid-template-columns:1fr}}
+footer{background:var(--navy-dd);color:#A9B7C8;padding-block:34px 110px;text-align:center;font-size:1.05rem}
+footer b,footer a{color:#fff}
 
-/* mobile sticky bar */
-.bar{position:fixed;inset:auto 0 0;z-index:30;display:none;gap:8px;padding:10px max(12px,env(safe-area-inset-right,0px)) max(10px,env(safe-area-inset-bottom,0px)) max(12px,env(safe-area-inset-left,0px));background:color-mix(in srgb,var(--paper) 94%,transparent);backdrop-filter:blur(10px);border-top:1px solid var(--line)}
-.bar .btn{flex:1;padding:12px 10px;font-size:1rem}
-@media (max-width:760px){.bar{display:flex}}
+/* mobile call bar */
+.bar{position:fixed;inset:auto 0 0;z-index:30;display:none;gap:10px;padding:10px max(12px,env(safe-area-inset-right,0px)) max(12px,env(safe-area-inset-bottom,0px)) max(12px,env(safe-area-inset-left,0px));background:color-mix(in srgb,var(--paper) 95%,transparent);backdrop-filter:blur(12px);border-top:1px solid var(--line)}
+.bar .btn{flex:1;min-height:56px;font-size:1.15rem;padding:10px}
+@media (max-width:800px){.bar{display:flex}}
 </style>
 </head>
 <body>
-
 
 <header>
   <div class="wrap">
     <a class="lg" href="#top" aria-label="אלבום בקליק"><img src="m/logo.png" alt="אלבום בקליק"></a>
     <nav aria-label="ניווט">
-      <a href="#videos">סרטונים</a><a href="#services">שירותים</a><a href="#how">איך זה עובד</a><a href="#prices">מחירון</a><a href="#reviews">ממליצים</a><a href="#faq">שאלות</a><a href="#contact">צור קשר</a>
+      <a href="#services">מה סורקים</a><a href="#how">איך זה עובד</a><a href="#prices">מחירון</a><a href="#videos">סרטונים</a><a href="#reviews">ממליצים</a><a href="#contact">צור קשר</a>
     </nav>
-    <a class="hphone" href="tel:039369999">03-9369999</a>
+    <div class="tools">
+      <button class="big-t" id="bigT" type="button" aria-pressed="false" title="הגדלת טקסט">א+</button>
+      <a class="btn btn-gold hphone" href="tel:039369999">03-9369999</a>
+    </div>
   </div>
 </header>
 
@@ -237,136 +280,123 @@ footer b{color:#fff}
 <section class="hero">
   <div class="wrap hero-g">
     <div>
-      <div class="kicker rv">אלבום בקליק · מקבוצת <a href="/" target="_blank" rel="noopener">סופט קופי</a></div>
-      <h1 class="rv" style="--i:1">האלבומים בארון<span>הפכו לנושא כבד?</span></h1>
-      <p class="sub rv" style="--i:2">אנחנו סורקים אלבומים, תמונות, שקופיות, נגטיבים וקלטות וידאו, ומחזירים לכם את הזיכרונות בדיגיטל: לצפייה בטלוויזיה, לשיתוף עם כל המשפחה ולשמירה לדורות.</p>
-      <div class="whys rv" style="--i:3"><span>עוברים דירה?</span><span>דואגים מנזקים לתמונות?</span><span>מארגנים אירוע?</span><span>עושים סדר?</span></div>
-      <div class="ctas rv" style="--i:4"><a class="btn btn-o" href="#contact">לקבלת הצעת מחיר</a><a class="btn btn-g" href="#prices">למחירון</a></div>
-    </div>
-    <div class="hero-art rv" style="--i:2">
-      <div class="phone-fr">
-        <video id="heroV" src="v/feat.mp4" poster="v/feat.jpg" autoplay muted loop playsinline preload="auto"></video>
-        <button class="snd" id="snd" type="button">🔊 הפעלת קול</button>
+      <div class="kicker rv">אלבום בקליק · מבית <a href="../" target="_blank" rel="noopener">סופט קופי</a></div>
+      <h1 class="rv" style="--i:1">האלבומים בארון<span class="g">הפכו לנושא כבד?</span></h1>
+      <p class="sub rv" style="--i:2">אנחנו סורקים אלבומים, תמונות, שקופיות וקלטות וידאו, ומחזירים לכם את הזיכרונות מסודרים: לצפייה בטלוויזיה, לשיתוף עם הילדים והנכדים ולשמירה לדורות.</p>
+      <div class="ctas rv" style="--i:3">
+        <a class="btn btn-gold" href="tel:039369999"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A16 16 0 013 6a2 2 0 012-2"/></svg>התקשרו אלינו</a>
+        <a class="btn btn-line" href="#contact">לקבלת הצעת מחיר</a>
       </div>
-      <div class="polaroid pl1"><img src="m/old1.jpg" alt=""></div>
-      <div class="polaroid pl2"><img src="m/ph3.jpg" alt=""></div>
+      <ul class="ticks rv" style="--i:4"><li>איסוף עד הבית</li><li>שחזור צבע ללא עלות</li><li>הכל חוזר אליכם</li></ul>
+    </div>
+    <div class="art rv" style="--i:2" aria-hidden="true">
+      <div class="frame f1"><div class="ph"><img class="kb" src="m/ph3.jpg" alt=""></div><i></i><i></i><i></i><i></i></div>
+      <div class="frame f2 float"><div class="ph"><img src="m/old1.jpg" alt=""></div><b>זיכרונות לדורות</b></div>
     </div>
   </div>
 </section>
 
 <div class="trust"><div class="wrap">
-  <div><b>20+ שנה</b><span>של סריקה ושחזור תמונות</span></div>
-  <div><b>תו אמון הציבור</b><span>הגינות, איכות ושירות</span></div>
-  <div><b>ציוד Kodak</b><span>סורקים מקצועיים</span></div>
-  <div><b>איסוף עד הבית</b><span>שליח הלוך וחזור</span></div>
+  <div class="rv"><b>20+ שנה</b><span>של סריקה ושחזור</span></div>
+  <div class="rv" style="--i:1"><b>תו אמון הציבור</b><span>הגינות ושירות</span></div>
+  <div class="rv" style="--i:2"><b>ציוד Kodak</b><span>סורקים מקצועיים</span></div>
+  <div class="rv" style="--i:3"><b>עד הבית</b><span>שליח הלוך וחזור</span></div>
 </div></div>
-
-<section class="sec cream" id="videos">
-  <div class="wrap">
-    <div class="head"><div class="kicker">צפו בנו</div><h2>הזיכרונות שלכם, מהקופסה למסך</h2><p class="lead">הסרטונים מתנגנים ברצף. לחצו על ריבוע כדי לבחור סרטון, ועל הרמקול בנגן כדי לשמוע.</p></div>
-    <div class="pl">
-      <div><div class="pl-main"><video id="plV" muted playsinline controls preload="metadata"></video></div><div class="pl-cap"><b id="plT"></b><span id="plN"></span></div></div>
-      <div class="thumbs" id="plTh" aria-label="בחירת סרטון"></div>
-    </div>
-  </div>
-</section>
 
 <section class="sec" id="services">
   <div class="wrap">
-    <div class="head"><div class="kicker">מה סורקים?</div><h2>כל מה שמחכה בארון, בארגז ובמגירה</h2><p class="lead">מאלבומי דבק של סבתא ועד קלטות החתונה. כל חומר נסרק בציוד המתאים לו ומקבל טיפול עדין.</p></div>
+    <div class="head c rv"><div class="kicker">מה סורקים?</div><h2><span class="ul">כל מה שמחכה בארון ובמגירה</span></h2><p class="lead">כל חומר נסרק בציוד המתאים לו, בעדינות ובקפידה.</p></div>
     <div class="svcs">
-      <article class="sv"><img src="m/shelf.jpg" alt="מדף אלבומי תמונות" loading="lazy"><div class="b"><h3>סריקת אלבומי תמונות</h3><p>אלבומי כיסים, אלבומי דבק ואלבומים ישנים מכל התקופות. נסרקים באיכות גבוהה ונשמרים מבלאי ומנזקי הזמן.</p><span class="pr">מ־59 ₪ לאלבום</span></div></article>
-      <article class="sv"><img src="m/old1.jpg" alt="תמונות ישנות בשחור לבן" loading="lazy"><div class="b"><h3>תמונות ומסמכים בתפזורת</h3><p>ערימות תמונות, תעודות ומסמכים משפחתיים בעלי ערך נוסטלגי. נסרקים, מסודרים ונשמרים לדורות.</p><span class="pr">1.4 ₪ לתמונה</span></div></article>
-      <article class="sv"><img src="v/v13.jpg" alt="סריקת שקופיות" loading="lazy"><div class="b"><h3>סריקת שקופיות</h3><p>שקופיות מכל הסוגים והגדלים, בציוד ייעודי ובאיכות להצגה בטלוויזיה ואפילו במקרן. כל שקופית מנוקה מאבק.</p><span class="pr">5 ₪ לשקופית</span></div></article>
-      <article class="sv"><img src="lab/l20.jpg" alt="סריקת נגטיבים ושקופיות" loading="lazy"><div class="b"><h3>סריקת נגטיבים</h3><p>סרטי צילום ישנים שמחכים במגירה הופכים לקבצים דיגיטליים באיכות גבוהה במיוחד.</p><span class="pr">1.8 ₪ לתמונה</span></div></article>
-      <article class="sv"><img src="m/pvhs2.jpg" alt="המרת קלטות וידאו" loading="lazy"><div class="b"><h3>קלטות, דיסקים וסלילים</h3><p>חתונה, בר מצווה, מפגש משפחתי. קלטות וידאו, קלטות אודיו וסלילי 8 מ״מ הופכים לקבצים שאפשר לראות בכל מכשיר.</p><span class="pr">69 ₪ לקלטת עד 3 שעות</span></div></article>
-      <article class="sv"><img src="m/ph1.jpg" alt="משפחה צופה בתמונות במחשב" loading="lazy"><div class="b"><h3>עיצוב אלבומים דיגיטליים</h3><p>בחרו אירוע או תקופה: טיול, יום הולדת, בר מצווה, צבא. אנחנו מעצבים אלבום מודפס ואיכותי שנשאר לכם למזכרת.</p><span class="pr">לפי הצעת מחיר</span></div></article>
+      <article class="sv rv"><div class="im"><img src="m/ph2.jpg" alt="אישה מעיינת באלבום תמונות" loading="lazy"></div><div class="b"><h3>אלבומי תמונות</h3><p>אלבומי כיסים ואלבומי דבק מכל התקופות.</p><span class="pr">מ־59 ₪ לאלבום</span></div></article>
+      <article class="sv rv" style="--i:1"><div class="im"><img src="m/old1.jpg" alt="תמונות ישנות" loading="lazy" style="object-position:center 30%"></div><div class="b"><h3>תמונות ומסמכים</h3><p>ערימות תמונות, תעודות ומסמכים משפחתיים.</p><span class="pr">1.4 ₪ לתמונה</span></div></article>
+      <article class="sv rv" style="--i:2"><div class="im"><img src="v/v13.jpg" alt="סריקת שקופיות" loading="lazy"></div><div class="b"><h3>שקופיות ונגטיבים</h3><p>כל שקופית מנוקה מאבק ונסרקת באיכות גבוהה.</p><span class="pr">מ־1.8 ₪</span></div></article>
+      <article class="sv rv"><div class="im"><img src="m/pvhs2.jpg" alt="המרת קלטות וידאו" loading="lazy" style="object-position:center 25%"></div><div class="b"><h3>קלטות וידאו וסלילים</h3><p>החתונה, הבר מצווה והטיולים, לצפייה בכל מכשיר.</p><span class="pr">69 ₪ לקלטת</span></div></article>
+      <article class="sv rv" style="--i:1"><div class="im"><img src="m/ph1.jpg" alt="סבתא ונכדים צופים בתמונות" loading="lazy"></div><div class="b"><h3>עיצוב אלבום מודפס</h3><p>אלבום מעוצב לאירוע או לתקופה, למזכרת.</p><span class="pr">לפי הצעת מחיר</span></div></article>
+      <article class="sv rv" style="--i:2"><div class="im"><img src="m/usb.jpg" alt="דיסק און קי של אלבום בקליק" loading="lazy" style="background:#fff;object-fit:contain"></div><div class="b"><h3>דיסק און קי ממותג</h3><p>הכל מסודר בתיקיות, עם עותקים לכל המשפחה.</p><span class="pr">כלול בהזמנה</span></div></article>
     </div>
-    <div class="free">
-      <svg viewBox="0 0 48 48" fill="none" aria-hidden="true"><circle cx="24" cy="24" r="22" fill="#F39200"/><path d="M14 25l7 7 13-15" stroke="#1E1200" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      <div><b>שחזור צבע ללא עלות</b><p>תמונות ישנות שדהו עוברות אחרי הסריקה תוכנה ייחודית שמחזירה את צבעי המקור. השירות כלול בחבילת הסריקה.</p></div>
+    <div class="free rv">
+      <svg viewBox="0 0 52 52" aria-hidden="true"><circle cx="26" cy="26" r="24" fill="#C8902A"/><path d="M15 27l8 8 14-16" stroke="#fff" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <div><b>שחזור צבע ללא עלות</b><p style="color:var(--muted)">תמונות שדהו מקבלות אחרי הסריקה את צבעי המקור, בלי תוספת תשלום.</p></div>
     </div>
   </div>
 </section>
 
 <section class="sec cream" id="how">
   <div class="wrap">
-    <div class="head c"><div class="kicker">איך זה עובד?</div><h2>אתם אורזים. אנחנו עושים את כל השאר.</h2></div>
+    <div class="head c rv"><div class="kicker">איך זה עובד?</div><h2><span class="ul">אתם אורזים. אנחנו עושים את השאר.</span></h2></div>
     <ol class="steps">
-      <li><span class="n">1</span><h3>אורזים בארגז</h3><p>אלבומים, תמונות, שקופיות וקלטות. לא צריך למיין או לפרק כלום.</p></li>
-      <li><span class="n">2</span><h3>שליח עד הבית</h3><p>שליח אוסף את הארגז ומחזיר אותו בסוף, 59 ₪ לארגז לכל כיוון (עד 20 ק״ג).</p></li>
-      <li><span class="n">3</span><h3>סורקים ומשחזרים</h3><p>סריקה בסורקים מקצועיים, ניקוי שקופיות ושחזור צבע אוטומטי לתמונות שדהו.</p></li>
-      <li><span class="n">4</span><h3>מקבלים בדיגיטל</h3><p>הכל חוזר אליכם בקישור להורדה ובדיסק און קי ממותג, יחד עם החומר המקורי.</p></li>
+      <li class="rv"><span class="n">1</span><h3>אורזים בארגז</h3><p>בלי למיין ובלי לפרק כלום.</p></li>
+      <li class="rv" style="--i:1"><span class="n">2</span><h3>שליח עד הבית</h3><p>אוסף מכם ומחזיר בסוף.</p></li>
+      <li class="rv" style="--i:2"><span class="n">3</span><h3>סורקים ומשחזרים</h3><p>בציוד מקצועי, עם שחזור צבע.</p></li>
+      <li class="rv" style="--i:3"><span class="n">4</span><h3>מקבלים הכל</h3><p>בקישור ובדיסק און קי, יחד עם המקור.</p></li>
     </ol>
+  </div>
+</section>
+
+<section class="sec" id="videos">
+  <div class="wrap">
+    <div class="head rv"><div class="kicker">צפו בנו</div><h2><span class="ul">מהקופסה אל המסך</span></h2><p class="lead">לחצו על תמונה קטנה כדי לבחור סרטון.</p></div>
+    <div class="pl rv">
+      <div><div class="pl-main"><video id="plV" muted playsinline controls preload="metadata"></video></div><div class="pl-cap"><b id="plT"></b><span id="plN"></span></div></div>
+      <div class="thumbs" id="plTh" aria-label="בחירת סרטון"></div>
+    </div>
   </div>
 </section>
 
 <section class="sec navy" id="prices">
   <div class="wrap">
-    <div class="head"><div class="kicker">מחירון</div><h2 style="color:#fff">מחירים שקופים, כולל מע״מ</h2></div>
-    <div class="prices">
-      <div class="pcard">
+    <div class="head c rv"><div class="kicker">מחירון</div><h2 style="color:#fff"><span class="ul">מחירים שקופים, כולל מע״מ</span></h2></div>
+    <div class="menu">
+      <div class="mc rv">
         <h3>אלבומי תמונות</h3>
-        <div class="row arow"><img src="m/alb1.png" alt="המחשה: אלבום קטן" loading="lazy"><span>אלבום קטן<small>תמונה אחת בעמוד, עד 20 עמודים</small></span><b>59<em>₪</em></b></div>
-        <div class="row arow"><img src="m/alb2.png" alt="המחשה: אלבום ממוצע" loading="lazy"><span>אלבום ממוצע<small>עד 3 תמונות בעמוד, עד 50 עמודים</small></span><b>159<em>₪</em></b></div>
-        <div class="row arow"><img src="m/alb3.png" alt="המחשה: אלבום גדול" loading="lazy"><span>אלבום גדול<small>4 תמונות ומעלה בעמוד, עד 80 עמודים</small></span><b>299<em>₪</em></b></div>
-        <div class="row arow"><img src="m/alb4.png" alt="המחשה: אלבום ענק" loading="lazy"><span>אלבום ענק<small>4 תמונות ומעלה בעמוד, מעל 80 עמודים</small></span><b>599<em>₪</em></b></div>
+        <div class="it alb"><img src="m/alb1.png" alt="" loading="lazy"><span>אלבום קטן<small>עד 20 עמודים</small></span><i class="d"></i><b>59<em>₪</em></b></div>
+        <div class="it alb"><img src="m/alb2.png" alt="" loading="lazy"><span>אלבום ממוצע<small>עד 50 עמודים</small></span><i class="d"></i><b>159<em>₪</em></b></div>
+        <div class="it alb"><img src="m/alb3.png" alt="" loading="lazy"><span>אלבום גדול<small>עד 80 עמודים</small></span><i class="d"></i><b>299<em>₪</em></b></div>
+        <div class="it alb"><img src="m/alb4.png" alt="" loading="lazy"><span>אלבום ענק<small>מעל 80 עמודים</small></span><i class="d"></i><b>599<em>₪</em></b></div>
       </div>
-      <div class="pcard">
+      <div class="mc rv" style="--i:1">
         <h3>תמונות, שקופיות ווידאו</h3>
-        <div class="row"><span>תמונות בתפזורת<small>לתמונה</small></span><b>1.4<em>₪</em></b></div>
-        <div class="row"><span>תמונות בגודל חריג<small>לפי טבלת הגדלים למטה</small></span><b>7<em>₪</em></b></div>
-        <div class="row"><span>סריקת שקופיות<small>לשקופית</small></span><b>5<em>₪</em></b></div>
-        <div class="row"><span>סריקת נגטיבים<small>לתמונה</small></span><b>1.8<em>₪</em></b></div>
-        <div class="row"><span>המרת קלטת וידאו<small>עד 3 שעות</small></span><b>69<em>₪</em></b></div>
+        <div class="it"><span>תמונה בתפזורת</span><i class="d"></i><b>1.4<em>₪</em></b></div>
+        <div class="it"><span>תמונה בגודל חריג</span><i class="d"></i><b>7<em>₪</em></b></div>
+        <div class="it"><span>שקופית</span><i class="d"></i><b>5<em>₪</em></b></div>
+        <div class="it"><span>נגטיב, לתמונה</span><i class="d"></i><b>1.8<em>₪</em></b></div>
+        <div class="it"><span>קלטת וידאו<small>עד 3 שעות</small></span><i class="d"></i><b>69<em>₪</em></b></div>
       </div>
     </div>
-    <div class="sizes">
-      <div><h3>טבלת הגדלים הרשמית</h3><p>תמונה רגילה (10×15 ס״מ) נסרקת לפי מחיר תמונות בתפזורת, 1.4 ₪. תמונות בגודל חריג נסרקות ב־7 ₪ לתמונה. הגדלים החריגים, בס״מ ובקירוב:</p>
-        <ul class="sz-list"><li>פספורט 3.5×4.5</li><li>5.5×9</li><li>6.5×8.5</li><li>7×10</li><li>8.5×11.5</li><li>9×9</li><li>A5 · 15×21</li></ul></div>
-      <img src="m/sizes.png" alt="המחשת גדלי תמונות חריגים, כפי שמופיעה במחירון הרשמי" loading="lazy">
-    </div>
-    <ul class="terms">
-      <li>מינימום הזמנה 700 ₪. משלוח עם שליח עד הבית: 59 ₪ לארגז לכל כיוון, עד 20 ק״ג.</li>
-      <li>החזרת התמונות לאלבום כרוכה בתשלום נוסף. ניקוי שקופיות עם פטרת או תיקון שקופיות פגומות בתשלום נוסף.</li>
-      <li>הסריקה מתחילה עם הגעת החומר, לפי המחירון. אם תרצו פיילוט, נתחיל רק אחרי שתאשרו אותו.</li>
-      <li>לפריטים שאינם במחירון נשלח הצעת מחיר אחרי שהחומר יגיע למרכז הסריקה.</li>
+    <details class="sizes rv"><summary>טבלת הגדלים: מה נחשב תמונה בגודל חריג?</summary>
+      <div class="sz"><div><p style="color:#CBD5E2">תמונה רגילה (10×15 ס״מ) נסרקת ב־1.4 ₪. תמונות בגודל חריג נסרקות ב־7 ₪. הגדלים החריגים, בס״מ ובקירוב:</p>
+        <ul class="sz-list"><li>3.5×4.5</li><li>5.5×9</li><li>6.5×8.5</li><li>7×10</li><li>8.5×11.5</li><li>9×9</li><li>A5 · 15×21</li></ul></div>
+        <img src="m/sizes.png" alt="המחשת גדלי תמונות חריגים, כפי שמופיעה במחירון הרשמי" loading="lazy"></div>
+    </details>
+    <ul class="notes rv">
+      <li>מינימום הזמנה 700 ₪. שליח עד הבית: 59 ₪ לארגז לכל כיוון, עד 20 ק״ג.</li>
+      <li>החזרת תמונות לאלבום, וניקוי או תיקון שקופיות פגומות, בתשלום נוסף.</li>
+      <li>לפריטים שאינם במחירון נשלח הצעת מחיר. אפשר להתחיל בפיילוט קטן.</li>
     </ul>
-    <p style="margin-top:22px"><a class="btn btn-o" href="#contact">להזמנה ולהצעת מחיר</a></p>
+    <p class="rv" style="margin-top:30px;text-align:center"><a class="btn btn-gold" href="#contact">להזמנה ולהצעת מחיר</a></p>
   </div>
 </section>
 
-
-<section class="sec cream" id="what">
+<section class="sec cream" id="reviews">
   <div class="wrap">
-    <div class="head"><div class="kicker">כך זה מגיע אלינו</div><h2>אלבומים, קופסאות שקופיות וקלטות</h2></div>
-    <div class="what">
-      <figure><img src="m/shelf.jpg" alt="מדף אלבומים" loading="lazy"><figcaption>אלבומי תמונות</figcaption></figure>
-      <figure><img src="m/stack.jpg" alt="ערימת אלבומים" loading="lazy"><figcaption>אלבומים עבים וקלסרים</figcaption></figure>
-      <figure><img src="m/old1.jpg" alt="תמונות שחור לבן" loading="lazy"><figcaption>תמונות ישנות ומסמכים</figcaption></figure>
-      <figure><img src="m/pvhs2.jpg" alt="קלטות וידאו" loading="lazy"><figcaption>קלטות וידאו</figcaption></figure>
-    </div>
-    <div class="usb">
-      <img src="m/usb.jpg" alt="דיסק און קי ממותג של אלבום בקליק" loading="lazy">
-      <div><h3 style="font-size:1.6rem">הכל חוזר אליכם בדיסק און קי ממותג</h3><p style="color:var(--muted);margin-top:6px">התמונות והסרטים מסודרים בתיקיות, מוכנים לצפייה במחשב ובטלוויזיה. אפשר להזמין עותקים נוספים לכל בני המשפחה.</p></div>
-    </div>
-    <div class="head" style="margin-top:56px"><h2 style="font-size:clamp(1.5rem,3.6vw,2.2rem)">מהמעבדה שלנו</h2><p class="lead">ארגזים שהגיעו אלינו לסריקה. התמונות מוצגות ברזולוציה מוגבלת כדי לשמור על פרטיות הלקוחות.</p></div>
-    <div class="pl photo">
-      <div><div class="pl-main"><img id="lbI" src="lab/l01.jpg" alt="ארגזי אלבומים שהגיעו לסריקה" draggable="false"></div><div class="pl-cap"><b>מהמעבדה של אלבום בקליק</b><span id="lbN"></span></div></div>
-      <div class="thumbs" id="lbTh" aria-label="בחירת תמונה"></div>
+    <div class="head c rv"><div class="kicker">לקוחות ממליצים</div><h2><span class="ul">״פשוט הצלתם לנו את הזיכרונות״</span></h2></div>
+    <div class="revs">
+      <figure class="rev rv" style="margin:0"><p>היו לי כמעט 600 שקופיות משנות ה־70 וה־80. תוך כעשרה ימים קיבלתי הכל בדיגיטל, באיכות מעולה.</p><figcaption><div class="stars">★★★★★</div><b>מיכאל גרבר</b></figcaption></figure>
+      <figure class="rev rv" style="margin:0;--i:1"><p>קיבלתי הכל מסודר, בקישור ובדיסק און קי. עכשיו אפשר לראות את התמונות בלי שהאלבומים ייקרעו. צוות אדיב וסבלני.</p><figcaption><div class="stars">★★★★★</div><b>אידה ריינמן</b></figcaption></figure>
+      <figure class="rev rv" style="margin:0;--i:2"><p>שלחתי את השקופיות לכל המשפחה, והם התרגשו מתמונות בנות יותר מ־40 שנה שלא ידעו שקיימות.</p><figcaption><div class="stars">★★★★★</div><b>משה גולדשטיין</b></figcaption></figure>
     </div>
   </div>
 </section>
 
 <section class="sec">
   <div class="wrap gift">
-    <div>
+    <div class="rv">
       <div class="kicker">מתנה שאין לאף אחד</div>
-      <h2>חוגגים להורים יום הולדת?</h2>
-      <p class="lead" style="margin-top:12px">יש להם הכל? תנו להם את הזיכרונות שלהם, מסודרים ושמורים. אלבום דיגיטלי עם תמונות מכל התקופות הוא מתנה מרגשת לסבא וסבתא, ועותק לכל אחד מהנכדים.</p>
-      <p style="margin-top:20px"><a class="btn btn-n" href="#contact">להזמנת מתנה</a></p>
+      <h2 style="margin-top:12px">חוגגים להורים יום הולדת?</h2>
+      <p class="lead" style="margin-top:16px">תנו להם את הזיכרונות שלהם, מסודרים ושמורים, ועותק לכל אחד מהנכדים.</p>
+      <p style="margin-top:26px"><a class="btn btn-navy" href="#contact">להזמנת מתנה</a></p>
     </div>
-    <div class="posters">
+    <div class="posters rv" style="--i:1">
       <img src="m/p80.jpg" alt="חוגגים לסבתא 80?" loading="lazy">
       <img src="m/pbday.jpg" alt="חוגגים להורים יום הולדת?" loading="lazy">
       <img src="m/mascot.jpg" alt="אלבום בקליק: המרת תמונות לקבצי מחשב" loading="lazy">
@@ -374,82 +404,77 @@ footer b{color:#fff}
   </div>
 </section>
 
-<section class="sec cream" id="reviews">
+<section class="sec cream">
   <div class="wrap">
-    <div class="head c"><div class="kicker">לקוחות ממליצים</div><h2>״פשוט הצלתם לנו את הזיכרונות״</h2></div>
-    <div class="revs">
-      <div class="rev"><p>יש לי כמעט 600 שקופיות שצילמתי בארץ ובאמריקה בשנות ה־70 וה־80. העברתי אותן לאלבום בקליק וקיבלתי חזרה תוך כ־10 ימים קובץ מעולה של הגרסה הדיגיטלית. ממליץ מאוד.</p><b>מיכאל גרבר</b></div>
-      <div class="rev"><p>קיבלתי את הכל בחזרה בצורה מסודרת ביותר, גם בלינק וגם בדיסק און קי, כולל סרטי וידאו ו־DVD. ממש כיף שנוכל לראות את התמונות בלי שהאלבומים ייקרעו. הצוות אדיב ומסביר הכל בסבלנות.</p><b>אידה ריינמן</b></div>
-      <div class="rev"><p>תודה על המרת השקופיות שלי לפורמט דיגיטלי. כבר הפצתי אותן בין קרובי משפחה שהתרגשו מאוד מתמונות משפחתיות בנות 40 שנה ויותר, שהם לא ידעו על קיומן.</p><b>משה גולדשטיין</b></div>
+    <div class="head rv"><div class="kicker">מהמעבדה שלנו</div><h2><span class="ul">ארגזים שהגיעו אלינו לסריקה</span></h2><p class="lead">מוצגות ברזולוציה מוגבלת, לשמירה על פרטיות הלקוחות.</p></div>
+    <div class="pl photo rv">
+      <div><div class="pl-main"><img id="lbI" src="lab/l01.jpg" alt="ארגזי אלבומים שהגיעו לסריקה" draggable="false"></div><div class="pl-cap"><b>מהמעבדה של אלבום בקליק</b><span id="lbN"></span></div></div>
+      <div class="thumbs" id="lbTh" aria-label="בחירת תמונה"></div>
     </div>
   </div>
 </section>
 
 <section class="sec" id="faq">
   <div class="wrap">
-    <div class="head c"><div class="kicker">שאלות ותשובות</div><h2>מה שכולם שואלים</h2></div>
+    <div class="head c rv"><div class="kicker">שאלות ותשובות</div><h2><span class="ul">מה שכולם שואלים</span></h2></div>
     <div class="faq">
-      <details><summary>למה לסרוק תמונות שכבר נמצאות באלבום?</summary><p>אלבומים נפגעים מבלאי, מלחות ומהזמן. סריקה שומרת את התמונות לתמיד, מאפשרת לראות אותן מכל מקום ולשתף את כל המשפחה, ולשלב אותן באירועים משפחתיים.</p></details>
-      <details><summary>אפשר לסרוק כל תמונה ומסמך?</summary><p>כן. יש לנו ציוד מקצועי שמתאים גם לתמונות ישנות בשחור לבן ולתמונות שמתפוררות. אנחנו גם סורקים תמונות ישנות עבור מוזיאונים.</p></details>
-      <details><summary>מה איכות הסריקה?</summary><p>אנחנו עובדים עם סורקים מקצועיים של Kodak וחברות נוספות, שעולים עשרות אלפי שקלים. חשוב לדעת שהסריקה משקפת את המקור: תמונה מטושטשת תיראה מטושטשת גם בסריקה. לתמונות שדהו יש שחזור צבע ללא עלות.</p></details>
-      <details><summary>איך מקבלים את התמונות?</summary><p>בקישור להורדה ובדיסק און קי ממותג. החומר המקורי חוזר אליכם עם השליח.</p></details>
-      <details><summary>אפשר לקבל כמה עותקים?</summary><p>בהחלט, ואפילו רצוי. עותק לכל אחד מבני המשפחה הוא מתנה מרגשת. בקשו מהנציג לשכפל עבורכם עותקים נוספים.</p></details>
-      <details><summary>כמה זמן זה לוקח?</summary><p>תלוי בכמות החומר. לקוחות מספרים שקיבלו מאות שקופיות סרוקות תוך כעשרה ימים. נציג יעדכן אתכם בזמנים כשהחומר מגיע.</p></details>
+      <details class="rv"><summary>למה לסרוק תמונות שכבר באלבום?</summary><p>אלבומים נפגעים מבלאי, מלחות ומהזמן. סריקה שומרת את התמונות לתמיד ומאפשרת לשתף את כל המשפחה.</p></details>
+      <details class="rv"><summary>מה איכות הסריקה?</summary><p>אנחנו עובדים עם סורקים מקצועיים של Kodak. הסריקה משקפת את המקור, ולתמונות שדהו יש שחזור צבע ללא עלות.</p></details>
+      <details class="rv"><summary>איך מקבלים את התמונות?</summary><p>בקישור להורדה ובדיסק און קי ממותג. החומר המקורי חוזר אליכם עם השליח.</p></details>
+      <details class="rv"><summary>אפשר לקבל כמה עותקים?</summary><p>בהחלט. עותק לכל אחד מבני המשפחה הוא מתנה מרגשת.</p></details>
+      <details class="rv"><summary>כמה זמן זה לוקח?</summary><p>תלוי בכמות. לקוחות קיבלו מאות שקופיות סרוקות תוך כעשרה ימים. נעדכן אתכם כשהחומר מגיע.</p></details>
     </div>
   </div>
 </section>
 
-<section class="sec cream">
-  <div class="wrap">
-    <div class="fam">
-      <div class="lgs"><a href="/" target="_blank" rel="noopener"><img src="m/softcopy.png" alt="סופט קופי"></a><img src="m/mod.png" alt="משרד הביטחון"></div>
-      <div><h3>חברת בת של <a href="/" target="_blank" rel="noopener">סופט קופי</a></h3><p>אלבום בקליק שייכת לקבוצת <a href="/" target="_blank" rel="noopener">סופט קופי</a>, חברת סריקה וארכיון דיגיטלי ללקוחות עסקיים וספק מורשה של משרד הביטחון. אותה מקצועיות, אותה הקפדה על פרטיות, לזיכרונות שלכם.</p></div>
-    </div>
+<section class="sec cream" style="padding-block:56px">
+  <div class="wrap fam rv">
+    <a href="../" target="_blank" rel="noopener"><img src="m/softcopy.png" alt="סופט קופי"></a>
+    <p>אלבום בקליק היא חלק מקבוצת <a href="../" target="_blank" rel="noopener">סופט קופי</a>, חברת סריקה וארכיון דיגיטלי וספק מורשה של משרד הביטחון. אותה מקצועיות ואותה הקפדה על פרטיות, לזיכרונות שלכם.</p>
   </div>
 </section>
 
 <section class="sec navy" id="contact">
   <div class="wrap ct">
-    <div>
+    <div class="rv">
       <div class="kicker">צור קשר</div>
-      <h2 style="color:#fff;margin-top:8px">בואו נעשה סדר בזיכרונות</h2>
-      <p class="lead" style="margin-top:12px">השאירו פרטים ונחזור אליכם עם הצעת מחיר מתאימה, או התקשרו עכשיו.</p>
+      <h2 style="color:#fff;margin-top:12px">בואו נעשה סדר בזיכרונות</h2>
+      <p class="lead" style="margin-top:14px">ענו על שלוש שאלות קצרות ונחזור אליכם עם הצעת מחיר. או פשוט התקשרו.</p>
       <div class="ci">
-        <div><small>טלפון</small><b class="ltr">03-9369999</b></div>
-        <div><small>דוא״ל</small><b class="ltr">Info@softcopy.co.il</b></div>
-        <div><small>אתר</small><b class="ltr">albumbclick.co.il</b></div>
+        <a href="tel:039369999"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A16 16 0 013 6a2 2 0 012-2"/></svg><span><small>טלפון</small><b class="ltr">03-9369999</b></span></a>
+        <a href="mailto:Info@softcopy.co.il"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg><span><small>דוא״ל</small><b class="ltr">Info@softcopy.co.il</b></span></a>
       </div>
     </div>
-    <form id="f" novalidate>
-      <h3>השארת פרטים</h3>
-      <label for="fn">שם מלא<input id="fn" required autocomplete="name"></label>
-      <label for="fp">טלפון<input id="fp" required inputmode="tel" autocomplete="tel" class="ltr" style="text-align:right"></label>
-      <fieldset style="border:0;padding:0;margin:0;display:grid;gap:8px"><legend style="font-weight:700;margin-bottom:6px">מה תרצו לסרוק?</legend>
-        <div class="chk"><label><input type="checkbox" id="c1"> אלבומים</label><label><input type="checkbox" id="c2"> תמונות בתפזורת</label><label><input type="checkbox" id="c3"> שקופיות</label><label><input type="checkbox" id="c4"> נגטיבים</label><label><input type="checkbox" id="c5"> קלטות וידאו</label><label><input type="checkbox" id="c6"> עיצוב אלבום</label></div>
-      </fieldset>
-      <label for="fm">כמה בערך? (למשל: 10 אלבומים, 300 שקופיות)<textarea id="fm" rows="3"></textarea></label>
-      <button class="btn btn-o" type="submit">לקבלת הצעת מחיר</button>
-      <div class="ok" id="ok" hidden></div>
-    </form>
+    <div class="wiz rv" style="--i:1" id="wiz" aria-live="polite">
+      <div class="prog" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+      <div id="wq"></div>
+      <div class="nav"><button class="back" type="button" id="wBack" hidden>→ חזרה</button><button class="btn btn-gold" type="button" id="wNext">המשך</button></div>
+    </div>
   </div>
 </section>
 </main>
 
-<footer><div class="wrap"><b>אלבום בקליק</b> · מקבוצת <a href="/" target="_blank" rel="noopener" style="color:#fff">סופט קופי</a> · <span class="ltr">03-9369999</span> · <span class="ltr">Info@softcopy.co.il</span></div></footer>
+<footer><div class="wrap"><b>אלבום בקליק</b> · מבית <a href="../" target="_blank" rel="noopener">סופט קופי</a> · <a class="ltr" href="tel:039369999">03-9369999</a> · <span class="ltr">Info@softcopy.co.il</span></div></footer>
 
-<div class="bar"><a class="btn btn-n" href="tel:039369999">📞 התקשרו</a><a class="btn btn-o" href="#contact">הצעת מחיר</a></div>
+<div class="bar"><a class="btn btn-navy" href="tel:039369999">📞 התקשרו</a><a class="btn btn-gold" href="#contact">הצעת מחיר</a></div>
 
 <script>
-// hero sound
-const hv=document.getElementById('heroV'),snd=document.getElementById('snd');
-snd.onclick=()=>{hv.muted=!hv.muted;snd.textContent=hv.muted?'🔊 הפעלת קול':'🔇 השתקה';hv.play().catch(()=>{})};
+// larger text toggle (remembered per viewer)
+(function(){const b=document.getElementById('bigT'),h=document.documentElement;let on=false;try{on=localStorage.getItem('ab-big')==='1'}catch(e){}
+ const set=v=>{on=v;h.classList.toggle('big',v);b.setAttribute('aria-pressed',v);try{localStorage.setItem('ab-big',v?'1':'0')}catch(e){}};set(on);b.onclick=()=>set(!on)})();
 
-function gallery({main,thumbs,items,render,interval,onEnd}){
+// reveal on scroll
+(function(){const els=[...document.querySelectorAll('.rv')];
+ if(!('IntersectionObserver' in window)){els.forEach(e=>e.classList.add('in'));return}
+ const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12,rootMargin:'0px 0px -6% 0px'});
+ els.forEach(e=>io.observe(e))})();
+
+function gallery({thumbs,items,render,interval}){
  let cur=0,hold=0;
  thumbs.innerHTML=items.map((it,i)=>`<button type="button" class="th" data-i="${i}" aria-label="${it.t}"><img src="${it.th}" alt="" loading="lazy" draggable="false"></button>`).join('');
  function show(i,user){cur=(i+items.length)%items.length;render(items[cur],cur,user);
   thumbs.querySelectorAll('.th').forEach((b,k)=>b.classList.toggle('on',k===cur));
-  const b=thumbs.children[cur];if(b&&user!==undefined){const tr=thumbs.getBoundingClientRect(),br=b.getBoundingClientRect();if(br.top<tr.top||br.bottom>tr.bottom)thumbs.scrollTop+=br.top-tr.top-8}
+  const b=thumbs.children[cur];if(b&&user!==undefined){const tr=thumbs.getBoundingClientRect(),br=b.getBoundingClientRect();if(br.top<tr.top||br.bottom>tr.bottom)thumbs.scrollTop+=br.top-tr.top-8;if(br.left<tr.left||br.right>tr.right)thumbs.scrollLeft+=br.left-tr.left-8}
   if(user)hold=Date.now()+8000}
  thumbs.addEventListener('click',e=>{const b=e.target.closest('.th');if(b)show(+b.dataset.i,true)});
  if(interval)setInterval(()=>{if(Date.now()>hold)show(cur+1,false)},interval);
@@ -458,23 +483,46 @@ function gallery({main,thumbs,items,render,interval,onEnd}){
 const CAPS=['קיץ של מפגשים משפחתיים','ראש השנה','אלבומים שמחכים בארגז','תשליך של זיכרונות','יום העצמאות','אלבום שחוזר לחיים','יום הזיכרון','מהמדף אל המסך','האלבום מדבר','איפה עושים סדר לפסח?','סיפור מהסלון','בר מצווה 1982','סריקת אלבומים ושקופיות','הילדים מוצאים מזוודה','גם סרטים ישנים','סבתא ממליצה','מהקופסה לטלוויזיה','שקופיות שמתעוררות','תמונות שחוזרות לחיים','מסגרות שמספרות','אלבומים על הרצפה','סיפורים לדורות הבאים','צריכים לפנות ארגזים?','חבל על הזכרונות','סבתא מספרת','אלבומים שמעלים אבק?','מתנה לסבא וסבתא','מהארגז למחשב','איסוף עד הבית','כמו בפרסומת בטלוויזיה','הדיסק און קי שאוסף זכרונות','מהאלבום לדיסק און קי'];
 (function(){
  const v=document.getElementById('plV'),T=document.getElementById('plT'),N=document.getElementById('plN');
- const items=CAPS.map((c,i)=>{const n=String(i+1).padStart(2,'0');return {src:`v/v${n}.mp4`,th:`v/v${n}.jpg`,t:c}});
+ const items=[{src:'v/feat.mp4',th:'v/feat.jpg',t:'האלבומים בארון הפכו לנושא כבד?'}].concat(CAPS.map((c,i)=>{const n=String(i+1).padStart(2,'0');return {src:`v/v${n}.mp4`,th:`v/v${n}.jpg`,t:c}}));
  let vis=false;
- const g=gallery({main:v,thumbs:document.getElementById('plTh'),items,render:(it,i,user)=>{v.src=it.src;v.poster=it.th;T.textContent=it.t;N.textContent=(i+1)+' / '+items.length;if(vis||user)v.play().catch(()=>{})}});
+ const g=gallery({thumbs:document.getElementById('plTh'),items,render:(it,i,user)=>{v.src=it.src;v.poster=it.th;T.textContent=it.t;N.textContent=(i+1)+' / '+items.length;if(vis||user)v.play().catch(()=>{})}});
  v.addEventListener('ended',()=>g.show(g.cur+1,false));
  if('IntersectionObserver' in window)new IntersectionObserver(es=>es.forEach(e=>{vis=e.isIntersecting;if(vis)v.play().catch(()=>{});else v.pause()}),{threshold:.4}).observe(v);
 })();
 (function(){
  const im=document.getElementById('lbI'),N=document.getElementById('lbN');
  const items=Array.from({length:21},(_,i)=>{const n=String(i+1).padStart(2,'0');return {src:`lab/l${n}.jpg`,th:`lab/l${n}.jpg`,t:'תמונה '+(i+1)}});
- gallery({main:im,thumbs:document.getElementById('lbTh'),items,interval:3500,render:(it,i)=>{im.classList.remove('f');void im.offsetWidth;im.src=it.src;im.classList.add('f');N.textContent=(i+1)+' / '+items.length}});
+ gallery({thumbs:document.getElementById('lbTh'),items,interval:3800,render:(it,i)=>{im.classList.remove('f');void im.offsetWidth;im.src=it.src;im.classList.add('f');N.textContent=(i+1)+' / '+items.length}});
  document.querySelector('.photo').addEventListener('contextmenu',e=>e.preventDefault());
 })();
-document.querySelectorAll('video').forEach(x=>x.addEventListener('play',()=>document.querySelectorAll('video').forEach(o=>{if(o!==x&&o!==hv)o.pause()})));
-document.getElementById('f').addEventListener('submit',e=>{e.preventDefault();const ok=document.getElementById('ok');const miss=['fn','fp'].map(id=>document.getElementById(id)).filter(i=>!i.value.trim());
- if(miss.length){ok.hidden=false;ok.textContent='חסרים שם וטלפון. מלאו אותם ושלחו שוב.';miss[0].focus();return}
- ok.hidden=false;ok.innerHTML='תודה! נחזור אליכם בהקדם. אפשר גם להתקשר: <b class="ltr">03-9369999</b>'});
-</script>
 
+// contact wizard: one question at a time
+(function(){
+ const box=document.getElementById('wq'),next=document.getElementById('wNext'),back=document.getElementById('wBack'),bars=[...document.querySelectorAll('.wiz .prog i')];
+ const KINDS=['אלבומים','תמונות בתפזורת','שקופיות','נגטיבים','קלטות וידאו','עיצוב אלבום'];
+ const d={name:'',phone:'',kinds:[],qty:''}; let s=0;
+ const Q=[
+  ()=>`<div class="q"><label for="q1">איך קוראים לכם?</label><input id="q1" autocomplete="name" value="${d.name}" placeholder="שם מלא"></div>`,
+  ()=>`<div class="q"><label for="q2">לאיזה טלפון נחזור?</label><input id="q2" inputmode="tel" autocomplete="tel" class="ltr" style="text-align:right" value="${d.phone}" placeholder="050-0000000"></div>`,
+  ()=>`<div class="q"><fieldset><legend>מה תרצו לסרוק?</legend><div class="chips">${KINDS.map(k=>`<button type="button" aria-pressed="${d.kinds.includes(k)}">${k}</button>`).join('')}</div><small style="color:var(--muted)">אפשר לבחור כמה</small></fieldset></div>`,
+  ()=>`<div class="q"><label for="q4">כמה בערך?</label><textarea id="q4" rows="3" placeholder="למשל: 10 אלבומים ו־300 שקופיות">${d.qty}</textarea><small style="color:var(--muted)">לא חייבים לדעת בדיוק</small></div>`
+ ];
+ function draw(){box.innerHTML=Q[s]();bars.forEach((b,i)=>b.classList.toggle('on',i<=s));back.hidden=s===0;next.textContent=s===Q.length-1?'שליחה':'המשך';
+  const f=box.querySelector('input,textarea');if(f&&draw.ready)f.focus({preventScroll:true});
+  box.querySelectorAll('.chips button').forEach(b=>b.onclick=()=>{const k=b.textContent,on=d.kinds.includes(k);d.kinds=on?d.kinds.filter(x=>x!==k):d.kinds.concat(k);b.setAttribute('aria-pressed',!on)});
+  box.querySelectorAll('input').forEach(i=>i.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();go()}}))}
+ function err(t){let e=box.querySelector('.err');if(!e){e=document.createElement('div');e.className='err';box.firstChild.appendChild(e)}e.textContent=t}
+ function go(){
+  if(s===0){d.name=box.querySelector('input').value.trim();if(!d.name)return err('נשמח לדעת איך לפנות אליכם')}
+  if(s===1){d.phone=box.querySelector('input').value.trim();if(d.phone.replace(/\D/g,'').length<9)return err('נראה שחסרות ספרות במספר')}
+  if(s===3){d.qty=box.querySelector('textarea').value.trim();
+   bars.forEach(b=>b.classList.add('on'));next.hidden=true;back.hidden=true;
+   box.innerHTML=`<div class="done q"><div class="ok"><svg viewBox="0 0 52 52" width="46" height="46"><path d="M14 27l8 8 16-18" stroke="#C8902A" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div><h3>תודה, ${d.name.replace(/[<>&"]/g,'')}!</h3><p style="color:var(--muted)">נחזור אליכם בהקדם. אפשר גם להתקשר: <a class="ltr" href="tel:039369999"><b>03-9369999</b></a></p></div>`;return}
+  s++;draw()}
+ next.onclick=go; back.onclick=()=>{if(s>0){s--;draw()}};
+ draw();draw.ready=true;
+})();
+document.querySelectorAll('video').forEach(x=>x.addEventListener('play',()=>document.querySelectorAll('video').forEach(o=>{if(o!==x)o.pause()})));
+</script>
 </body>
 </html>
