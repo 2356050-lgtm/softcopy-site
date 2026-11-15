@@ -61,7 +61,7 @@ a{color:inherit}
 /* reveal on scroll */
 .rv{opacity:0;transform:translateY(26px);transition:opacity .9s ease,transform .9s cubic-bezier(.2,.8,.2,1);transition-delay:calc(var(--i,0)*110ms)}
 .rv.in{opacity:1;transform:none}
-@media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}.kb,.float{animation:none!important}.ul::after{transform:scaleX(1);transition:none}}
+@media (prefers-reduced-motion:reduce){.float2{animation:none!important}.rv{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}.kb,.float{animation:none!important}.ul::after{transform:scaleX(1);transition:none}}
 
 /* header */
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:40;background:var(--paper)}
@@ -92,7 +92,7 @@ nav a:hover{background:var(--gold-s)}
 .ticks li{display:flex;align-items:center;gap:8px}
 .ticks li::before{content:"✓";display:grid;place-items:center;width:24px;height:24px;border-radius:50%;background:rgba(233,207,152,.18);color:var(--gold-l);font-size:.9rem}
 /* album-style framed photos with corner mounts */
-.art{position:relative;min-height:clamp(380px,46vw,560px)}
+.art{position:relative;display:grid;place-items:center;padding-block:10px}
 .frame{position:absolute;background:#FBF7EF;padding:14px 14px 18px;box-shadow:0 34px 60px -26px rgba(0,0,0,.75);border-radius:4px}
 .frame .ph{overflow:hidden;position:relative}
 .frame img{width:100%;height:100%;object-fit:cover}
@@ -101,16 +101,22 @@ nav a:hover{background:var(--gold-s)}
 .frame i:nth-of-type(2){top:6px;left:6px}
 .frame i:nth-of-type(3){bottom:10px;left:6px;transform:rotate(-90deg)}
 .frame i:nth-of-type(4){bottom:10px;right:6px;transform:rotate(180deg)}
-.f1{inset:0 6% 8% 0;transform:rotate(-2.5deg)}
-.f1 .ph{height:100%}
-.f2{width:40%;aspect-ratio:3/4;left:-2%;bottom:-2%;transform:rotate(6deg);padding:10px 10px 34px}
+.fv{position:relative;margin:0 auto;width:min(330px,74vw);transform:rotate(-1.5deg);padding:12px 12px 16px;z-index:2}
+.fv .ph{aspect-ratio:9/16;background:#000}
+.fv video{width:100%;height:100%;object-fit:cover;display:block}
+.snd{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);background:rgba(15,25,40,.72);color:#fff;border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:9px 18px;font:inherit;font-weight:700;font-size:1.02rem;cursor:pointer;white-space:nowrap;min-height:46px}
+.f3{width:34%;aspect-ratio:1;right:-2%;top:6%;transform:rotate(7deg);padding:9px 9px 26px}
+.f3 .ph{height:100%}
+.float2{animation:fl2 8s ease-in-out infinite alternate}
+@keyframes fl2{to{transform:rotate(3deg) translateY(10px)}}
+.f2{width:36%;aspect-ratio:3/4;left:-2%;bottom:4%;transform:rotate(-6deg);padding:10px 10px 34px}
 .f2 .ph{height:100%;filter:sepia(.25)}
 .f2 b{position:absolute;bottom:6px;inset-inline:0;text-align:center;font-family:var(--f-display);color:#5B4A30;font-weight:500;font-size:1rem}
 .kb{animation:kb 22s ease-in-out infinite alternate}
 @keyframes kb{from{transform:scale(1.02)}to{transform:scale(1.14) translate(-2%,1%)}}
 .float{animation:fl 7s ease-in-out infinite alternate}
 @keyframes fl{to{transform:rotate(4deg) translateY(-12px)}}
-@media (max-width:900px){.hero-g{grid-template-columns:1fr}.art{min-height:0;aspect-ratio:1/0.95;max-width:560px;width:100%;justify-self:center}}
+@media (max-width:900px){.hero-g{grid-template-columns:1fr}.art{max-width:560px;width:100%;justify-self:center}.f2,.f3{width:30%}}
 
 /* trust */
 .trust{background:var(--navy-dd);color:#E9E1D2}
@@ -121,31 +127,85 @@ nav a:hover{background:var(--gold-s)}
 .trust span{font-size:1.02rem;color:#C9D2DE}
 
 
-/* services */
-.svcs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:26px}
-.sv{background:var(--card);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;display:grid;grid-template-rows:auto 1fr;box-shadow:var(--shadow);transition:transform .35s,box-shadow .35s}
-.sv:hover{transform:translateY(-6px);box-shadow:0 34px 60px -30px rgba(20,42,71,.55)}
-.sv .im{overflow:hidden}
-.sv img{width:100%;aspect-ratio:16/10;object-fit:cover;transition:transform .8s}
-.sv:hover img{transform:scale(1.06)}
-.sv .b{padding:22px 24px 24px;display:grid;gap:10px;align-content:start}
-.sv p{color:var(--muted)}
-.pr{justify-self:start;margin-top:4px;color:var(--gold-d);font-family:var(--f-display);font-weight:700;font-size:1.25rem}
-.free{display:flex;gap:20px;align-items:center;background:var(--gold-s);border:1px solid var(--gold-l);border-radius:var(--r);padding:24px 28px;margin-top:30px}
+/* more products */
+.prods{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+.pd{display:grid;gap:12px;align-content:start;text-decoration:none;color:#F3ECE0;background:rgba(255,255,255,.05);border:1px solid rgba(233,207,152,.25);border-radius:var(--r);padding:30px 28px;transition:transform .3s,background .3s}
+.pd:hover{transform:translateY(-6px);background:rgba(255,255,255,.09)}
+.pd .ic{width:64px;height:64px;border-radius:18px;background:rgba(233,207,152,.14);display:grid;place-items:center}
+.pd svg{width:36px;height:36px;fill:none;stroke:var(--gold-l);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.pd h3{color:#fff;font-size:1.6rem}
+.pd p{color:#CBD5E2}
+.pd .go{color:var(--gold-l);font-weight:800;margin-top:4px}
+@media (max-width:900px){.prods{grid-template-columns:1fr}}
+/* legacy: digital asset */
+.legacy{padding-block:clamp(56px,7vw,90px)}
+.lg-g{display:grid;grid-template-columns:.8fr 1.2fr;gap:44px;align-items:start}
+.lg-g>*{min-width:0}
+.lg-l{list-style:none;padding:0;margin:26px 0 0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.lg-l li{border-top:2px solid var(--gold);padding-top:14px;color:var(--muted)}
+.lg-l b{display:block;font-family:var(--f-display);font-size:1.3rem;color:var(--ink);margin-bottom:4px}
+@media (max-width:900px){.lg-g{grid-template-columns:1fr;gap:16px}.lg-l{grid-template-columns:1fr}}
+/* services: album prints list */
+.svl{display:grid;grid-template-columns:1fr 1fr;gap:10px 64px}
+.si{display:grid;grid-template-columns:150px 1fr;gap:28px;align-items:center;padding:26px 0;border-bottom:1px solid var(--line)}
+.si .print{margin:0;background:#fff;padding:8px 8px 22px;box-shadow:0 18px 30px -18px rgba(20,42,71,.55),0 2px 6px rgba(0,0,0,.08);transform:rotate(var(--r,-2deg));transition:transform .5s cubic-bezier(.2,.8,.2,1)}
+.si .print img{width:100%;aspect-ratio:1;object-fit:cover}
+.si:hover .print{transform:rotate(0) scale(1.05)}
+.si h3{font-size:1.55rem}
+.si p{color:var(--muted);margin-top:4px}
+.pr{display:inline-block;margin-top:8px;color:var(--gold-d);font-family:var(--f-display);font-weight:700;font-size:1.25rem}
+.free{display:flex;gap:20px;align-items:center;background:var(--gold-s);border:1px solid var(--gold-l);border-radius:var(--r);padding:24px 28px;margin-top:40px}
 .free svg{flex:0 0 52px}
 .free b{font-family:var(--f-display);font-size:1.5rem;color:var(--navy)}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .free b{color:var(--gold-l)}}
-@media (max-width:900px){.svcs{grid-template-columns:1fr 1fr}}
-@media (max-width:600px){.svcs{grid-template-columns:1fr}.free{flex-direction:column;text-align:center}}
+@media (max-width:900px){.svl{grid-template-columns:1fr}}
+@media (max-width:520px){.si{grid-template-columns:108px 1fr;gap:18px;padding:20px 0}.si h3{font-size:1.3rem}.free{flex-direction:column;text-align:center}}
 
-/* how: timeline */
-.steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:22px;list-style:none;padding:0;margin:0;position:relative}
-.steps::before{content:"";position:absolute;top:38px;inset-inline:12%;height:2px;background:repeating-linear-gradient(90deg,var(--gold) 0 10px,transparent 10px 18px);opacity:.6}
-.steps li{display:grid;gap:10px;justify-items:center;text-align:center;position:relative}
-.steps .n{width:76px;height:76px;border-radius:50%;background:var(--card);border:2px solid var(--gold);color:var(--navy);display:grid;place-items:center;font-family:var(--f-display);font-weight:900;font-size:2rem;box-shadow:0 0 0 8px var(--cream)}
-.steps p{color:var(--muted);max-width:26ch}
-@media (max-width:900px){.steps{grid-template-columns:1fr 1fr;row-gap:40px}.steps::before{display:none}}
-@media (max-width:520px){.steps{grid-template-columns:1fr}.steps li{grid-template-columns:76px 1fr;justify-items:start;text-align:start;column-gap:18px}.steps li .n{grid-row:span 2}}
+/* how: animated, narrated walkthrough */
+.hw{background:var(--card);border:1px solid var(--line);border-radius:28px;box-shadow:var(--shadow);overflow:hidden}
+.hw-g{display:grid;grid-template-columns:1.1fr 1fr;min-height:420px}
+.hw-g>*{min-width:0}
+.hw-art{background:linear-gradient(160deg,#F7EFDF,#EADBC0);display:grid;place-items:center;padding:20px;position:relative}
+.hw-art svg{width:100%;max-width:520px;height:auto}
+.hw-txt{padding:clamp(26px,4vw,48px);display:grid;align-content:center;gap:14px}
+.hw-n{font-family:var(--f-display);font-size:4.2rem;line-height:1;color:var(--gold);font-weight:900;opacity:.9}
+.hw-txt h3{font-size:clamp(1.8rem,3.4vw,2.4rem)}
+.hw-txt p{color:var(--muted);font-size:1.28rem}
+.hw-txt h3,.hw-txt p,.hw-n{animation:qin .6s cubic-bezier(.2,.8,.2,1) both}
+.hw-txt p{animation-delay:.12s}
+.hw-ctl{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:10px}
+.hw-arrow{width:56px;height:56px;border-radius:50%;border:2px solid var(--line);background:var(--paper);color:var(--ink);font-size:1.5rem;cursor:pointer;display:grid;place-items:center}
+.hw-play.on{background:var(--navy);color:#fff}
+.hw-dots{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line)}
+.hw-dots button{font:inherit;font-weight:700;font-size:1.05rem;color:var(--muted);background:none;border:0;padding:18px 10px 20px;cursor:pointer;position:relative;display:flex;gap:10px;align-items:center;justify-content:center}
+.hw-dots button+button{border-inline-start:1px solid var(--line)}
+.hw-dots button b{display:grid;place-items:center;width:34px;height:34px;border-radius:50%;border:2px solid var(--gold);color:var(--navy);font-family:var(--f-display)}
+.hw-dots button.on{color:var(--ink);background:var(--gold-s)}
+.hw-dots button.on b,.hw-dots button.done b{background:var(--gold);color:#fff;border-color:var(--gold)}
+.hw-dots button i{position:absolute;inset:auto 0 0 auto;height:4px;width:0;background:var(--gold)}
+.hw-dots button.on i{animation:hwp var(--d,6s) linear forwards}
+@keyframes hwp{to{width:100%}}
+@media (max-width:860px){.hw-g{grid-template-columns:1fr}.hw-art{min-height:260px}.hw-dots button span{display:none}}
+/* scene animations */
+.a-drop{animation:drop 1.1s cubic-bezier(.3,1.4,.5,1) both}.d1{animation-delay:.5s}.d2{animation-delay:1s}.d3{animation-delay:1.5s}.d4{animation-delay:2s}
+@keyframes drop{from{transform:translateY(-170px) rotate(-10deg);opacity:0}to{transform:none;opacity:1}}
+.a-flap{transform-box:fill-box;animation:flap 1s 2.8s ease both}.a-flap.r{transform-origin:right bottom}.a-flap.l{transform-origin:left bottom}
+@keyframes flap{to{transform:scaleY(-.2)}}
+.a-van{animation:van 6s ease-in-out infinite both}
+@keyframes van{0%{transform:translateX(-260px)}35%,55%{transform:translateX(0)}100%{transform:translateX(-260px)}}
+.a-box{animation:boxv 6s ease-in-out infinite both}
+@keyframes boxv{0%,34%{opacity:1;transform:none}44%{opacity:1;transform:translate(-40px,-6px)}46%,100%{opacity:0}}
+.a-beam{animation:beam 2.6s ease-in-out infinite alternate}
+@keyframes beam{from{transform:translateX(0)}to{transform:translateX(190px)}}
+.a-col{animation:col 5s ease-in-out infinite alternate}
+@keyframes col{0%,15%{filter:grayscale(1) sepia(.7) brightness(.9)}85%,100%{filter:none}}
+.a-sh{animation:sh 9s infinite}.s2{animation-delay:3s}.s3{animation-delay:6s}
+@keyframes sh{0%{opacity:0}4%,30%{opacity:1}34%,100%{opacity:0}}
+.a-heart{animation:hrt 3s ease-in infinite;transform-box:fill-box}.h2{animation-delay:1s}.h3{animation-delay:2s}
+@keyframes hrt{from{transform:translateY(0);opacity:0}20%{opacity:1}to{transform:translateY(-90px);opacity:0}}
+.a-usb{animation:usb 2.4s ease-in-out infinite alternate}
+@keyframes usb{to{transform:translateY(-8px) rotate(-4deg)}}
+@media (prefers-reduced-motion:reduce){.hw-art *{animation:none!important}}
 
 /* videos */
 .pl{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:22px;align-items:start}
@@ -174,10 +234,26 @@ nav a:hover{background:var(--gold-s)}
 .it .d{border-bottom:2px dotted rgba(233,207,152,.35);transform:translateY(-6px)}
 .it span{color:#F1EADD;font-weight:600}
 .it small{display:block;color:#A9B7C8;font-size:.95rem;font-weight:500}
-.it b{font-family:var(--f-display);font-size:1.7rem;color:#fff;white-space:nowrap;font-variant-numeric:tabular-nums}
-.it b em{font-style:normal;font-size:1rem;color:var(--gold-l);margin-inline-start:3px}
-.it.alb{grid-template-columns:84px auto 1fr auto}
-.it.alb img{width:78px;background:#fff;border-radius:8px;padding:4px;align-self:center}
+.it b{font-family:var(--f-display);font-size:1.7rem;color:#fff;white-space:nowrap;font-variant-numeric:tabular-nums;direction:ltr;unicode-bidi:isolate}
+.it b em{font-style:normal;font-size:1.05rem;color:var(--gold-l);margin-right:4px}
+.it.alb{grid-template-columns:104px auto 1fr auto;align-items:center}
+.bk{position:relative;width:96px;height:62px;padding:4px;border:0;border-radius:8px;background:#fff;cursor:zoom-in;perspective:500px;box-shadow:0 8px 18px -10px rgba(0,0,0,.6)}
+.bk img{width:100%;height:100%;object-fit:contain}
+.bk .cv{position:absolute;inset:0;border-radius:8px;background:linear-gradient(135deg,#2B5482,#1F3F63);transform-origin:right center;transform-style:preserve-3d;backface-visibility:hidden;box-shadow:inset -6px 0 0 rgba(0,0,0,.18);transition:transform 1.3s cubic-bezier(.4,.1,.2,1)}
+.bk .cv::after{content:"אלבום";position:absolute;inset:0;display:grid;place-items:center;color:var(--gold-l);font-family:var(--f-display);font-weight:700;font-size:.9rem}
+.mc.in .bk .cv{transform:rotateY(-170deg)}
+.mc.in .it:nth-child(3) .cv{transition-delay:.35s}.mc.in .it:nth-child(4) .cv{transition-delay:.7s}.mc.in .it:nth-child(5) .cv{transition-delay:1.05s}
+.mc.in .it:nth-child(2) .cv{transition-delay:.1s}
+.bk .zm{position:absolute;left:-8px;bottom:-8px;width:26px;height:26px;border-radius:50%;background:var(--gold);color:#231503;display:grid;place-items:center;font-size:.85rem;font-weight:800}
+.bk:hover{transform:scale(1.06)}
+.lbx{position:fixed;inset:0;z-index:60;background:rgba(10,18,30,.82);display:grid;place-items:center;padding:20px;backdrop-filter:blur(4px)}
+.lbx .bkb{position:relative;width:min(760px,92vw);aspect-ratio:520/220;background:#fff;border-radius:16px;padding:16px;perspective:1600px;box-shadow:0 40px 80px -30px #000}
+.lbx .bkb img{width:100%;height:100%;object-fit:contain}
+.lbx .bkb .cv{position:absolute;inset:0;border-radius:16px;background:linear-gradient(135deg,#2B5482,#1F3F63);transform-origin:right center;backface-visibility:hidden;animation:opn 1.4s .25s cubic-bezier(.4,.1,.2,1) forwards;display:grid;place-items:center;color:var(--gold-l);font-family:var(--f-display);font-size:2rem;font-weight:700}
+@keyframes opn{to{transform:rotateY(-172deg)}}
+.lbx .x{position:absolute;top:18px;left:18px;width:56px;height:56px;border-radius:50%;border:0;background:#fff;color:#111;font-size:1.6rem;cursor:pointer}
+.lbx p{color:#fff;text-align:center;margin-top:14px;font-size:1.15rem}
+@media (prefers-reduced-motion:reduce){.bk .cv,.lbx .cv{display:none}}
 .notes{margin-top:26px;display:grid;gap:10px;color:#CBD5E2;font-size:1.05rem;list-style:none;padding:0}
 .notes li{display:flex;gap:12px}
 .notes li::before{content:"✦";color:var(--gold-l);flex:0 0 auto}
@@ -189,7 +265,7 @@ nav a:hover{background:var(--gold-s)}
 .sz-list{list-style:none;padding:0;margin:12px 0 0;display:flex;flex-wrap:wrap;gap:8px}
 .sz-list li{background:rgba(255,255,255,.09);border-radius:999px;padding:4px 14px;direction:ltr}
 @media (max-width:900px){.menu{grid-template-columns:1fr}.sizes .sz{grid-template-columns:1fr}}
-@media (max-width:440px){.mc{padding:24px 18px 12px}.it.alb{grid-template-columns:64px auto 1fr auto}.it.alb img{width:58px}.it b{font-size:1.45rem}}
+@media (max-width:440px){.mc{padding:24px 18px 12px}.it.alb{grid-template-columns:78px auto 1fr auto}.bk{width:72px;height:48px}.it b{font-size:1.45rem}}
 
 /* reviews */
 .revs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:26px}
@@ -267,7 +343,7 @@ footer b,footer a{color:#fff}
   <div class="wrap">
     <a class="lg" href="#top" aria-label="אלבום בקליק"><img src="m/logo.png" alt="אלבום בקליק"></a>
     <nav aria-label="ניווט">
-      <a href="#services">מה סורקים</a><a href="#how">איך זה עובד</a><a href="#prices">מחירון</a><a href="#videos">סרטונים</a><a href="#reviews">ממליצים</a><a href="#contact">צור קשר</a>
+      <a href="#services">מה סורקים</a><a href="#how">איך זה עובד</a><a href="#prices">מחירון</a><a href="#videos">סרטונים</a><a href="#reviews">ממליצים</a><a href="#more">עוד מאיתנו</a><a href="#contact">צור קשר</a>
     </nav>
     <div class="tools">
       <button class="big-t" id="bigT" type="button" aria-pressed="false" title="הגדלת טקסט">א+</button>
@@ -282,16 +358,17 @@ footer b,footer a{color:#fff}
     <div>
       <div class="kicker rv">אלבום בקליק · מבית <a href="../" target="_blank" rel="noopener">סופט קופי</a></div>
       <h1 class="rv" style="--i:1">האלבומים בארון<span class="g">הפכו לנושא כבד?</span></h1>
-      <p class="sub rv" style="--i:2">אנחנו סורקים אלבומים, תמונות, שקופיות וקלטות וידאו, ומחזירים לכם את הזיכרונות מסודרים: לצפייה בטלוויזיה, לשיתוף עם הילדים והנכדים ולשמירה לדורות.</p>
+      <p class="sub rv" style="--i:2">אנחנו סורקים אלבומים, תמונות, שקופיות וקלטות וידאו, והופכים אותם ל<b style="color:#fff">נכס דיגיטלי</b> של המשפחה: ירושה שתעבור לילדים, לנכדים ולכל הדורות הבאים.</p>
       <div class="ctas rv" style="--i:3">
         <a class="btn btn-gold" href="tel:039369999"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A16 16 0 013 6a2 2 0 012-2"/></svg>התקשרו אלינו</a>
         <a class="btn btn-line" href="#contact">לקבלת הצעת מחיר</a>
       </div>
       <ul class="ticks rv" style="--i:4"><li>איסוף עד הבית</li><li>שחזור צבע ללא עלות</li><li>הכל חוזר אליכם</li></ul>
     </div>
-    <div class="art rv" style="--i:2" aria-hidden="true">
-      <div class="frame f1"><div class="ph"><img class="kb" src="m/ph3.jpg" alt=""></div><i></i><i></i><i></i><i></i></div>
-      <div class="frame f2 float"><div class="ph"><img src="m/old1.jpg" alt=""></div><b>זיכרונות לדורות</b></div>
+    <div class="art rv" style="--i:2">
+      <div class="frame fv"><div class="ph"><video id="heroV" src="v/feat.mp4" poster="v/feat.jpg" autoplay muted loop playsinline preload="auto"></video><button class="snd" id="snd" type="button">🔊 הפעלת קול</button></div><i></i><i></i><i></i><i></i></div>
+      <div class="frame f2 float" aria-hidden="true"><div class="ph"><img src="m/old1.jpg" alt=""></div><b>זיכרונות לדורות</b></div>
+      <div class="frame f3 float2" aria-hidden="true"><div class="ph"><img src="m/ph3.jpg" alt=""></div></div>
     </div>
   </div>
 </section>
@@ -301,16 +378,24 @@ footer b,footer a{color:#fff}
   <div class="rv" style="--i:1"><b>עד הבית</b><span>שליח הלוך וחזור</span></div>
 </div></div>
 
-<section class="sec" id="services">
+<section class="sec legacy">
+  <div class="wrap lg-g">
+    <div class="rv"><div class="kicker">נכס דיגיטלי</div><h2 style="margin-top:12px"><span class="ul">הירושה שתשאירו אחריכם</span></h2></div>
+    <div class="rv" style="--i:1"><p class="lead" style="max-width:none">האלבומים שלכם הם הסיפור של המשפחה. כשסורקים אותם, הם הופכים לנכס דיגיטלי: עותק לכל ילד ולכל נכד, שלא נקרע, לא דוהה ולא הולך לאיבוד. זו ירושה דיגיטלית שתעבור הלאה, לכל הדורות הבאים.</p>
+      <ul class="lg-l"><li><b>לא נקרע ולא דוהה</b>שמור לתמיד, גם בעוד 50 שנה</li><li><b>עותק לכל אחד</b>כל ילד ונכד מקבל את כל הזיכרונות</li><li><b>עובר מדור לדור</b>הסיפור של המשפחה נשאר במשפחה</li></ul></div>
+  </div>
+</section>
+
+<section class="sec cream" id="services">
   <div class="wrap">
     <div class="head c rv"><div class="kicker">מה סורקים?</div><h2><span class="ul">כל מה שמחכה בארון ובמגירה</span></h2><p class="lead">כל חומר נסרק בציוד המתאים לו, בעדינות ובקפידה.</p></div>
-    <div class="svcs">
-      <article class="sv rv"><div class="im"><img src="m/ph2.jpg" alt="אישה מעיינת באלבום תמונות" loading="lazy"></div><div class="b"><h3>אלבומי תמונות</h3><p>אלבומי כיסים ואלבומי דבק מכל התקופות.</p><span class="pr">מ־59 ₪ לאלבום</span></div></article>
-      <article class="sv rv" style="--i:1"><div class="im"><img src="m/old1.jpg" alt="תמונות ישנות" loading="lazy" style="object-position:center 30%"></div><div class="b"><h3>תמונות ומסמכים</h3><p>ערימות תמונות, תעודות ומסמכים משפחתיים.</p><span class="pr">1.4 ₪ לתמונה</span></div></article>
-      <article class="sv rv" style="--i:2"><div class="im"><img src="v/v13.jpg" alt="סריקת שקופיות" loading="lazy"></div><div class="b"><h3>שקופיות ונגטיבים</h3><p>כל שקופית מנוקה מאבק ונסרקת באיכות גבוהה.</p><span class="pr">מ־1.8 ₪</span></div></article>
-      <article class="sv rv"><div class="im"><img src="m/pvhs2.jpg" alt="המרת קלטות וידאו" loading="lazy" style="object-position:center 25%"></div><div class="b"><h3>קלטות וידאו וסלילים</h3><p>החתונה, הבר מצווה והטיולים, לצפייה בכל מכשיר.</p><span class="pr">69 ₪ לקלטת</span></div></article>
-      <article class="sv rv" style="--i:1"><div class="im"><img src="m/ph1.jpg" alt="סבתא ונכדים צופים בתמונות" loading="lazy"></div><div class="b"><h3>עיצוב אלבום מודפס</h3><p>אלבום מעוצב לאירוע או לתקופה, למזכרת.</p><span class="pr">לפי הצעת מחיר</span></div></article>
-      <article class="sv rv" style="--i:2"><div class="im"><img src="m/usb.jpg" alt="דיסק און קי של אלבום בקליק" loading="lazy" style="background:#fff;object-fit:contain"></div><div class="b"><h3>דיסק און קי ממותג</h3><p>הכל מסודר בתיקיות, עם עותקים לכל המשפחה.</p><span class="pr">כלול בהזמנה</span></div></article>
+    <div class="svl">
+      <article class="si rv"><figure class="print" style="--r:-3deg"><img src="m/ph2.jpg" alt="" loading="lazy"></figure><div><h3>אלבומי תמונות</h3><p>אלבומי כיסים ואלבומי דבק מכל התקופות.</p><span class="pr">מ־59 ₪ לאלבום</span></div></article>
+      <article class="si rv" style="--i:1"><figure class="print" style="--r:2.5deg"><img src="m/old1.jpg" alt="" loading="lazy" style="object-position:center 30%"></figure><div><h3>תמונות ומסמכים</h3><p>ערימות תמונות, תעודות ומכתבים משפחתיים.</p><span class="pr">1.4 ₪ לתמונה</span></div></article>
+      <article class="si rv"><figure class="print" style="--r:2deg"><img src="v/v14.jpg" alt="" loading="lazy"></figure><div><h3>שקופיות ונגטיבים</h3><p>כל שקופית מנוקה מאבק ונסרקת באיכות גבוהה.</p><span class="pr">מ־1.8 ₪</span></div></article>
+      <article class="si rv" style="--i:1"><figure class="print" style="--r:-2.5deg"><img src="m/vhs_c.jpg" alt="" loading="lazy"></figure><div><h3>קלטות וידאו וסלילים</h3><p>החתונה, הבר מצווה והטיולים, לצפייה בכל מסך.</p><span class="pr">69 ₪ לקלטת</span></div></article>
+      <article class="si rv"><figure class="print" style="--r:-2deg"><img src="m/ph1.jpg" alt="" loading="lazy"></figure><div><h3>עיצוב אלבום מודפס</h3><p>אלבום מעוצב לאירוע או לתקופה, למזכרת.</p><span class="pr">לפי הצעת מחיר</span></div></article>
+      <article class="si rv" style="--i:1"><figure class="print" style="--r:3deg"><img src="m/usb.jpg" alt="" loading="lazy" style="object-fit:contain;padding:8px"></figure><div><h3>דיסק און קי ממותג</h3><p>הכל מסודר בתיקיות, עם עותקים לכל המשפחה.</p><span class="pr">כלול בהזמנה</span></div></article>
     </div>
     <div class="free rv">
       <svg viewBox="0 0 52 52" aria-hidden="true"><circle cx="26" cy="26" r="24" fill="#C8902A"/><path d="M15 27l8 8 14-16" stroke="#fff" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -319,15 +404,18 @@ footer b,footer a{color:#fff}
   </div>
 </section>
 
-<section class="sec cream" id="how">
+<section class="sec" id="how">
   <div class="wrap">
-    <div class="head c rv"><div class="kicker">איך זה עובד?</div><h2><span class="ul">אתם אורזים. אנחנו עושים את השאר.</span></h2></div>
-    <ol class="steps">
-      <li class="rv"><span class="n">1</span><h3>אורזים בארגז</h3><p>בלי למיין ובלי לפרק כלום.</p></li>
-      <li class="rv" style="--i:1"><span class="n">2</span><h3>שליח עד הבית</h3><p>אוסף מכם ומחזיר בסוף.</p></li>
-      <li class="rv" style="--i:2"><span class="n">3</span><h3>סורקים ומשחזרים</h3><p>בציוד מקצועי, עם שחזור צבע.</p></li>
-      <li class="rv" style="--i:3"><span class="n">4</span><h3>מקבלים הכל</h3><p>בקישור ובדיסק און קי, יחד עם המקור.</p></li>
-    </ol>
+    <div class="head c rv"><div class="kicker">איך זה עובד?</div><h2><span class="ul">אתם אורזים. אנחנו עושים את השאר.</span></h2><p class="lead">ארבעה צעדים פשוטים. לחצו על "הפעלה עם קריינות" כדי לשמוע הסבר.</p></div>
+    <div class="hw rv">
+      <div class="hw-g">
+        <div class="hw-art" id="hwArt" aria-hidden="true"></div>
+        <div class="hw-txt"><div class="hw-n" id="hwN">1</div><h3 id="hwH"></h3><p id="hwP"></p>
+          <div class="hw-ctl"><button class="btn btn-gold hw-play" id="hwPlay" type="button">▶ הפעלה עם קריינות</button><button class="hw-arrow" id="hwPrev" type="button" aria-label="הצעד הקודם">→</button><button class="hw-arrow" id="hwNext" type="button" aria-label="הצעד הבא">←</button></div>
+        </div>
+      </div>
+      <div class="hw-dots" id="hwDots"></div>
+    </div>
   </div>
 </section>
 
@@ -347,18 +435,18 @@ footer b,footer a{color:#fff}
     <div class="menu">
       <div class="mc rv">
         <h3>אלבומי תמונות</h3>
-        <div class="it alb"><img src="m/alb1.png" alt="" loading="lazy"><span>אלבום קטן<small>עד 20 עמודים</small></span><i class="d"></i><b>59<em>₪</em></b></div>
-        <div class="it alb"><img src="m/alb2.png" alt="" loading="lazy"><span>אלבום ממוצע<small>עד 50 עמודים</small></span><i class="d"></i><b>159<em>₪</em></b></div>
-        <div class="it alb"><img src="m/alb3.png" alt="" loading="lazy"><span>אלבום גדול<small>עד 80 עמודים</small></span><i class="d"></i><b>299<em>₪</em></b></div>
-        <div class="it alb"><img src="m/alb4.png" alt="" loading="lazy"><span>אלבום ענק<small>מעל 80 עמודים</small></span><i class="d"></i><b>599<em>₪</em></b></div>
+        <div class="it alb"><button class="bk" type="button" data-src="m/alb1.png" aria-label="הגדלת ההמחשה"><img src="m/alb1.png" alt="" loading="lazy"><i class="cv"></i><span class="zm">⤢</span></button><span>אלבום קטן<small>עד 20 עמודים</small></span><i class="d"></i><b><em>₪</em>59</b></div>
+        <div class="it alb"><button class="bk" type="button" data-src="m/alb2.png" aria-label="הגדלת ההמחשה"><img src="m/alb2.png" alt="" loading="lazy"><i class="cv"></i><span class="zm">⤢</span></button><span>אלבום ממוצע<small>עד 50 עמודים</small></span><i class="d"></i><b><em>₪</em>159</b></div>
+        <div class="it alb"><button class="bk" type="button" data-src="m/alb3.png" aria-label="הגדלת ההמחשה"><img src="m/alb3.png" alt="" loading="lazy"><i class="cv"></i><span class="zm">⤢</span></button><span>אלבום גדול<small>עד 80 עמודים</small></span><i class="d"></i><b><em>₪</em>299</b></div>
+        <div class="it alb"><button class="bk" type="button" data-src="m/alb4.png" aria-label="הגדלת ההמחשה"><img src="m/alb4.png" alt="" loading="lazy"><i class="cv"></i><span class="zm">⤢</span></button><span>אלבום ענק<small>מעל 80 עמודים</small></span><i class="d"></i><b><em>₪</em>599</b></div>
       </div>
       <div class="mc rv" style="--i:1">
         <h3>תמונות, שקופיות ווידאו</h3>
-        <div class="it"><span>תמונה בתפזורת</span><i class="d"></i><b>1.4<em>₪</em></b></div>
-        <div class="it"><span>תמונה בגודל חריג</span><i class="d"></i><b>7<em>₪</em></b></div>
-        <div class="it"><span>שקופית</span><i class="d"></i><b>5<em>₪</em></b></div>
-        <div class="it"><span>נגטיב, לתמונה</span><i class="d"></i><b>1.8<em>₪</em></b></div>
-        <div class="it"><span>קלטת וידאו<small>עד 3 שעות</small></span><i class="d"></i><b>69<em>₪</em></b></div>
+        <div class="it"><span>תמונה בתפזורת</span><i class="d"></i><b><em>₪</em>1.4</b></div>
+        <div class="it"><span>תמונה בגודל חריג</span><i class="d"></i><b><em>₪</em>7</b></div>
+        <div class="it"><span>שקופית</span><i class="d"></i><b><em>₪</em>5</b></div>
+        <div class="it"><span>נגטיב, לתמונה</span><i class="d"></i><b><em>₪</em>1.8</b></div>
+        <div class="it"><span>קלטת וידאו<small>עד 3 שעות</small></span><i class="d"></i><b><em>₪</em>69</b></div>
       </div>
     </div>
     <details class="sizes rv"><summary>טבלת הגדלים: מה נחשב תמונה בגודל חריג?</summary>
@@ -391,13 +479,24 @@ footer b,footer a{color:#fff}
     <div class="rv">
       <div class="kicker">מתנה שאין לאף אחד</div>
       <h2 style="margin-top:12px">חוגגים להורים יום הולדת?</h2>
-      <p class="lead" style="margin-top:16px">תנו להם את הזיכרונות שלהם, מסודרים ושמורים, ועותק לכל אחד מהנכדים.</p>
+      <p class="lead" style="margin-top:16px">תנו להם את הזיכרונות שלהם כנכס דיגיטלי, מסודר ושמור, עם עותק לכל אחד מהנכדים.</p>
       <p style="margin-top:26px"><a class="btn btn-navy" href="#contact">להזמנת מתנה</a></p>
     </div>
     <div class="posters rv" style="--i:1">
       <img src="m/p80.jpg" alt="חוגגים לסבתא 80?" loading="lazy">
       <img src="m/pbday.jpg" alt="חוגגים להורים יום הולדת?" loading="lazy">
       <img src="m/mascot.jpg" alt="אלבום בקליק: המרת תמונות לקבצי מחשב" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<section class="sec navy" id="more">
+  <div class="wrap">
+    <div class="head c rv"><div class="kicker">עוד מבית אלבום בקליק</div><h2 style="color:#fff"><span class="ul">הזיכרונות שלכם, גם מכאן והלאה</span></h2><p class="lead">שירותים דיגיטליים שממשיכים לשמור על הסיפור של המשפחה.</p></div>
+    <div class="prods">
+      <a class="pd rv" href="https://pick-a-pick.albumbclick.co.il" target="_blank" rel="noopener"><span class="ic"><svg viewBox="0 0 48 48"><rect x="6" y="10" width="36" height="28" rx="4"/><path d="M6 30l10-9 9 8 6-5 11 9"/><circle cx="32" cy="18" r="3"/></svg></span><h3>Pick A Pic</h3><p>ציר הזמן של המשפחה: כל התמונות במקום אחד, ומצגת וסרטון מוכנים לכל אירוע.</p><span class="go">לאתר ←</span></a>
+      <a class="pd rv" style="--i:1" href="https://trip.albumbclick.co.il" target="_blank" rel="noopener"><span class="ic"><svg viewBox="0 0 48 48"><path d="M8 12l10-4 12 4 10-4v28l-10 4-12-4-10 4z"/><path d="M18 8v28M30 12v28"/></svg></span><h3>אלבום טיול אוטומטי</h3><p>כל המשתתפים מעלים תמונות, והאלבום מתעצב לבד: אלבום דיגיטלי מדפדף ואלבום מודפס.</p><span class="go">לאתר ←</span></a>
+      <a class="pd rv" style="--i:2" href="https://zochrim.albumbclick.co.il" target="_blank" rel="noopener"><span class="ic"><svg viewBox="0 0 48 48"><path d="M24 6c-3 5-6 7-6 12a6 6 0 0012 0c0-5-3-7-6-12z"/><path d="M18 30h12l2 12H16z"/></svg></span><h3>זוכרים</h3><p>אתר הנצחה מכובד ועדין: סיפור חיים, ציר זמן וסרט זיכרון עם קריינות.</p><span class="go">לאתר ←</span></a>
     </div>
   </div>
 </section>
@@ -457,6 +556,9 @@ footer b,footer a{color:#fff}
 <div class="bar"><a class="btn btn-navy" href="tel:039369999">📞 התקשרו</a><a class="btn btn-gold" href="#contact">הצעת מחיר</a></div>
 
 <script>
+// hero sound
+(function(){const hv=document.getElementById('heroV'),snd=document.getElementById('snd');
+ snd.onclick=()=>{hv.muted=!hv.muted;snd.textContent=hv.muted?'🔊 הפעלת קול':'🔇 השתקה';if(!hv.muted){hv.currentTime=0}hv.play().catch(()=>{})}})();
 // larger text toggle (remembered per viewer)
 (function(){const b=document.getElementById('bigT'),h=document.documentElement;let on=false;try{on=localStorage.getItem('ab-big')==='1'}catch(e){}
  const set=v=>{on=v;h.classList.toggle('big',v);b.setAttribute('aria-pressed',v);try{localStorage.setItem('ab-big',v?'1':'0')}catch(e){}};set(on);b.onclick=()=>set(!on)})();
@@ -481,7 +583,7 @@ function gallery({thumbs,items,render,interval}){
 const CAPS=['קיץ של מפגשים משפחתיים','ראש השנה','אלבומים שמחכים בארגז','תשליך של זיכרונות','יום העצמאות','אלבום שחוזר לחיים','יום הזיכרון','מהמדף אל המסך','האלבום מדבר','איפה עושים סדר לפסח?','סיפור מהסלון','בר מצווה 1982','סריקת אלבומים ושקופיות','הילדים מוצאים מזוודה','גם סרטים ישנים','סבתא ממליצה','מהקופסה לטלוויזיה','שקופיות שמתעוררות','תמונות שחוזרות לחיים','מסגרות שמספרות','אלבומים על הרצפה','סיפורים לדורות הבאים','צריכים לפנות ארגזים?','חבל על הזכרונות','סבתא מספרת','אלבומים שמעלים אבק?','מתנה לסבא וסבתא','מהארגז למחשב','איסוף עד הבית','כמו בפרסומת בטלוויזיה','הדיסק און קי שאוסף זכרונות','מהאלבום לדיסק און קי'];
 (function(){
  const v=document.getElementById('plV'),T=document.getElementById('plT'),N=document.getElementById('plN');
- const items=[{src:'v/feat.mp4',th:'v/feat.jpg',t:'האלבומים בארון הפכו לנושא כבד?'}].concat(CAPS.map((c,i)=>{const n=String(i+1).padStart(2,'0');return {src:`v/v${n}.mp4`,th:`v/v${n}.jpg`,t:c}}));
+ const items=CAPS.map((c,i)=>{const n=String(i+1).padStart(2,'0');return {src:`v/v${n}.mp4`,th:`v/v${n}.jpg`,t:c}});
  let vis=false;
  const g=gallery({thumbs:document.getElementById('plTh'),items,render:(it,i,user)=>{v.src=it.src;v.poster=it.th;T.textContent=it.t;N.textContent=(i+1)+' / '+items.length;if(vis||user)v.play().catch(()=>{})}});
  v.addEventListener('ended',()=>g.show(g.cur+1,false));
@@ -493,6 +595,46 @@ const CAPS=['קיץ של מפגשים משפחתיים','ראש השנה','אל�
  gallery({thumbs:document.getElementById('lbTh'),items,interval:3800,render:(it,i)=>{im.classList.remove('f');void im.offsetWidth;im.src=it.src;im.classList.add('f');N.textContent=(i+1)+' / '+items.length}});
  document.querySelector('.photo').addEventListener('contextmenu',e=>e.preventDefault());
 })();
+
+// how it works: animated scenes + Noa narration
+(function(){
+ const B='#1F3F63',G='#C8902A',K='#8B5E34',C='#C99B62';
+ const box=(x,y)=>`<g transform="translate(${x} ${y})"><path d="M0 40h200v110H0z" fill="${C}"/><path d="M0 40h200v16H0z" fill="#B88A52"/><path class="a-flap r" d="M100 40h100l-20-34H90z" fill="#D9AE74"/><path class="a-flap l" d="M0 40h100L110 6H20z" fill="#D9AE74"/><text x="100" y="112" text-anchor="middle" font-family="Arial" font-weight="700" font-size="17" fill="#5A3B17">אלבום בקליק</text></g>`;
+ const alb=(x,col,cls)=>`<g class="a-drop ${cls}"><rect x="${x}" y="120" width="44" height="58" rx="4" fill="${col}"/><rect x="${x+6}" y="128" width="32" height="20" rx="2" fill="#fff" opacity=".85"/></g>`;
+ const S=[
+  ()=>alb(130,B,'d1')+alb(178,'#8C2F39','d2')+alb(226,'#2F6B4F','d3')+`<g class="a-drop d4"><rect x="160" y="96" width="70" height="40" rx="6" fill="#222"/><rect x="172" y="104" width="46" height="24" rx="3" fill="#555"/><circle cx="182" cy="116" r="6" fill="#ddd"/><circle cx="208" cy="116" r="6" fill="#ddd"/></g>`+box(100,120),
+  ()=>`<rect x="0" y="238" width="400" height="8" fill="#B9A78A"/><g transform="translate(290 108)"><path d="M0 50L50 10 100 50z" fill="${B}"/><rect x="10" y="50" width="80" height="80" fill="#FFF8EC" stroke="#D8C7A8" stroke-width="2"/><rect x="40" y="88" width="22" height="42" fill="${G}"/><rect x="18" y="62" width="18" height="16" fill="#BFD3E6"/></g><g class="a-box"><rect x="250" y="206" width="34" height="30" fill="${C}"/><path d="M250 214h34" stroke="#B88A52" stroke-width="3"/></g><g class="a-van"><g transform="translate(150 168)"><rect x="0" y="0" width="92" height="56" rx="8" fill="#fff" stroke="${B}" stroke-width="3"/><path d="M92 16h26l14 18v22H92z" fill="${B}"/><rect x="98" y="22" width="18" height="12" rx="2" fill="#BFD3E6"/><text x="46" y="34" text-anchor="middle" font-family="Arial" font-weight="700" font-size="13" fill="${B}">אלבום בקליק</text><circle cx="24" cy="60" r="11" fill="#333"/><circle cx="108" cy="60" r="11" fill="#333"/><circle cx="24" cy="60" r="4" fill="#ccc"/><circle cx="108" cy="60" r="4" fill="#ccc"/></g></g>`,
+  ()=>`<rect x="70" y="150" width="260" height="80" rx="12" fill="#F3F5F8" stroke="#B8C3D0" stroke-width="3"/><rect x="70" y="150" width="260" height="20" rx="8" fill="${B}"/><rect x="90" y="100" width="220" height="56" rx="6" fill="#E6EBF1" stroke="#B8C3D0" stroke-width="2" transform="skewX(-8) translate(18 0)"/><g transform="translate(122 34)"><rect width="156" height="112" fill="#fff" stroke="#ddd"/><image class="a-col" href="m/ph1.jpg" x="6" y="6" width="144" height="100" preserveAspectRatio="xMidYMid slice"/></g><g class="a-beam"><rect x="104" y="30" width="6" height="122" fill="${G}" opacity=".85"/><rect x="96" y="30" width="22" height="122" fill="${G}" opacity=".18"/></g><circle cx="300" cy="200" r="7" fill="#5BC27A"/><text x="200" y="262" text-anchor="middle" font-family="Arial" font-weight="700" font-size="16" fill="${B}">סריקה + שחזור צבע</text>`,
+  ()=>`<rect x="60" y="30" width="250" height="160" rx="12" fill="#222"/><rect x="70" y="40" width="230" height="140" fill="#000"/>`+['m/ph3.jpg','m/ph1.jpg','m/ph2.jpg'].map((u,i)=>`<image class="a-sh s${i+1}" href="${u}" x="70" y="40" width="230" height="140" preserveAspectRatio="xMidYMid slice"/>`).join('')+`<rect x="160" y="190" width="50" height="16" fill="#333"/><rect x="130" y="204" width="110" height="8" rx="4" fill="#333"/><g class="a-usb" transform="translate(318 150)"><rect width="34" height="70" rx="8" fill="#C9CED6"/><rect x="6" y="-16" width="22" height="18" fill="#9AA3AE"/><rect x="4" y="22" width="26" height="20" rx="3" fill="${G}"/></g>`+[0,1,2].map(i=>`<path class="a-heart h${i+1}" d="M${100+i*80} 236c-8-8-18-2-14 6l14 12 14-12c4-8-6-14-14-6z" fill="#D9534F"/>`).join('')
+ ];
+ const T=[['אורזים בארגז','אוספים לארגז את כל האלבומים, התמונות והקלטות. לא צריך למיין ולא לפרק כלום.'],['שליח עד הבית','שליח מגיע אליכם, אוסף את הארגז, ובסוף גם מחזיר אותו.'],['סורקים ומשחזרים','סורקים הכל בציוד מקצועי, ותמונות שדהו מקבלות בחזרה את הצבעים שלהן.'],['מקבלים הכל','כל הזיכרונות בקישור ובדיסק און קי, יחד עם החומר המקורי. מוכן לצפייה בטלוויזיה.']];
+ const art=document.getElementById('hwArt'),N=document.getElementById('hwN'),H=document.getElementById('hwH'),P=document.getElementById('hwP'),dots=document.getElementById('hwDots'),play=document.getElementById('hwPlay');
+ dots.innerHTML=T.map((t,i)=>`<button type="button"><b>${i+1}</b><span>${t[0]}</span><i></i></button>`).join('');
+ const db=[...dots.children]; const VO=new Audio(); VO.preload='none';
+ let cur=0,narr=false,tm=null,vis=false;
+ function show(i,dur){cur=(i+4)%4;art.innerHTML=`<svg viewBox="0 0 400 280" xmlns="http://www.w3.org/2000/svg" direction="ltr">${S[cur]()}</svg>`;
+  N.textContent=cur+1;H.textContent=T[cur][0];P.textContent=T[cur][1];[N,H,P].forEach(e=>{e.style.animation='none';void e.offsetWidth;e.style.animation=''});
+  db.forEach((b,k)=>{b.classList.toggle('on',k===cur);b.classList.toggle('done',k<cur);b.style.setProperty('--d',(dur||7)+'s');const ii=b.querySelector('i');ii.style.animation='none';void ii.offsetWidth;ii.style.animation=''})}
+ function loop(){clearTimeout(tm);if(narr)return;tm=setTimeout(()=>{if(vis&&!narr){show(cur+1);loop()}else loop()},7000)}
+ function speak(){clearTimeout(tm);VO.src='v/how/how'+(cur+1)+'.mp3';VO.onloadedmetadata=()=>db[cur].style.setProperty('--d',(VO.duration+.8)+'s');
+  VO.onended=()=>{tm=setTimeout(()=>{if(!narr)return;if(cur<3){show(cur+1);speak()}else stop()},800)};VO.play().catch(()=>stop())}
+ function stop(){narr=false;VO.pause();play.classList.remove('on');play.textContent='▶ הפעלה עם קריינות';loop()}
+ play.onclick=()=>{if(narr)return stop();narr=true;play.classList.add('on');play.textContent='❚❚ עצירה';show(cur===3?0:cur);speak()};
+ const go=i=>{show(i);if(narr)speak();else loop()};
+ document.getElementById('hwNext').onclick=()=>go(cur+1);document.getElementById('hwPrev').onclick=()=>go(cur-1);
+ db.forEach((b,i)=>b.onclick=()=>go(i));
+ if('IntersectionObserver' in window)new IntersectionObserver(es=>es.forEach(e=>vis=e.isIntersecting),{threshold:.3}).observe(art);else vis=true;
+ show(0);loop();
+})();
+
+// album illustration zoom
+document.querySelectorAll('.bk').forEach(b=>b.addEventListener('click',()=>{
+ const lab=b.parentElement.querySelector(':scope > span').childNodes[0].textContent.trim();
+ const d=document.createElement('div');d.className='lbx';d.setAttribute('role','dialog');d.setAttribute('aria-label',lab);
+ d.innerHTML=`<button class="x" type="button" aria-label="סגירה">✕</button><div><div class="bkb"><img src="${b.dataset.src}" alt="המחשה: ${lab}"><div class="cv">${lab}</div></div><p>${lab}: המחשה מהמחירון</p></div>`;
+ const close=()=>{d.remove();document.removeEventListener('keydown',esc)};const esc=e=>{if(e.key==='Escape')close()};
+ d.addEventListener('click',e=>{if(e.target===d||e.target.classList.contains('x'))close()});document.addEventListener('keydown',esc);
+ document.body.appendChild(d);d.querySelector('.x').focus()}));
 
 // contact wizard: one question at a time
 (function(){
@@ -520,7 +662,7 @@ const CAPS=['קיץ של מפגשים משפחתיים','ראש השנה','אל�
  next.onclick=go; back.onclick=()=>{if(s>0){s--;draw()}};
  draw();draw.ready=true;
 })();
-document.querySelectorAll('video').forEach(x=>x.addEventListener('play',()=>document.querySelectorAll('video').forEach(o=>{if(o!==x)o.pause()})));
+document.querySelectorAll('video').forEach(x=>x.addEventListener('play',()=>{if(x.muted)return;document.querySelectorAll('video').forEach(o=>{if(o!==x&&!o.muted)o.pause()})}));
 </script>
 </body>
 </html>
